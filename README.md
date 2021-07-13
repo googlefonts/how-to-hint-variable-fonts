@@ -22,4 +22,8 @@ To help solve these problems, some form of font intelligence, or instructions, i
 
 Achieving perfect results, however required expert hinting knowledge, a huge ammount of code, and months of painstaking detailed work. 
 
-<img width="60%" height="60%" src="Images/oldvnewhinting.png">
+<img width="80%" height="80%" src="Images/oldvnewhinting.png">
+
+**Left** Older autohinting code. In this example the hinting is intended for black and white rendering. Hinting code is added to control every aspect of the glyph for onsceeen rendering. All of the x-direction code is needed to control, spacing, proportion, symmetry, diagonal control, alignment and glyph shape. Additional Deltas would be needed to clean up the appearance of the glyph for perfectly symmetical display in black and white.
+
+**Right** Showing new style hinting, with some simple hinting code to control x-height alignment and interpolation. All of the x-hinting code that was needed in the horizonal direction is no longer needed, and instead is rendered from the font outline, by DirectWrite subpixel rendering.
