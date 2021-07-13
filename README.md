@@ -22,4 +22,4 @@ To help solve these problems, some form of font intelligence, or instructions, i
 
 Achieving perfect results, however required expert hinting knowledge, a huge ammount of code, and months of painstaking detailed work. 
 
-<img width="50%" height="50%" src="Images/unhintedm.png">
+<img width="60%" height="60%" src="Images/oldvnewhinting.png">
