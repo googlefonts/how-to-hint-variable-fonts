@@ -8,9 +8,9 @@ _“The glyphs look like crisp pixel sculptures with lots of detail!”_ — Eri
 Feedback from client on a VTT Hinted Variable font
 
 ### Introduction
-Font Hinting has always been thought of as a 'Black Art', some magic performed behind the scenes, hard to understand, and very difficult to do. This was indeed true, for hinting done for lower resolution screens, and older font rendering techniques, _(e.g. black and white or monochrome rendering)_. This required a lot of hinting code to control every feature in the font, to ensure consistent and clear on screen display. This made Hinting an _extremely_ time consuming, a very skilled task for specialistds, and was usually a manual process. 
+Font Hinting has always been thought of as a 'Black Art', some magic performed behind the scenes, hard to understand, and very difficult to do. This was indeed true, for hinting done for lower resolution screens, and older font rendering techniques, _(e.g. black and white or monochrome rendering)_. This required a lot of hinting code to control every feature in the font, to ensure consistent and clear on screen display. This made Hinting an _extremely_ time consuming, a very skilled task for specialists, and was usually a manual process. 
 
-The good news is, this is no longer the case. As screen resolutions and font rendering have gotton better, hinting has become a lot less complicated, with only a handful of hinting instructions needed to ensure consistent and beautiful rendering on screen. In addition, VTT's built in Autohinter, speeds up the process, leaving the focus on editing and fine tuning the hinting, to achieve the best results.
+The good news is, this is no longer the case. As screen resolutions and font rendering have improved, hinting has become a lot less complicated, with only a handful of hinting instructions needed to ensure consistent and beautiful rendering on screen. In addition, VTT's built in Autohinter, speeds up the process, leaving the focus on editing and fine tuning the hinting, to achieve the best results.
 
 The VTT (Visual True Type) tool has been upgraded to handle all aspects of hinting for Variable fonts. The following tutorial will go into detail on all of the steps you will need, to use VTT to automatically add and then fine tune the hinting for Variable fonts, ensuring consistency and clear rendering for onscreen reading . (link to download)
 
@@ -18,9 +18,9 @@ The VTT (Visual True Type) tool has been upgraded to handle all aspects of hinti
 
 In Digital fonts each character or glyph is described by a set of outlines. For older methods of font rendering, when the outline was scaled to a small size and rendered onto a coarse grid of pixels, each pixel whose centre lay within the outline, was set to black. This method rarely produced good results. The resulting bitmaps shapes were irregular and usually misshapen, glyph stems become uneven, spacing was not controlled, and individual glyph shapes were poor.
 
-To help solve these problems, some form of font intelligence, or instructions, ie: Hinting was needed. These special instructions were used to help translate a typeface’s high resolution outlines, to the coarse pixel grid of a screen. To ensure even and easy to read text, every feature had be controled, including spacing, symmetry, stem consistency, individual glyph shape, proportion, & overall typographic colour. Special instructions called ‘Deltas', could be used to even further refine a glyphs shape, to turn individual pixels on or off, at a specific point size on screen. 
+To help solve these problems, some form of font intelligence, or instructions, i.e: Hinting was needed. This Truetype instruction help translate a typeface’s high resolution outlines, to the coarse pixel grid of a screen. To ensure even and easy to read text, every feature had be controlled, including spacing, symmetry, stem consistency, individual glyph shape, proportion, & overall typographic colour. Special instructions called ‘Deltas', could be used to even further refine a glyphs shape, to turn individual pixels on or off, at a specific point size on screen. 
 
-Achieving perfect results, however required expert hinting knowledge, a huge ammount of code, and months of painstaking detailed work. 
+Achieving perfect results, however required expert hinting knowledge, a huge amount of code, and months of painstaking detailed work. 
 
 <img width="90%" height="90%" src="Images/oldvnewhinting.png">
 
@@ -44,8 +44,30 @@ Subpixel rendering improves the horizontal aspect of type on screen but not the 
  
 The addition of support for vertical anti-aliasing, helped a great deal in smoothing out the appearance of text onscreen, particularly at larger sizes. In a similar fashion, outlines are first scaled and then placed on the pixel grid of the screen. (super sampling etc……..insert antialiasing explanation). 
 
-However, for smaller font sizes, when a fonts outline are scaled and rendered with no hinting, the vertical anti-aliasing can cause significant blur, particularly in horizontal features. **This is ‘key’ to why Hinting is still important, in particular for text reading sizes on screen with a lower resolution**  One simple set of Hinting instructions in each glyph, fits the font outline to the pixel grid, which significantly reduces the blur. Finer details such as accents benefit greatly from hinting also, allowing them to render clearly on screen, down to the smallest text sizes.  (insert more details on what hinting can do and example text, blur, clarity, avoid clashing, shape glyphs correctly for clear display, ensure complex glyphs look clear)
+However, for smaller font sizes, when a fonts outline are scaled and rendered with no hinting, the vertical anti-aliasing can cause significant blur, particularly in horizontal features. **This is one important area that Hinting can adress, in particular for text reading sizes on screen with a lower resolution**  
 
+**For todays common rendering environments, Hinting can help with**
+ 
+**Alignment of Heights, and Blur Reduction**
+
+Main Heights, such as Capital, x-height, Ascender, Descender, are kept consistent on screen across all variations, and styles of a Variable font. 
+
+**Sharp rendering of Horizontals strokes and alignment zones**
+
+One simple set of Hinting instructions in each glyph, fits the font outline to the pixel grid, which significantly reduces the blur. 
+ 
+**Maintaining correct distances**
+
+This allows all glyphs to be render cleary on-screen across all variations. 
+
+Accented glyphs are hinted once, to be a minimum of two pixels in height, and at least one pixel clear of the base glyph, for all variations, ensuring readable text across all variations, allowing for open and clear rendering on screen, down to the smallest text sizes.  
+
+Glyphs with complex outline structure render clearly on screen.
+
+
+**Examples: Benifits of Hinting / Open Sans Variable / DirectWrite rendering**
+
+**Alignment and blur reduction**
 <img width="90%" height="90%" src="Images/EHTBLUR.png">
 
 **Top:** Scaled un-hinted outlines, at 13ppem/10 point @96dpi, results in Blurry horizontal features. (Open Sans Variable font, default, Regular weight, ‘E’, ‘T’, ‘H’)
@@ -55,6 +77,19 @@ However, for smaller font sizes, when a fonts outline are scaled and rendered wi
 
 **Top:** Scaled un-hinted outlines results in Blurry horizontal features. (Open Sans Variable font, default, Regular weight, ‘e’, ‘o’, ‘t’)
 **Bottom:** Hinted outlines, reduces blur, by fitting horizontals to the pixel grid.
+
+**Maintaining Distances**
+
+<img width="90%" height="90%" src="Images/accentsunhintedvhinted.png">
+
+**Top:** Accented glyphs, at 13ppem/10 point @96dpi. Accents lose details and blur with the base glyphs, resulting in loss of legibilty. (Open Sans Variable font, default, Regular weight, and ExtraBold Variation.)
+**Bottom:** Hinted accent. Accents are hinted to preserve the correct shape, and to maintain a consistent height. A minimum distance is maintained between the base glyph and thge accent.
+
+
+<img width="90%" height="90%" src="Images/YENBLUR.png">
+
+**Top:** Scaled un-hinted outlines of complex glyph outlines, results in Blurry horizontal horizontal features.
+**Bottom:** Hinted outlines, reduces blur, by fitting horizontals to the pixel grid, while also preserving the internal white space, allowing for clear discplay on-screen.
 
 
 
