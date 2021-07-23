@@ -22,7 +22,7 @@ To help solve these problems, some form of font intelligence, or instructions, i
 
 Achieving perfect results, however required expert hinting knowledge, a huge amount of code, and months of painstaking detailed work. 
 
-<img width="90%" height="90%" src="Images/oldvnewhinting.png">
+<img width="100%" height="100%" src="Images/oldvnewhinting.png">
 
 **Left** Older autohinting code. In this example the hinting is intended for black and white rendering. Hinting code is added to control every aspect of the glyph for onsceeen rendering. All of the x-direction code is needed to control, spacing, proportion, symmetry, diagonal control, alignment and glyph shape. Additional Deltas would be needed to clean up the appearance of the glyph for perfectly symmetical display in black and white.
 
@@ -32,7 +32,7 @@ Achieving perfect results, however required expert hinting knowledge, a huge amo
 
 Most modern Browsers and common rendering environments, such as Microsoft Office on Windows, now have full support for the latest DirectWrite (link?) rendering. VTT also has the DirectWrite font rasterizer built in. This allows you to proof your font, in the VTT Tool, while hinting, confident that the results will be replicated in the real world, in browsers and applications that use DW as their default. 
 
-**Key Features of the DiretWrite font rendering** (link?)
+**Key Features of the DirectWrite font rendering** (link?)
  
 **Subpixel Positioning**
  
@@ -68,28 +68,152 @@ Glyphs with complex outline structure render clearly on screen.
 **Examples: Benifits of Hinting / Open Sans Variable / DirectWrite rendering**
 
 **Alignment and blur reduction**
-<img width="90%" height="90%" src="Images/EHTBLUR.png">
+<img width="100%" height="100%" src="Images/EHTBLUR.png">
 
 **Top:** Scaled un-hinted outlines, at 13ppem/10 point @96dpi, results in Blurry horizontal features. (Open Sans Variable font, default, Regular weight, ‘E’, ‘T’, ‘H’)
 **Bottom:** Hinted outlines. Reduces blur, by fitting horizontals to the pixel grid. (Shown with VTT Visual Hinting)
 
-<img width="90%" height="90%" src="Images/eotblur.png">
+<img width="100%" height="100%" src="Images/eotblur.png">
 
 **Top:** Scaled un-hinted outlines results in Blurry horizontal features. (Open Sans Variable font, default, Regular weight, ‘e’, ‘o’, ‘t’)
 **Bottom:** Hinted outlines, reduces blur, by fitting horizontals to the pixel grid.
 
 **Maintaining Distances**
 
-<img width="90%" height="90%" src="Images/accentsunhintedvhinted.png">
+<img width="100%" height="100%" src="Images/accentsunhintedvhinted.png">
 
 **Top:** Accented glyphs, at 13ppem/10 point @96dpi. Accents lose details and blur with the base glyphs, resulting in loss of legibilty. (Open Sans Variable font, default, Regular weight, and ExtraBold Variation.)
 **Bottom:** Hinted accent. Accents are hinted to preserve the correct shape, and to maintain a consistent height. A minimum distance is maintained between the base glyph and thge accent.
 
 
-<img width="90%" height="90%" src="Images/YENBLUR.png">
+<img width="100%" height="100%" src="Images/YENBLUR.png">
 
 **Top:** Scaled un-hinted outlines of complex glyph outlines, results in Blurry horizontal horizontal features.
 **Bottom:** Hinted outlines, reduces blur, by fitting horizontals to the pixel grid, while also preserving the internal white space, allowing for clear discplay on-screen.
+
+### VTT Design Space Setup _(Hinting and Proofing Variation Fonts)_
+
+<img width="100%" height="100%" src="Images/VTTSETUP.png">
+
+Hinting, editing, and proofing a Variable font in VTT is detailed work. It is helpful to have the workspace in VTT set up to a consistent and comfortable view. Becoming familiar with the tools, info, settings, & options, will help you get the most out of VTT, & streamline the hinting process. 
+
+_On opening a Variation Font, you can arrange the Windows to suit your own workflow. Make any edit, and save (ctrl s). This will save the VTT preferences. The next time a font file is opened in VTT you will see the same Window configuration._
+
+This example window setup (OpenSans Variable font) shows the main windows (1-4) needed to view and edit the hinting, proof the results, and see the visual representation of the hinting, as well as the hinting code associated with each glyph. **(5)** shows the display options, and will not appear during the workflow, when set.
+
+_Refer also to the extensive Help file in VTT for additional information on setup, proofing, Hinting basics, Variable fonts, and more._
+
+**(1) Main Window _(View > Main View or (Ctrl + 1))_**
+
+Hinting is done in the Main Window _(as previously for static fonts in VTT)_ on the default instance of the Variation font. Variable fonts are many fonts stored in one font file, but only one set of outlines, the default instance, needs to be hinted. 
+
+With both the Main and Variation windows showing side by side, viewing and editing hints is done in in the Main window, on the default instance of the font. The hinting will update live in the Variation window. Because hints in a variable font are associated with the default instance and merely follow interpolated CVT’s for other instances, you can only edit hints in the Main window. 
+
+The Variation Window can be used for proofing the hinted results of any available instance in the font. Choose from the Display Menu > Variations Instance > Choose Variation, Light Bold, Condensed Light etc. or using keyboard shortcuts, (ctrl + shift + up arrow / down arrow, is a quick and convenient way to toggle throught the available variations in the font)
+
+**(5) Display Options _(Menu > Display > Options or (Ctrl + D))_**
+
+Display options settings, determine how the glyph view and live text in the main window and Variation Window, is displayed. To ensure that hinting and proofing is set correctly to show DirectWrite rendering, use the settings shown under the ‘Rasterizer Options’ Tab 
+
+**ClearType** 
+
+**CT fract. AW _(subpixel positioning)_**
+
+**CT anti-aliased _(y-smoothing)_**
+
+
+These settings will be reflected in the Main View of the current glyph, the text samples in the size ramp at the bottom of the main view, and in the sample text string at the top. _(The sample text string can be customized in Tools>options>Text Sample> Extra Text. **add some addional notes in how to proof, by viewing main enlarged glyph view, but more importantly the actual text size view in the live text sample, and size ramp.)_
+
+All of the other setting can be configured to how best suits your own working style. 
+
+**Useful settings tips for Display > Options**
+**VTT General Tab:**, Set x-direction to off, as x-hinting is not used
+**VTT Atributes:** Show CVT numbers. This allows for easy visual proofing of the hints, to quickly determine if the correct cvt’s are used for setting heights, for example.
+
+**Glyph Info Bar _(Top of Main Window)_**
+
+<img width="100%" height="100%" src="Images/Glyphinfobar.png">
+
+While viewing any glyph in the Main Window this information will display in the following order.
+
+**GID number:** The Glyph ID for the currently selected glyph, in the sequential order the glyphs are stored in the font file. **Pro Tip:** The glyph order can be set to display in the character set in two ways, under Tools>options>settings> Access glyph by Index. When this is set, the character set (ctrl 9) will show the glyphs as they are ordered in the font file. It is useful to leave this as the default setting, as the hinting for every glyph in the font should be proofed and checked. By unsetting this option, only glyphs with Unicodes will be shown. This is also a useful view, but, if this is set as the default, some glyphs may be missed in hinting and proofing process.
+
+**Char:** If the glyph has an associated Unicode, this will be shown, eg: Cap H (0x48). If there is no Unicode associated with the glyph, this will be shown as Oxffff _(OpenType glyphs such as Small Caps, figure styles or ligatures, for example). Unicode is followed by the Glyph name.
+
+**Other:** char group data info… _(include more information on char group..dat.)_
+
+**pt / ppem** (currently selected point/ppem size reflecting the selected resolution _(The resolution to display the text string and waterfall run in the main window can be changed (Display > Resolution > choose desired resolution). This can used to for proofing at different resolutions)_
+
+**grid-fitted:** showing whether hinting is turned on (grid-fitted) or off Toggle between the two states, ctrl g / ctlr g. 
+
+**PRO TIP** ctrl g, are worn out on my keyboard, Toggle between hinting and no hinting, always keeping the orignal outline in mind, to view and ensure that there is mimimal distortion between the two states. The hinted outline should not vary too much from the High resolution design, (proportion, shape, and no distortions)
+
+**Pixels:** pixels on or off
+
+**Device Units:** ??
+
+**CTAA**  shows the current anti-aliasing settings, as choosen in Display options under Rasterizer settings (list other acronymns)
+
+**Tool bar**
+
+**Toolbar:** shown here in the main window set to the left. _(this can be configured)_ main descriptions of tools to be used for both measuring during the workflow as needed.
+
+**Note:** The ‘Move’, ‘Swap’, ‘Delete’ and ‘Insert’ commands in the main Window UI Toolbar, are disabled in VTT, for Variation Fonts. Making any changes to the oultines, with these commands, would break a Variation font.
+
+**add additonal with graphics
+
+**(2) Variation View _(ctrl + shift + 1)_**
+This window is for viewing and proofing Hinting for Variations. The Variation window shows you the current glyph outline and hints, just like the Main window, for the selected variable font instance. The choosen instance is displayed in the top left of the Variation Window. With both the Main and Variation windows up, you can edit hints in the Main window and see the impact on variations in the Variation window. 
+
+**Variation Cvt View** (View Menu > Variation CVT)
+
+<img width="100%" height="100%" src="Images/varcvt.png">
+
+The Variation Cvt Window, allows for Adding, Editing, Deleting cvar variation data in a font for axis locations in variation space and for setting the current location in variation space in the VTT UI. 
+
+This window can be used to adjust the numeric value of particular control values for different variation instances. 
+
+**(3) VTT Talk Window _(ctrl + 5)_**
+more info soon
+
+**(4) Glyph Program Window _(TrueType code) _(ctrl + 2)_**
+more info soon
+
+
+**Proofing**
+
+Proofing the hints, can be done by viewing the sample text string at the top of the main windonw, and at the visual size run at the bottom of the main Window, as well as in the Variation Window. The text string is useful for a detailed look at the how the hinted glyphs will look at any given size. The size ramp is crucial also for proofing the hinted results all at once, for a range of sizes, not just for the default instance, but for all of the variations also. _(add easy to toggle between the variations and get a live updated preview of the hinted results.)_
+ 
+**Waterfall _(ctrl 8)_**
+
+<img width="100%" height="100%" src="Images/waterfall.png">
+
+The waterfall window, view allows for a quick preview waterfall of the glyphs that are already in the text sample string. (To change the text sample see, Tools > Options > Extra Text. Glyphs added here will display in the text sample at the top, in the Main and Variation Windows, as well as in the Waterfall sample). 
+
+**Character / glyph set _(ctrl 9)_**
+
+<img width="100%" height="100%" src="Images/characterset.png">
+
+Proofing can also be done on the entire glyph set, by choosing View > Character / glyph set. CTRL + Shift + up arrow / down arrow, on the keyboard, can be used in both the Waterfall view as well as the Glyph set view to toggle between all of the available font variations. **Note:** One set of hints covers all masters in the font. If there are problems with the hints, or you change you mind on the hinting strategy, select the Default master and edit the hints again in VTT’s main window. Remember, though, that any changes here effect all masters, so you’ll need to proof everything across all instances for the re-hinted glyphs again. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
