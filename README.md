@@ -8,17 +8,17 @@ _“The glyphs look like crisp pixel sculptures with lots of detail!”_ — Eri
 Feedback from client on a VTT Hinted Variable font
 
 ### Introduction
-Font Hinting has always been thought of as a 'Black Art', some magic performed behind the scenes, hard to understand, and very difficult to do. This was indeed true, for hinting done for lower resolution screens, and older font rendering techniques, _(e.g. black and white or monochrome rendering)_. This required a lot of hinting code to control every feature in the font, to ensure consistent and clear on screen display. This made Hinting an _extremely_ time consuming, a very skilled task for specialists, and was usually a manual process. 
+Font Hinting has always been thought of as a ‘Black Art’, some magic performed behind the scenes, hard to understand, and very difficult to do. This was true, when hinting was done for low resolution screens, and older font rendering techniques, _(e.g. black and white or monochrome rendering)_. This required a lot of hinting code to control every feature in the font, to ensure consistent and clear on screen display, making Hinting an _extremely_ time consuming, very skilled task for specialists. In addition the hinting was often a manual process, wrring and editing TrueType code. 
 
-The good news is, this is no longer the case. As screen resolutions and font rendering have improved, hinting has become a lot less complicated, with only a handful of hinting instructions needed to ensure consistent and beautiful rendering on screen. In addition, VTT's built in Autohinter, speeds up the process, leaving the focus on editing and fine tuning the hinting, to achieve the best results.
+The good news is, this is no longer the case. As screen resolutions and font rendering have improved, hinting has become a lot less complicated, with only a handful of hinting instructions needed to ensure consistent and beautiful rendering on screen. In addition, VTT’s built in Autohinter, speeds up the process, leaving the focus on editing and fine tuning the hinting, to achieve the best results.
 
-The VTT (Visual True Type) tool has been upgraded to handle all aspects of hinting for Variable fonts. The following tutorial will go into detail on all of the steps you will need, to use VTT to automatically add and then fine tune the hinting for Variable fonts, ensuring consistency and clear rendering for onscreen reading . (link to download)
+The VTT (Visual TrueType) tool has been upgraded to handle all aspects of hinting for Variable fonts. The following tutorial will go into detail on all of the steps you will need, to use VTT to automatically add and then fine tune the hinting for Variable fonts, ensuring consistency and clear rendering for onscreen reading . (link to download)
 
 ### Background / Older Font Hinting.
 
-In Digital fonts each character or glyph is described by a set of outlines. For older methods of font rendering, when the outline was scaled to a small size and rendered onto a coarse grid of pixels, each pixel whose centre lay within the outline, was set to black. This method rarely produced good results. The resulting bitmaps shapes were irregular and usually misshapen, glyph stems become uneven, spacing was not controlled, and individual glyph shapes were poor.
+In Digital fonts each character or glyph is described by a set of outlines. For older methods of font rendering, when the outline was scaled to a small size and rendered onto a coarse grid of pixels, each pixel whose centre lay within the outline, was set to black. This method never produced good results. The resulting bitmaps shapes were irregular and usually misshapen, glyph stems became uneven, spacing was not controlled, and individual glyph shapes were poor.
 
-To help solve these problems, some form of font intelligence, or instructions, i.e: Hinting was needed. This Truetype instruction help translate a typeface’s high resolution outlines, to the coarse pixel grid of a screen. To ensure even and easy to read text, every feature had be controlled, including spacing, symmetry, stem consistency, individual glyph shape, proportion, & overall typographic colour. Special instructions called ‘Deltas', could be used to even further refine a glyphs shape, to turn individual pixels on or off, at a specific point size on screen. 
+To help solve these problems, some form of font intelligence, or instructions, i.e: Hinting was needed. These Truetype instructions help translate a typeface’s high resolution outlines, to the coarse pixel grid of a screen. To ensure even and easy to read text, every feature had be controlled, including spacing, symmetry, stem consistency, individual glyph shape, proportion, & overall typographic colour. Special instructions called ‘Deltas’, were often used to even further refine a glyphs shape, to turn individual pixels on or off, at a specific point size on screen. 
 
 Achieving perfect results, however required expert hinting knowledge, a huge amount of code, and months of painstaking detailed work. 
 
@@ -26,25 +26,25 @@ Achieving perfect results, however required expert hinting knowledge, a huge amo
 
 **Left** Older autohinting code. In this example the hinting is intended for black and white rendering. Hinting code is added to control every aspect of the glyph for onsceeen rendering. All of the x-direction code is needed to control, spacing, proportion, symmetry, diagonal control, alignment and glyph shape. Additional Deltas would be needed to clean up the appearance of the glyph for perfectly symmetical display in black and white.
 
-**Right** Showing new style hinting, with some simple hinting code to control x-height alignment and interpolation. All of the x-hinting code that was needed in the horizonal direction is no longer needed, and instead is rendered from the font outline, by DirectWrite subpixel rendering.
+**Right** New style hinting. Some simple hinting code to control x-height alignment and interpolation. All of the x-hinting code that was needed in the horizonal direction is no longer needed, and instead is rendered from the font outline, by DirectWrite subpixel rendering.
 
 ### Newer rendering and Why Hinting is still important. (title?)
 
-Most modern Browsers and common rendering environments, such as Microsoft Office on Windows, now have full support for the latest DirectWrite (link?) rendering. VTT also has the DirectWrite font rasterizer built in. This allows you to proof your font, in the VTT Tool, while hinting, confident that the results will be replicated in the real world, in browsers and applications that use DW as their default. 
+Most modern Browsers and common rendering environments, such as Microsoft Office on Windows, now have full support for the latest DirectWrite rendering. (link?) VTT also has the DirectWrite font rasterizer built in. This allows you to proof your font, in the VTT Tool, while hinting, confident that the results will be replicated in the real world, in browsers and applications that use DW as their default. 
 
 **Key Features of the DirectWrite font rendering** (link?)
  
 **Subpixel Positioning**
  
-When DirectWrite renders the font spacing, glyphs can begin on a subpixel boundary. Subpixel positioning, greatly improves the spacing of type on screen, especially at small sizes. The spacing accuracy that can be achieved by starting a glyphs spacing on a subpixel boundary, versus a whole pixel is significant. This more accurate spacing is critical in achieving a smooth flow and even typographic color. In addition, hinting is no longer needed to control the fonts spacing, which in the past took a lot of extra code and time to complete.
+When DirectWrite renders the font spacing, glyphs can begin on a subpixel boundary. Subpixel positioning, greatly improves the spacing of type on screen, especially at small sizes. The spacing accuracy that can be achieved by starting a glyphs spacing on a subpixel boundary, versus a whole pixel is significant. This more accurate spacing is critical in achieving a smooth flow and even typographic color to the text. In addition, hinting is no longer needed to control the fonts spacing, which in the past took a lot of extra code and time to complete.
  
 **Horizontal and Vertical antialiasing**
  
-Subpixel rendering improves the horizontal aspect of type on screen but not the vertical. Older types of Rendering such as Cleartype in Windows GDI for example, only supported horizontal anti-aliasing. This meant that aliasing or ‘jaggies’, were still very apparent at larger sizes on screen. In order to fix this problem and give a smoother vertical effect, DirectWrite applies anti-aliasing in the y-direction, in addition to using the horizontal subpixel rendering. 
+Subpixel rendering improves the horizontal aspect of type on screen but not the vertical. Older types of Rendering, such as Cleartype in Windows GDI for example, only supported horizontal anti-aliasing. This meant that aliasing or ‘jaggies’, were still very apparent at larger sizes on screen. In order to fix this problem and give a smoother vertical effect, DirectWrite applies anti-aliasing in the y-direction, in addition to using the horizontal subpixel rendering. 
  
 The addition of support for vertical anti-aliasing, helped a great deal in smoothing out the appearance of text onscreen, particularly at larger sizes. In a similar fashion, outlines are first scaled and then placed on the pixel grid of the screen. (super sampling etc……..insert antialiasing explanation). 
 
-However, for smaller font sizes, when a fonts outline are scaled and rendered with no hinting, the vertical anti-aliasing can cause significant blur, particularly in horizontal features. **This is one important area that Hinting can adress, in particular for text reading sizes on screen with a lower resolution**  
+However, for smaller font sizes, when a fonts outline are scaled and rendered with no hinting, the vertical anti-aliasing can cause significant blur, particularly in horizontal features. **This is one important area that Hinting can address, in particular for text reading sizes on screen with a lower resolution**  
 
 **For todays common rendering environments, Hinting can help with**
  
@@ -54,15 +54,15 @@ Main Heights, such as Capital, x-height, Ascender, Descender, are kept consisten
 
 **Sharp rendering of Horizontals strokes and alignment zones**
 
-One simple set of Hinting instructions in each glyph, fits the font outline to the pixel grid, which significantly reduces the blur. 
+One simple set of Hinting instructions in each glyph, fits the font outline to the pixel grid, which significantly reduces blur. 
  
 **Maintaining correct distances**
 
-This allows all glyphs to be render cleary on-screen across all variations. 
+This allows all glyphs to be render clearly on-screen across all variations. 
 
-Accented glyphs are hinted once, to be a minimum of two pixels in height, and at least one pixel clear of the base glyph, for all variations, ensuring readable text across all variations, allowing for open and clear rendering on screen, down to the smallest text sizes.  
+Accented glyphs are hinted once, to be a minimum of two pixels in height, and at least one pixel clear of the base glyph, for all variations. This ensures readable text across all variations, allowing for open and clear rendering on screen, down to the smallest text sizes.  
 
-Glyphs with complex outline structure render clearly on screen.
+Glyphs with complex outline structure made to render clearly on screen.
 
 
 **Examples: Benifits of Hinting / Open Sans Variable / DirectWrite rendering**
@@ -71,11 +71,13 @@ Glyphs with complex outline structure render clearly on screen.
 <img width="100%" height="100%" src="Images/EHTBLUR.png">
 
 **Top:** Scaled un-hinted outlines, at 13ppem/10 point @96dpi, results in Blurry horizontal features. (Open Sans Variable font, default, Regular weight, ‘E’, ‘T’, ‘H’)
+
 **Bottom:** Hinted outlines. Reduces blur, by fitting horizontals to the pixel grid. (Shown with VTT Visual Hinting)
 
 <img width="100%" height="100%" src="Images/eotblur.png">
 
 **Top:** Scaled un-hinted outlines results in Blurry horizontal features. (Open Sans Variable font, default, Regular weight, ‘e’, ‘o’, ‘t’)
+
 **Bottom:** Hinted outlines, reduces blur, by fitting horizontals to the pixel grid.
 
 **Maintaining Distances**
@@ -83,13 +85,15 @@ Glyphs with complex outline structure render clearly on screen.
 <img width="100%" height="100%" src="Images/accentsunhintedvhinted.png">
 
 **Top:** Accented glyphs, at 13ppem/10 point @96dpi. Accents lose details and blur with the base glyphs, resulting in loss of legibilty. (Open Sans Variable font, default, Regular weight, and ExtraBold Variation.)
+
 **Bottom:** Hinted accent. Accents are hinted to preserve the correct shape, and to maintain a consistent height. A minimum distance is maintained between the base glyph and thge accent.
 
 
 <img width="100%" height="100%" src="Images/YENBLUR.png">
 
 **Top:** Scaled un-hinted outlines of complex glyph outlines, results in Blurry horizontal horizontal features.
-**Bottom:** Hinted outlines, reduces blur, by fitting horizontals to the pixel grid, while also preserving the internal white space, allowing for clear discplay on-screen.
+
+**Bottom:** Hinted outlines, reduces blur, by fitting horizontals to the pixel grid, while also preserving the internal white space, allowing for clear display on-screen.
 
 ### VTT Design Space Setup _(Hinting and Proofing Variation Fonts)_
 
@@ -109,7 +113,7 @@ Hinting is done in the Main Window _(as previously for static fonts in VTT)_ on 
 
 With both the Main and Variation windows showing side by side, viewing and editing hints is done in in the Main window, on the default instance of the font. The hinting will update live in the Variation window. Because hints in a variable font are associated with the default instance and merely follow interpolated CVT’s for other instances, you can only edit hints in the Main window. 
 
-The Variation Window can be used for proofing the hinted results of any available instance in the font. Choose from the Display Menu > Variations Instance > Choose Variation, Light Bold, Condensed Light etc. or using keyboard shortcuts, (ctrl + shift + up arrow / down arrow, is a quick and convenient way to toggle throught the available variations in the font)
+The Variation Window can be used for proofing the hinted results of any available instance in the font. Choose from the Display Menu > Variations Instance > Choose Variation, Light Bold, Condensed Light etc. or using keyboard shortcuts, (ctrl + shift + up arrow / down arrow, is a quick and convenient way to toggle through the available variations in the font)
 
 **(5) Display Options _(Menu > Display > Options or (Ctrl + D))_**
 
@@ -128,7 +132,9 @@ All of the other setting can be configured to how best suits your own working st
 
 **Useful settings tips for Display > Options**
 **VTT General Tab:**, Set x-direction to off, as x-hinting is not used
-**VTT Atributes:** Show CVT numbers. This allows for easy visual proofing of the hints, to quickly determine if the correct cvt’s are used for setting heights, for example.
+**VTT Atributes:** 
+
+**Show CVT numbers** This allows for easy visual proofing of the hints, to quickly determine if the correct cvt’s are used for setting heights, for example.
 
 **Glyph Info Bar _(Top of Main Window)_**
 
@@ -144,15 +150,17 @@ While viewing any glyph in the Main Window this information will display in the 
 
 **pt / ppem** (currently selected point/ppem size reflecting the selected resolution _(The resolution to display the text string and waterfall run in the main window can be changed (Display > Resolution > choose desired resolution). This can used to for proofing at different resolutions)_
 
-**grid-fitted:** showing whether hinting is turned on (grid-fitted) or off Toggle between the two states, ctrl g / ctlr g. 
+**grid-fitted:** showing whether hinting is turned on (grid-fitted) or off Toggle between the two states, ctrl g / ctrl g. 
 
-**PRO TIP** ctrl g, are worn out on my keyboard, Toggle between hinting and no hinting, always keeping the orignal outline in mind, to view and ensure that there is mimimal distortion between the two states. The hinted outline should not vary too much from the High resolution design, (proportion, shape, and no distortions)
+**PRO TIP** ctrl g, is worn out on my keyboard. While adding hints or reviewing the autohinter code, ctrl g allows to switch between hinting and no hinting. It is critial to always keep the original outline in mind, _(no hinting)_ to ensure that there is mimimal distortion between the two states. 
 
-**Pixels:** pixels on or off
+The hinted outline should not vary too much from the High resolution design, in proportion, shape, and no there should be no obvious distortions)
 
-**Device Units:** ??
+**Pixels:** pixels on / off
 
-**CTAA**  shows the current anti-aliasing settings, as choosen in Display options under Rasterizer settings (list other acronymns)
+**Device Units:** 
+
+**CTAA**  Shows the current anti-aliasing settings, as choosen in Display options under Rasterizer settings (list other acronymns??)
 
 **Tool bar**
 
@@ -182,7 +190,7 @@ more info soon
 
 **Proofing**
 
-Proofing the hints, can be done by viewing the sample text string at the top of the main windonw, and at the visual size run at the bottom of the main Window, as well as in the Variation Window. The text string is useful for a detailed look at the how the hinted glyphs will look at any given size. The size ramp is crucial also for proofing the hinted results all at once, for a range of sizes, not just for the default instance, but for all of the variations also. _(add easy to toggle between the variations and get a live updated preview of the hinted results.)_
+Proofing the hints, can be done by viewing the sample text string at the top of the main window, and using the visual size run at the bottom of the main Window, as well as in the Variation Window. The text string at the top, is useful for a detailed look at the how the hinted glyphs will look at any given size. to change the size to view, use the Up and down arrow, or click on a size in the size ramp at the bottom. The size ramp is crucial also for proofing the hinted results all at once, for a range of sizes, not just for the default instance, but for all of the variations also. _(add easy to toggle between the variations and get a live updated preview of the hinted results.)_
  
 **Waterfall _(ctrl 8)_**
 
