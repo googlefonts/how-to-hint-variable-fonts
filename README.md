@@ -14,7 +14,7 @@ The good news is, this is no longer the case. As screen resolutions and font ren
 
 **VTT (Visual TrueType)** 
 
-VTT has been upgraded to handle all aspects of hinting for Variable fonts. The following tutorial will go into detail on all of the steps you will need, to use VTT, to automatically add, and then fine tune the hinting for Variable fonts.(link to download)
+[VTT](https://aka.ms/vtt-mst) has been upgraded to handle all aspects of hinting for Variable fonts. The following tutorial will go into detail on all of the steps you will need, to use VTT, to automatically add, and then fine tune the hinting for Variable fonts.
 
 ### Background / Older Font Hinting.
 
