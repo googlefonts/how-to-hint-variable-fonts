@@ -153,7 +153,7 @@ While viewing any glyph in the Main Window this information will display in the 
 
 **pt / ppem** Currently selected point/ppem size reflecting the selected resolution _(The resolution to display the text string and waterfall run in the main window can be changed (Display > Resolution > choose desired resolution). This is useful for proofing at different resolutions)_ Choose the size to view in the Main window, Display > Size >, or click on a size from the text ramp at the bottom of the main Window. Use up and down arrows to change the point size, or ctrl equal, and enter the disired size.
 
-**grid-fitted:** Shows if hinting is turned on (grid-fitted) or off. Toggle between the two states, ctrl g / ctrl g. 
+**grid-fitted:** Showing if hinting is turned on (grid-fitted) or off. Toggle between the two states, ctrl g / ctrl g. 
 
 **PRO TIP** ctrl g, is worn out on my keyboard. While adding hints or reviewing the autohinter code, ctrl g allows to switch between hinting and no hinting. It is critical to always keep the original outline in mind, _(no hinting)_ to ensure that there is mimimal distortion between the two states. 
 
@@ -163,15 +163,31 @@ The hinted outline should not vary too much from the High resolution design, in 
 
 **CTAA:**  Showing the current anti-aliasing settings, as choosen in ‘Display Options’, under Rasterizer settings _(**CTAA:** ClearType Anti-Aliased, **GS:** Grey Scale)_
 
-**Tool bar**
+**Toolbar**
 
-**insert graphic** 
+<img width="100%" height="100%" src="Images/toolbar.png">
 
 **Toolbar:** Shown in the main window set to the left. _(this can be configured to show in the main window on Top, left, right, or bottom. Tools>Options>Appearance>Location)_ 
 
-**Note:** The ‘Move’, ‘Swap’, ‘Delete’ and ‘Insert’ commands in the main Window UI Toolbar, are disabled in VTT, for Variation Fonts. Making any changes to the oultines, with these commands, would break a Variation font.
+**Note:** The ‘Move’, ‘Swap’, ‘Delete’ and ‘Insert’ commands in the main Window UI Toolbar, are disabled in VTT, for Variation Fonts. Making any changes to the oultines, with these commands, would break a Variation font. 
 
-**add additional with graphics
+Navigate / Zoomin / Zoomout / Measure
+
+**Pro Tip** _Using a Wheel mouse for zooming in and out, is a must for a smooth workflow. Zooming in, in particular, to inspect details, and see control point numbers, is a common task._
+
+**Hinting Tools**
+
+Only 3 main tools are needed to Complete the Hinting in Variable font.
+
+**YLink Tool:** Used to constrain a distance in the y-direction between two points. _(For example on a horizontal crossbar) The YLink tool can be used with reference to a value in the CVT Table. (Control Value Table)_
+
+**YShift Tool:** Used to constrain a distance in the y-direction between two points, when no cvt is used or needed _(when a distance is too small to warrant using a cvt to control the distance)_
+
+**YInter Tool:** _(YInterpolate)_ Interpolates the position of a point between two other points.
+
+**NOTE:** **YMove and YDelta:** Not used when Hinting Variable fonts. These commands are only useful for Static fonts. There is no way to predictably use the ‘Delta’ command in a Variable font. Deltas are special _instructions_ in a TrueType font which nudge the control points of the glyph outline at particular ppem sizes. 
+
+**Snapshot:** Opens a new window with a copy of the Main Windows. This is an image only and only useful for comparing two outlines or hinting. _(With the Snapshot Window open, side by side with the Main Window, you can navigate to another glyph in the Main Window to compare with the Snapshot image)_
 
 **(2) Variation View _(ctrl + shift + 1)_**
 This window is used for viewing and proofing Hinting for Variation Instances. The Variation window shows you the current glyph outline and hints, just like the Main window, for the selected variable font instance. The choosen instance is displayed in the top left of the Variation Window. With both the Main and Variation windows setup side by side, you can edit hints in the Main window and see the impact on variations in the Variation window.
