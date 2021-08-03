@@ -7,7 +7,7 @@ _“The glyphs look like crisp pixel sculptures with lots of detail!”_ — Eri
 
 Feedback from client on a VTT Hinted Variable font
 
-### Introduction
+## Introduction
 Font Hinting has always been thought of as a ‘Black Art’, some magic performed behind the scenes, hard to understand, and very difficult to do. This was true, when [hinting was done for low resolution screens,](https://docs.microsoft.com/en-us/typography/truetype/fixing-rasterization-issues) and older font rendering techniques, _(e.g. black and white or monochrome rendering)_. Older font rendering techniques required a lot of hinting code, ensuring every feature in the font was strictly controlled, to ensure consistent and clear on screen display. This made Hinting an _extremely_ time consuming, and skilled task, for specialists only. In addition hinting was often a manual process, involving writing and editing TrueType code by hand.
 
 The good news is, this is no longer the case. As screen resolutions and font rendering have improved, hinting has become a lot less complicated, with only a handful of hinting instructions needed to ensure consistent and beautiful rendering on screen. In addition, VTT’s built in Autohinter, significantly speeds up the process, leaving the focus on editing and fine tuning the hinting, to achieve the best results.
@@ -16,7 +16,7 @@ The good news is, this is no longer the case. As screen resolutions and font ren
 
 [VTT](https://aka.ms/vtt-mst) has been upgraded to handle all aspects of hinting for Variable fonts. The following tutorial will go into detail on all of the steps you will need, to use VTT, to automatically add, and then fine tune the hinting for Variable fonts.
 
-### Background / Older Font Hinting
+## Background / Older Font Hinting
 
 In Digital fonts each character or glyph is described by a set of outlines. For older methods of font rendering, when the outline was scaled to a small size and rendered onto a coarse grid of pixels, each pixel whose centre lay within the outline, was set to black. This method never produced good results. The resulting bitmaps shapes were irregular and usually misshapen, glyph stems became uneven, spacing was not controlled, and individual glyph shapes were poor.
 
@@ -30,7 +30,7 @@ Achieving perfect results, however, required expert hinting knowledge, a huge am
 
 **Right** _(New style hinting)_  Greatly reduced Hinting instruction set, controlling x-height alignment and interpolation. The ‘x’ Hinting code that was required in the horizonal direction, is no longer needed and instead the rendering is done from the font outline, by DirectWrite subpixel rendering.
 
-### Newer rendering / Why Hinting is still important
+## Hinting and New Rendering 
 
 Most modern Browsers and common rendering environments, such as Microsoft Office on Windows, now have full support for the latest DirectWrite rendering. VTT also has the DirectWrite font rasterizer built in. This allows for proofing the hinting of a Variable font, in the VTT Tool, without having to install the font to test the hinting results. While working in VTT, you can maintain a high level of confidence that the hinted results will be replicated in the real world, in browsers and applications that use DirectWrite as their default. 
 
@@ -97,7 +97,7 @@ Glyphs with complex outline structure can be made to render clearly on screen.
 
 **Bottom:** Hinted outlines, reduces blur, by fitting horizontals to the pixel grid, while also preserving the internal white space, allowing for clear display on-screen.
 
-### VTT Design Space Setup _(Hinting and Proofing Variation Fonts)_
+## VTT Design Space Setup
 
 <img width="100%" height="100%" src="Images/VTTSETUP.png">
 
@@ -268,9 +268,9 @@ If the measured outline distance between the base glyph and the accent is the sa
 
 
 
-### VTT Variable font workflow process 
+## VTT Variable font workflow process 
 
-## Step 1 Autohinting a Variable Font
+**Step 1.** Autohinting a Variable Font
 
 VTT includes an Autohinter for Latin fonts. This Autohinter makes use of a lightweight hinting strategy that focuses on fitting common heights, such as x-height, Cap Height, Ascender, Descender to Control Value Table (CVT) heights. This strategy, takes advantage of Windows symmetric rendering modes and anchors these key heights to the grid, thereby maintaining consistency in heights across a font family. This method of grid-fitting also helps to reduce blur, and minimizes distortion.
 
