@@ -270,11 +270,13 @@ If the measured outline distance between the base glyph and the accent is the sa
 
 ### VTT Variable font workflow process 
 
-### Step 1 Autohinting a Variable Font
+## Step 1 Autohinting a Variable Font
 
 VTT includes an Autohinter for Latin fonts. This Autohinter makes use of a lightweight hinting strategy that focuses on fitting common heights, such as x-height, Cap Height, Ascender, Descender to Control Value Table (CVT) heights. This strategy, takes advantage of Windows symmetric rendering modes and anchors these key heights to the grid, thereby maintaining consistency in heights across a font family. This method of grid-fitting also helps to reduce blur, and minimizes distortion.
 
 Follow these steps to Autohint a Latin font:
+
+![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/VTTLightLatinAutohinter.gif)
 
 1. Start Visual True Type.
 2. File > Open. Navigate to font file you would like to Autohint.
