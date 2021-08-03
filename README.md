@@ -117,6 +117,10 @@ With both the Main and Variation windows showing side by side, viewing and editi
 
 The Variation Window can be used for proofing the hinted results of any available instance in the font. When the Variation Windows is highlighted, choose, Display Menu > Variations Instance > Choose Variation, Light Bold, Condensed Light etc. or using keyboard shortcuts, (ctrl + shift + up arrow / down arrow, is a quick and convenient way to toggle through the available variations in the font)
 
+**Recommended Display Settings** _(Quick Overview)_
+
+<img width="100%" height="100%" src="Images/Settingsoverview.png">
+
 **(5) Display Options _(Menu > Display > Options or (Ctrl + D))_**
 
 Display options settings, determine how the glyph view and live text in the main window and Variation Window, is displayed. To ensure that hinting and proofing is set correctly to show DirectWrite rendering, use the following settings shown under the ‘Rasterizer Options’ Tab 
@@ -167,17 +171,17 @@ The hinted outline should not vary too much from the High resolution design, in 
 
 <img width="100%" height="100%" src="Images/toolbar.png">
 
-**Toolbar:** Shown in the main window set to the left. _(this can be configured to show in the main window on Top, left, right, or bottom. Tools>Options>Appearance>Location)_ 
+**Toolbar:** Shown here in the main window set to the left. _(this can be configured to show in the main window on Top, left, right, or bottom. Tools>Options>Appearance>Location)_ 
 
 **Note:** The ‘Move’, ‘Swap’, ‘Delete’ and ‘Insert’ commands in the main Window UI Toolbar, are disabled in VTT, for Variation Fonts. Making any changes to the oultines, with these commands, would break a Variation font. 
 
 Navigate / Zoomin / Zoomout / Measure
 
-**Pro Tip** _Using a Wheel mouse for zooming in and out, is a must for a smooth workflow. Zooming in, in particular, to inspect details, and see control point numbers, is a common task._
+**Pro Tip** _Using a Wheel mouse for zooming in and out, is a must for a smooth workflow. Zooming in, in particular, to inspect details, is a common task during the hinting workflow._
 
 **Hinting Tools**
 
-Only 3 main tools are needed to Complete the Hinting in Variable font.
+Three main tools are needed to Complete the Hinting in Variable font.
 
 **YLink Tool:** Used to constrain a distance in the y-direction between two points. _(For example on a horizontal crossbar) The YLink tool can be used with reference to a value in the CVT Table. (Control Value Table)_
 
@@ -185,9 +189,9 @@ Only 3 main tools are needed to Complete the Hinting in Variable font.
 
 **YInter Tool:** _(YInterpolate)_ Interpolates the position of a point between two other points.
 
-**NOTE:** **YMove and YDelta:** Not used when Hinting Variable fonts. These commands are only useful for Static fonts. There is no way to predictably use the ‘Delta’ command in a Variable font. Deltas are special _instructions_ in a TrueType font which nudge the control points of the glyph outline at particular ppem sizes. 
+**NOTE:** **YMove and YDelta:** Not used when Hinting Variable fonts. These commands are only useful for Static fonts. There is no way to predictably use the ‘YMove’ or ‘Delta’ command in a Variable font. Deltas are special _instructions_ (used in a Static TrueType font) which nudge the control points of the glyph outline at particular ppem sizes. 
 
-**Snapshot:** Opens a new window with a copy of the Main Windows. This is an image only and only useful for comparing two outlines or hinting. _(With the Snapshot Window open, side by side with the Main Window, you can navigate to another glyph in the Main Window to compare with the Snapshot image)_
+**Snapshot:** Opens a new window with a copy of the Main Windows. This is an image, and only useful for comparing two outlines or comparing hinting structure. _(With the Snapshot Window open, side by side with the Main Window, you can navigate to another glyph in the Main Window to compare with the Snapshot image)_
 
 **(2) Variation View _(ctrl + shift + 1)_**
 This window is used for viewing and proofing Hinting for Variation Instances. The Variation window shows you the current glyph outline and hints, just like the Main window, for the selected variable font instance. The choosen instance is displayed in the top left of the Variation Window. With both the Main and Variation windows setup side by side, you can edit hints in the Main window and see the impact on variations in the Variation window.
@@ -198,7 +202,7 @@ This window is used for viewing and proofing Hinting for Variation Instances. Th
 
 The Variation CVT Window, allows for Adding, Editing, Deleting [cvar](https://docs.microsoft.com/en-us/typography/opentype/spec/cvar) variation data in a font for axis locations in variation space and for setting the current location in variation space in the VTT UI. 
 
-This window can be used to adjust the numeric value of particular control values for different variation instances. 
+This window can be used to adjust the numeric value of particular control values for different variation instances. _(For example, editing the value of the x-height, control value, where the outline design is different from the default instance)_
 
 **(3) VTT Talk Window _(ctrl + 5)_** High Level font hinting language.
 
@@ -220,6 +224,27 @@ The waterfall window, view allows for a quick preview waterfall of the glyphs th
 <img width="100%" height="100%" src="Images/characterset.png">
 
 Proofing can also be done on the entire glyph set, by choosing View > Character / glyph set. CTRL + Shift + up arrow / down arrow, on the keyboard, can be used in both the Waterfall view as well as the Glyph set view to toggle between all of the available font variations. **Note:** One set of hints covers all masters in the font. If there are problems with the hints, or you change you mind on the hinting strategy, select the Default master and edit the hints again in VTT’s main window. Remember, though, that any changes here effect all masters, so you’ll need to proof everything across all instances for the re-hinted glyphs again. 
+
+
+**Useful Keyboard Shortcuts**
+
+**Ctrl g:** Grid-fit _(Hinting)_ on/off. 
+
+**Ctrl b:** Pixels on/off. Hinting with pixels turned on is useful to see the exact results of the hinting code. While hinting it is also necessary to view the outline clearly to identify control point numbers. 
+
+**Ctrl = (equals) :** Go to point size
+
+**Ctrl 9:** View Character set
+
+**Ctrl/shift/up/down arrow:**  Runs through the Variations in the Variations Windows for proofing
+
+**Ctrl shift y:** Show/hide Visual Hints in the Main Window
+
+**Left arrow / Right arrow** Previous / Next Glyph
+
+
+
+
 
 **Notes on Keeping track of completed Hinting**
 
