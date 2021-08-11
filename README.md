@@ -10,40 +10,42 @@ Feedback from client on a VTT Hinted Variable font
 ## Introduction
 Font Hinting has always been thought of as a ‘black art’ - some magic performed behind the scenes, hard to understand, and very difficult to do. This was true when [hinting was done for low resolution screens](https://docs.microsoft.com/en-us/typography/truetype/fixing-rasterization-issues) and in the case of older font rendering techniques, such as black and white or monochrome rendering. These techniques required a lot of hinting code to ensure every feature in the font was strictly controlled and to ensure consistent and clear on-screen display. This made hinting an _extremely_ time-consuming and skilled task, for specialists only. In addition, hinting was often a manual process, involving writing and editing TrueType code by hand.
 
-The good news is that this is no longer the case. As screen resolutions and font rendering have improved, hinting has become a lot less complicated, with only a handful of hinting instructions needed to ensure consistent and beautiful rendering on screen. In addition, VTT’s built in Autohinter significantly speeds up the process, leaving the focus on editing and fine-tuning the hinting to achieve the best results.
+The good news is that this is no longer the case. As screen resolutions and font rendering have improved, hinting has become a lot less complicated, with only a handful of hinting instructions needed to ensure consistent and beautiful rendering on-screen. In addition, VTT’s built in Autohinter significantly speeds up the process, leaving the focus on editing and fine-tuning the hinting to achieve the best results.
 
-**VTT (Visual TrueType)** 
+**VTT (Visual TrueType)** [Install](https://aka.ms/vtt-mst)
 
-[VTT](https://aka.ms/vtt-mst) has been upgraded to handle all aspects of hinting for variable fonts. The following tutorial will go into detail on all of the steps you will need to use VTT to automatically add, and then fine tune, the hinting for variable fonts.
+Microsoft Visual TrueType is a software tool for viewing, editing, and adding hinting instructions to the outlines of TrueType and OpenType/TTF fonts. You use Visual TrueType after creating a font in a font editor or after converting an existing font to the TrueType format.
+
+VTT has been upgraded to handle all aspects of hinting for variable fonts. The following tutorial will go into detail on all of the steps you will need to use VTT to automatically add, and then fine tune, the hinting for variable fonts.
 
 ## Background / Older Font Hinting
 
 In digital fonts, each character or glyph is described by a set of outlines. For older methods of font rendering, when the outline was scaled to a small size and rendered onto a coarse grid of pixels, each pixel whose centre lay within the outline was set to black. This method never produced good results. The resulting bitmap’s shapes were irregular and usually misshapen, glyph stems became uneven, spacing was not controlled, and individual glyph shapes were poor.
 
 To help solve these problems, some form of font intelligence or instructions  was needed. These instructions were known as 
-[hints](https://docs.microsoft.com/en-us/typography/truetype/hinting), and helped to translate a typeface’s high resolution outlines to the coarse pixel grid of a screen. To ensure even and easy to read text, every feature had be controlled, including spacing, symmetry, stem consistency, individual glyph shape, proportion, and overall typographic colour. Special instructions called ‘deltas’ were often used to even further refine a glyph’s shape, turning individual pixels on or off at a specific point size on screen. 
+[hints](https://docs.microsoft.com/en-us/typography/truetype/hinting), and helped to translate a typeface’s high resolution outlines to the coarse pixel grid of a screen. To ensure even and easy to read text, every feature had be controlled, including spacing, symmetry, stem consistency, individual glyph shape, proportion, and overall typographic colour. Special instructions called ‘deltas’ were often used to even further refine a glyph’s shape, turning individual pixels on or off at a specific point size on-screen. 
 
 Achieving perfect results, however, required expert hinting knowledge, a huge amount of code, and months of painstaking detailed work. 
 
 <img width="100%" height="100%" src="Images/oldvnewhinting.png">
 
-**Left** _(Older autohinting code)_ Hinting intended for black and white rendering. Code is added to control every aspect of the glyph for on-sceeen rendering. X-direction code was required to control, spacing, proportion, symmetry, diagonal control, alignment and glyph shape. Additional deltas would be needed to clean up the appearance of the glyph for perfectly symmetrical display in black and white.
+**Left** _(Older autohinting code)_ Hinting intended for black and white rendering. Code is added to control every aspect of the glyph for on-screen rendering. X-direction code was required to control, spacing, proportion, symmetry, diagonal control, alignment and glyph shape. Additional deltas would be needed to clean up the appearance of the glyph for perfectly symmetrical display in black and white.
 
 **Right** _(New style hinting)_  Greatly reduced hinting instruction set, controlling x-height alignment and interpolation. The ‘x’ hinting code that was required in the horizontal direction is no longer needed, and instead the rendering is done from the font outline using DirectWrite subpixel rendering.
 
 ## Hinting and New Rendering 
 
-Most modern browsers and common rendering environments, such as Microsoft Office on Windows, now have full support for the latest DirectWrite rendering engine. VTT also has the DirectWrite font rasterizer built in. This allows you to proof the hinting of a variable font in the VTT Tool, without having to install the font to test the hinting results. While working in VTT, you can maintain a high level of confidence that the hinted results will be replicated in the real world, in browsers and applications that use DirectWrite as their default. 
+Most modern browsers and common rendering environments, such as Microsoft Office on Windows, now have full support for the latest DirectWrite rendering engine. VTT also has the DirectWrite font rasterizer built in. This allows you to proof the hinting of a variable font in the VTT Tool, without having to install the font to test the hinting results. While working in VTT, you can maintain a high level of confidence that the hinted results will be replicated in the real world, in browsers and applications that use DirectWrite as their default. Proofing is also strongly advised, on the fully hinted font, in intended target browsers and applications.
 
 **Key Features of [DirectWrite font rendering](https://docs.microsoft.com/en-us/windows/win32/direct2d/direct2d-and-directwrite#glyph-rendering)**
  
 **Subpixel Positioning**
  
-When DirectWrite renders a font’s spacing, glyphs can now begin on a subpixel boundary. [Subpixel positioning](https://docs.microsoft.com/en-us/windows/win32/directwrite/introducing-directwrite#improved-text-rendering-with-cleartype) greatly improves the spacing of type on screen, especially at small sizes. The spacing accuracy that can be achieved by starting a glyph’s spacing on a subpixel boundary is significant compared with starting on a whole pixel as in GDI. This more accurate spacing is critical in achieving a smooth flow and even typographic color to the text. In addition, hinting is no longer needed to control the font’s spacing, which in the past required a lot of extra code and time to complete.
+When DirectWrite renders a font’s spacing, glyphs can now begin on a subpixel boundary. [Subpixel positioning](https://docs.microsoft.com/en-us/windows/win32/directwrite/introducing-directwrite#improved-text-rendering-with-cleartype) greatly improves the spacing of type on-screen, especially at small sizes. The spacing accuracy that can be achieved by starting a glyph’s spacing on a subpixel boundary is significant compared with starting on a whole pixel as in GDI. This more accurate spacing is critical in achieving a smooth flow and even typographic color to the text. In addition, hinting is no longer needed to control the font’s spacing, which in the past required a lot of extra code and time to complete.
  
-**Horizontal and Vertical antialiasing**
+**Horizontal and Vertical anti-aliasing**
  
-Subpixel rendering improves the horizontal aspect of type on screen but not the vertical. Older types of rendering, such as Cleartype in Windows GDI for example, only supported horizontal anti-aliasing. This meant that aliasing or ‘jaggies’ were still very apparent at larger sizes on screen. In order to fix this problem and give a smoother vertical effect, DirectWrite applies [anti-aliasing in the y-direction](https://docs.microsoft.com/en-us/windows/win32/directwrite/introducing-directwrite#improved-text-rendering-with-cleartype) in addition to using the horizontal subpixel rendering. 
+Subpixel rendering improves the horizontal aspect of type on-screen but not the vertical. Older types of rendering, such as Cleartype in Windows GDI for example, only supported horizontal anti-aliasing. This meant that aliasing or ‘jaggies’ were still very apparent at larger sizes on-screen. In order to fix this problem and give a smoother vertical effect, DirectWrite applies [anti-aliasing in the y-direction](https://docs.microsoft.com/en-us/windows/win32/directwrite/introducing-directwrite#improved-text-rendering-with-cleartype) in addition to using the horizontal subpixel rendering. 
  
 The addition of support for vertical anti-aliasing, helped a great deal in smoothing out the appearance of text on-screen, particularly at larger sizes. 
 
@@ -65,7 +67,7 @@ This allows all glyphs to be rendered clearly on-screen across all variations.
 
 Accented glyphs are hinted once to be a minimum of two pixels in height, if needed, and to be at least one pixel clear of the base glyph, for all variations. This ensures readable text across all variations, allowing for open and clear rendering on-screen, and for the detail of the font design to be maintained down to the smallest text sizes.  
 
-Glyphs with a complex outline structure can be made to render clearly on screen.
+Glyphs with a complex outline structure can be made to render clearly on-screen.
 
 
 **Examples: Benifits of Hinting / Open Sans Variable / DirectWrite rendering**
@@ -108,19 +110,15 @@ _On opening a Variation Font, you can arrange the Windows in VTT to suit your ow
 
 This example window setup _(OpenSans Variable font)_ shows the main windows (1-4) needed to view and edit the hinting, proof the results, and see the visual representation of the hinting (1 & 2), as well as the hinting code associated with each glyph. (3 & 4). Display Options (5) will not appear during the workflow when set.
 
-_Refer also to the extensive Help file in VTT for additional information on setup, proofing, Hinting basics, Autohinting, Variable fonts, and more._
+**NOTE:** _Refer also to the extensive Help file in VTT for additional information on setup, proofing, Hinting basics, Autohinting, Variable fonts, and more._
 
 **(1) Main Window _(View > Main View or `ctrl + 1`)_**
 
 Hinting is done in the Main Window _(as previously for static fonts in VTT)_ on the default instance of the Variation font. Variable fonts are a way of accessing many font instances stored in one font file, but only one set of outlines needs to be hinted: the default instance. 
 
-With both the Main and Variation windows showing side by side, viewing and editing hints of the default instance of the font is performed in the Main window. The hinting will update live in the Variation window. Because hints in a variable font are associated with the default instance and other instances merely use interpolated CVTs (control values), you can only edit hints in the Main window. 
+With both the Main and Variation windows showing side by side, viewing and editing hints of the default instance of the font is performed in the Main window. The hinting will update live in the Variation window. Because hints in a variable font are associated with the default instance and other instances merely use interpolated CVTs (control values), you can only edit hints in the Main window.
 
 The Variation Window can be used to proof the hinted results of any available instance in the font. When the Variation Window is highlighted, choose Display Menu > Variations Instance > Choose Variation, Light Bold, Condensed Light etc. or use keyboard shortcuts. (`ctrl + shift + up arrow / down arrow` is a quick and convenient way to toggle through the available variations in the font)
-
-**Recommended Display Settings** _(Quick Overview)_
-
-<img width="100%" height="100%" src="Images/Settingsoverview.png">
 
 **(5) Display Options _(Menu > Display > Options or `ctrl + D`)_**
 
@@ -137,12 +135,19 @@ These settings will be reflected in the Main View of the current glyph, the text
 
 Other settings can be configured to how best suits your own working style. 
 
-**Useful settings tips for `Display > Options`**
-**VTT General Tab:**, Set x-direction to off, as x-hinting is not used
+**Useful settings tips**
 
-**VTT Atributes:** 
+`Display > Options > Design Options` >  **Show fewer points.**
 
-**Show CVT numbers** This allows for easy visual proofing of the hinted glyph in the Main Window, for example to quickly determine whether the correct CVTs are used for setting heights.
+Showing fewer points will hide all off curve points which are not generally needed when hinting. This also allows for a much clearer display of the glyph outline in the main window, while hinting.
+
+`Display > Options > VTT General` > **X-direction**
+
+Set x-direction to off, as x-hinting is not used
+
+`Display > Options > VTT Attributes` > **Show CVT numbers.** 
+
+Showing cvt numbers allows for easy visual proofing of the hinted glyph in the Main Window, for example to quickly determine whether the correct CVTs are used for setting heights.
 
 **Glyph Info Bar _(Top of Main Window)_**
 
@@ -150,7 +155,7 @@ Other settings can be configured to how best suits your own working style.
 
 While viewing any glyph in the Main Window, the glyph info bar will display the following information:
 
-**GID number:** The Glyph ID for the currently selected glyph, in the sequential order the glyphs are stored in the font file. **Pro Tip:** The glyph order can be displayed in two ways, under `Tools > options > settings > Access glyph by Index`. When this checkbox is set, the character set (`ctrl-9`) will show the glyphs as they are ordered in the font file. It is useful to leave this as the default setting, as the hinting for every glyph in the font should be proofed and checked. If this option is unset, only glyphs with Unicode codepoints assigned will be shown. This is also a useful view, but if this is set as the default, some glyphs may be missed in hinting and proofing process.
+**GID number:** The Glyph ID for the currently selected glyph, in the sequential order the glyphs are stored in the font file. **Pro Tip:** The glyph order can be displayed in two ways, under `Tools > options > settings > Access glyph by Index`. When this checkbox is set, the character set (`ctrl-9`) will show the glyphs as they are ordered in the font file. It is useful to leave this as the default setting, as the hinting for every glyph in the font should be proofed and checked. If this option is unset, only glyphs with Unicode codepoints assigned will be shown. This is also a useful view, but if this is set as the default, some glyphs may be missed in the hinting and proofing process.
 
 **Char:** If the glyph has an associated Unicode, this will be shown, eg: Cap H (0x48). If there is no Unicode associated with the glyph, this will be shown as Oxffff _(OpenType glyphs such as Small Caps, figure styles or ligatures, for example). Unicode is followed by the Glyph name.
 
@@ -164,21 +169,31 @@ While viewing any glyph in the Main Window, the glyph info bar will display the 
 
 The hinted outline should not vary too much from the high resolution design in proportion and shape, and there should be no obvious distortions.
 
-**Pixels:** pixels on / off
+**Pixels:** pixels on / off `ctrl + b`
 
-**CTAA:**  Showing the current anti-aliasing settings, as chosen in `Display Options > Rasterizer settings` _(**CTAA:** ClearType Anti-Aliased, **GS:** Grey Scale)_
+**CTAA:**  Showing the current anti-aliasing settings, as chosen in `Display Options > Rasterizer settings` _(**CTAA:** ClearType anti-aliased, **GS:** Grey Scale)_
 
 **Toolbar**
 
 <img width="100%" height="100%" src="Images/toolbar.png">
 
-**Toolbar:** Shown here in the main window set to the left. _(This can be configured to show on the top, left, right, or bottom of the Main Window using `Tools>Options>Appearance>Location`)_ 
+Shown here in the main window set to the left. _(Refer to the VTT Help file for more detailed explanations on using each tool. The Toolbar can be configured to show on the top, left, right, or bottom of the Main Window using `Tools>Options>Appearance>Location`)_ 
 
 **Note:** The ‘Move’, ‘Swap’, ‘Delete’ and ‘Insert’ commands in the Main Window UI Toolbar are disabled in VTT for Variation Fonts. Making any changes to the oultines with these commands would break a Variation font. 
 
-Navigate / Zoomin / Zoomout / Measure
+Navigate / Zoomin / Zoomout 
 
 **Pro Tip** _Using a wheel mouse for zooming in and out is a must for a smooth workflow. Zooming in to inspect details, in particular, is a common task during the hinting workflow._
+
+**Measure**
+
+<img width="100%" height="100%" src="Images/Measure.png">
+
+
+**Left:** When Grid-fit and pixels are turned off the measuring tool will measure distances on the original outline design.
+
+**Right** When Grid-fit and pixels are turned on the measuring tool will measure the number of pixels
+
 
 **Hinting Tools**
 
@@ -193,6 +208,8 @@ Three main tools are needed to complete the hinting in a variable font.
 **NOTE:** **YMove and YDelta** are not used when hinting variable fonts. These commands are only useful for static fonts. There is no way to predictably use the ‘YMove’ or ‘Delta’ command in a variable font. Deltas are special _instructions_ (used in a static TrueType font) which nudge the control points of the glyph outline at particular ppem sizes. 
 
 **Snapshot:** Opens a new window with a copy of the Main Windows. This is an image, and only useful for comparing two outlines or comparing hinting structure. _(With the Snapshot Window open, side by side with the Main Window, you can navigate to another glyph in the Main Window to compare with the Snapshot image)_
+
+**Changer:** Switches between the last two glyphs selected.
 
 **(2) Variation View (`ctrl + shift + 1`)**
 
@@ -230,6 +247,14 @@ Proofing can also be done on the entire glyph set, by choosing `View > Character
 > **Note:** One set of hints covers all masters in the font. If there are problems with the hints, or if you change your mind on the hinting strategy, select the Default master and edit the hints again in VTT’s main window. Remember, though, that any changes here affect all masters, so you’ll need to proof everything across all instances for the re-hinted glyphs again. 
 
 
+**Choosing Glyphs**
+
+`Edit > Go to / glyph` **(`ctrl + H`)** Enter Glyph Index or Character code
+
+or 
+
+Using the Character set (`ctrl + 9`). Clicking on any glyph in the character set window, will take you to that glyph in the main window. 
+
 **Useful Keyboard Shortcuts**
 
 * `ctrl + g`: Grid-fit _(Hinting)_ on/off. 
@@ -258,9 +283,9 @@ A color-coded system is shown here as an example of marking each glyph as having
 
 1. **Unique glyphs** _(This can involve: Reviewing the Autohinter’s code, editing and fine tuning, or hinting from scratch.)_
 
-2. **Pure composite glyphs** _(Composite of an original glyphs with only offset commands in the glyph program. In this case, no code changes are necessary, only proofing. It is only the Unique reference glyph, which needs hinting)_
+2. **Pure composite glyphs** _(Composite of an original glyph with only offset commands in the glyph program. In this case, no code changes are necessary, only proofing. It is only the Unique reference glyph, which needs hinting)_
 
-3. **Composites: Hinting code editing required** Composite glyphs which use `USEMYMETRICS`, offset transformation and positioning code. At the time of writing, the code generated by the Autohinter does not work for variable fonts. The code calls a helper function (function 86) from the Font Program which uses an _outline measured distance_ as a reference for positioning accent glyphs in the y-direction. This procedure works for static fonts where there is only one measured distance, but in variable fonts, the distance between the accent and base glyph can vary. The code currently generated by the autohinter only positions the accent correctly for the default instance. 
+3. **Composites: Hinting code editing required.** Composite glyphs which use `USEMYMETRICS`, offset transformation and positioning code. At the time of writing, the code generated by the Autohinter does not work for variable fonts. The code calls a helper function (function 86) from the Font Program which uses an _outline measured distance_ as a reference for positioning accent glyphs in the y-direction. This procedure works for static fonts where there is only one measured distance, but in variable fonts, the distance between the accent and base glyph can vary. The code currently generated by the autohinter only positions the accent correctly for the default instance. 
 
 If the measured outline distance between the base glyph and the accent is the same across the variation space, this code can be used. If the accent distance measurement varies, custom code is needed.
 
@@ -286,7 +311,7 @@ Follow these steps to Autohint a Latin font:
 4. From the Tools menu, select Autohint > Light Latin Autohint.
 5. When Autohinting is complete choose Save from File Menu
 
-**Note** _No Autohinter, including this one, is perfect; the intent is that this Autohinter works well enough for most glyphs. Autohinting for all glyphs in the font should be carefully checked and proofed, and certain glyphs may need to be re-hinted manually, either by using the Visual Hinting tools, or by editing the VTT Talk code. Please see the sample font VTTDemo.ttf that ships with VTT as a reference on best practices for hinting._
+**Note** The intent is that this Autohinter works well enough for most glyphs. Autohinting for all glyphs in the font should be carefully checked and proofed, and certain glyphs may need to be re-hinted manually, either by using the Visual Hinting tools, or by editing the VTT Talk code directly._
 
  
 
