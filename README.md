@@ -313,10 +313,101 @@ Follow these steps to Autohint a Latin font:
 
 **Note** The intent is that this Autohinter works well enough for most glyphs. Autohinting for all glyphs in the font should be carefully checked and proofed, and certain glyphs may need to be re-hinted manually, either by using the Visual Hinting tools, or by editing the VTT Talk code directly._
 
- 
+## Hinting Concepts (Hinting the H & O)
 
+**Hinting the Control Glyphs H & O**
 
+Let’s look at how to add hinting to the capital ‘H’, and ‘O’ using the graphical hinting tools, and take a closer look at the high-level hinting code _‘VTT Talk’_ and the lower level _‘Glyph Program’,_ TrueType code. The hinting code that is needed for these _control characters_, contains a lot of information that will translate to the rest of the glyph set.
+ 
+Whenever the automatically generated code is not optimal, or is incorrect, it is often easier and faster to re-hint a glyph from scratch, rather than edit the autohinter code. Understanding how to use the basic graphical hinting tools, and the hinting code, makes it easier to view the visual hinting, to quickly determine if the code is correct, or if further editing or re-hinting is necessary.
 
+Once you become familiar with some hinting concepts, tools, and code, editing the hinting or re-hinting, can be completed quickly. The automatically generated code, for the most part, will be either fully correct, or will only need some small edits.
+
+**High level hinting strategy for hinting the uppercase H**
+
+1. Control the top (Capital Height) and bottom (Baseline) to be consistent with other uppercase glyphs, using values in the Control Value Table as a reference. Minimise blur at the Cap Height.
+ 
+2. Control the position of the middle horizontal bar, in relation to the baseline and Capital height. Minimise blur on the horizonal Bar.
+
+3. Control the weight of the middle horizontal bar.
+ 
+**Tip:** _Before beginning, ensure Auto Compile is turned on. (Tools > Options > Settings Auto-compile Main view). This will speed up the hinting, by allowing VTT to automatically generate the hinting code as you work with the Graphical Hinting tools, without the need to compile after each step in the process._
+
+![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/HintH.gif)
+
+**Hinting the Cap H**
+
+**Step 1: Baseline and Cap Height Control** 
+
+Choose the YLink Tool from the Toolbar. Position the ‘blue circle’, directly over point 5, and right click. With the right mouse button held down, drag to the right to select ‘round to grid’ then release.
+
+The following code is generated in the VTT Talk Window.
+
+**YAnchor (5, 8)** Moves point 5 to the control value listed in the ‘Control Program’, that corresponds to the baseline, (cvt #8) and rounds this point to a grid line. (View > Control Program:  (8: 0 /* base line */)
+
+**YShift(5,1)** Choose the YShift Tool. Position the ‘blue circle’, directly over point 5, and drag to point 1. Shifts point 1, to a new position on the grid, relative to point 5’s new position on the grid, ensuring point 1 will also be grid-fit to the baseline.
+ 
+**Note:** Because the capital ‘H’ is defined as ‘Uppercase’, VTT knows which group of values to use from the Control Value table, and will generate the correct values automatically.
+
+**Cap Height Control**
+
+Repeat Step 1, this time for point 6 at the Cap Height.
+
+**YAnchor (6, 2)** Moves point 6 to the control value, that corresponds to the cap height, (cvt #2) and rounds this point to a grid line. (View > Control Program:  (2: 1462 /* cap height */)
+
+**YShift(6,10)** Shifts point 10, to a new position on the grid, relative to point 6’s new position on the grid, ensuring point 10 will also be grid-fit to the cap height.
+
+**Note:** _There are different methods that can be used in hinting. The best methods are efficient, using the least amount of code. An alternate method to using the shift command,is to YAnchor points 1 and 10, using cvt 8 and 2. The hinted result will be the same._ 
+
+**Middle Bar Control**
+
+Now that the Baseline and Cap Height have been established and reference the correct control values, the middle bar now needs to be interpolated to find its correct position. 
+
+When the outline is scaled and the cap height is rounded to the grid, the outline can round up or down, depending on the size. The middle bar now needs instruction on where to find its correct position, between the baseline and the cap height.
+
+**Step 2: YInterpolate** 
+
+Choose the YInterpolate tool. Position the _‘blue circle’_, directly over point 5 and drag to point 6. You will see a line appear, which takes the form of a draggable _‘elastic band’._ No code is generated yet until a point is chosen to interpolate. Click anywhere on the line, and drag the curser to the point you want to interpolate, in this case point 3, and release. The following code is generated in the VTT Talk Window.
+
+**YInterpolate(5,3,6)**
+
+The middle bar is now positioned correcty, between the base line and cap height but one more step is needed. To maintain as much contrast as possible and to reduce blur, one side of the middle bar needs to be aligned to the pixel grid.
+
+**Step 3: Round to grid** 
+
+Right click on point 3, drag to the right to ‘round to grid’, and release. The YInterpolate code, will be replaced with the following code
+
+**YIPAnchor(5,3,6)**
+
+Moves point 3, to full pixel grid, relative to point 5 and point 6, which now has a new grid-fit position. This ensures high contrast on the bottom of the horizontal crossbar on the Cap H, and helps to minimise blur. _(The Autohinter also chooses point 3 on the bottom of the horizontal bar, to interpolate, between the top and bottom of the Cap H.)_
+
+If point 8 was chosen, the bar would have a tendency to round down and may cause the bar to look optically low. It is better visually for the bar to be high as opposed to low, the same conceppt as is used in the high resolution design. This same hinting strategy can then be used in a consistent way, for other glyphs with a centre bar, capital ‘E’, ‘F’, etc.
+
+**Step 4: Adding the Res command** 
+
+Switch to the VTTtalk window** (`ctlr 5`). Type Res before the YAnchor commands. Compile VTT Talk, (`ctrl r`) and save (`ctrl + s`).
+
+The ‘Res’ _(Resolution Environment Specific)_ command is not supported when using the Graphical Hinting tools. This additional code can be added manually, in the VTTtalk window. _(See the notes on Res command in the next section)_
+
+The final code in the VTTtalk window will appear like this. The Res command is highlighted here for easy comparison. 
+ 
+/* Y direction */
+
+**Res**YAnchor(5,8)
+
+YShift(5,1)
+
+**Res**YAnchor(6,2)
+
+YShift(6,10)
+
+YIPAnchor(6,3,5)
+
+YShift(3,8)
+
+Smooth()
+
+The hinting for Cap H is now complete. The glyph can be proofed in the main window, using the text string to see shape and spacing, in the size ramp to see the hinted results at a range of sizes, and in the Variation Window, to proof for all variations in the font.
 
 
 
