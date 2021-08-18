@@ -383,7 +383,17 @@ Moves point 3, to full pixel grid, relative to point 5 and point 6, which now h
 
 If point 8 was chosen, the bar would have a tendency to round down and may cause the bar to look optically low. It is better visually for the bar to be high as opposed to low, the same conceppt as is used in the high resolution design. This same hinting strategy can then be used in a consistent way, for other glyphs with a centre bar, capital ‘E’, ‘F’, etc.
 
-**Step 4: Adding the Res command** 
+**Step 4: Control the middle horizontal bar weight**
+
+Choose the YShift tool. Position the blue circle over point 3, and drag to point 8. The following code is generated in the VTT Talk Window.
+
+**YShift(3,8)** Shifts point 8, to a new position, relative to point 3’s new position on the grid, maintaining the same relative distance between the point 3 and point 8 as is in the original high resolution design of the outline. The shift command does not reference a cvt value and does not move the hinted point 8 to a full pixel grid line. Shift also does not default to a one pixel minimum used by the Link command. Using the Shift command will maintain a balanced visual weight, of horizontal features in particular, across all variations.
+
+**Step 5: Adding the Res command** 
+
+The Res addition to the command ResAnchor, for example, stands for Rendering Environment Specific, and ensures that the appropriate rounding happens, for the various rendering environments. This saves adding additional Hinting commands if Hinting is required to work in a variety of rendering environments._The Res command calls a Function, that is designed to also allow for more subtle rendering of features such as undershoots and overshoots
+
+_( Please refer to the longer section on Res commands for more details.)_ **(link to this)**
 
 Switch to the VTTtalk window** (`ctlr 5`). Type Res before the YAnchor commands. Compile VTT Talk, (`ctrl r`) and save (`ctrl + s`).
 
@@ -407,9 +417,83 @@ YShift(3,8)
 
 Smooth()
 
-The hinting for Cap H is now complete. The glyph can be proofed in the main window, using the text string to see shape and spacing, in the size ramp to see the hinted results at a range of sizes, and in the Variation Window, to proof for all variations in the font.
+_The hinting for Cap H is now complete. The glyph can be proofed in the main window, using the text string to see shape and spacing, in the size ramp to see the hinted results at a range of sizes, and in the Variation Window, to proof for all variations in the font._
+
+**Hinting the Cap O**
+
+![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/HintO.gif)
+
+**High level hinting strategy for hinting the uppercase O**
+
+Control the top _(round overshoot height)_ and bottom _(round undershoot height)_ to be consistent with other uppercase glyphs, using values in the Control Value Table as a reference.
+ 
+Reduce blur at the Capital Overshoot height, and baseline undershoot height, using *inheritence, to force the undershoot and overshoot values to be equal to the baseline and square cap height until a defined size
+
+_*inhertence: A method of forcing one cvt to be equal to another cvt until a certain size. This is used for smaller point sizes on-screen to supress subtle features that cannot be shown when there is a linited number of pixels_
+ 
+Control the weight of the top and bottom rounds of the O
+
+**Step 1: Control bottom of Cap O** 
+
+Choose the YShift Tool from the Toolbar. Position the ‘blue circle’, directly over point 5, and drag to point 22. Two lines of code are generated in the VTT Talk Window.
+
+**YAnchor(5,9)** Moves point 5 to the control value listed in the ‘Control Program’, that corresponds to the baseline cap round undershoot value. 
+
+**Note:** CVT 9, _(cap round undershoot)_is automatically forced to be equal to baseline cvt 8, which has a value of zero, until a higher size. CVT 3, _(cap round overshoot)_ is automatically forced to be equal to square cap height cvt 2, which has a value of 1462, until a higher size. This supresses the undershoots and overshoots, until there are enough pixels to show this subtle feature. This will already be automatically generated in the cvt table, and you will only need to change the value for appropriate point size to show the overshoots and undershoots.
+ 
+The baseline cap round undershoot value in the cvt table looks like this.
+ 
+**9: -22 ~ 8 @ 50 /* base line undershoot */**
+ 
+9 is the cvt number for the cap baseline undershoot
+ 
+-22 ~ means the relative outline measurement from baseline of 0 to bottom of the Cap 0, a measurement of -22 units.
+ 
+8 designates the parent cvt, which is the square baseline in this case. 
+ 
+50 means that the overshoot should kick in at 50 ppem. Replace the 50ppem by whichever ppem size you wish the overshoot to kick in.
+
+**YShift(5,22)**
+
+Shifts point 22, to a new position, relative to point 5’s new position on the grid, maintaining the same relative distance between the point 5 and point 22 as is in the original high-resolution design of the outline.
 
 
+**Step 2: Control top of Cap O** 
+
+Choose the YShift Tool from the Toolbar. Position the ‘blue circle’, directly over point 14, and drag to point 29. Two lines of code are generated in the VTT Talk Window.
+
+**YAnchor(14,29)** Moves point 14 to the control value listed in the ‘Control Program’, that corresponds to the cap height overshoot.
+ 
+3: 22 ~ 2 @ 50 /* cap height overshoot */
+ 
+3 is the cvt number for the cap height overshoot. **Note:** 22 is an average value calculated by the autohinter. _(The actual measured difference between the square cap outline measurement of 1462, and the round cap overshoot measurement, of 1485 is 23, and the bottom round undershoot is 20. It is however better to have both of these values to be equal, to ensure the same rendering behaviour for both overshoot and undershoot at all sizes)_
+ 
+22 ~ means the relative outline measurement from square cap height of 1462 to the top of the Cap O, an averaged value of 22 units.
+ 
+2 designates the parent cvt, (cap height) which is the square cap height.
+ 
+50 means that the overshoot should kick in at 50 ppem. Replace the 50ppem by whichever ppem size you wish the overshoot to kick in. The size at which the  undershoot and overshoots will kick in, is usually kept to be equal.
+ 
+**YShift(14,29)**
+Shifts point 29, to a new position, relative to point 14’s new position on the grid, maintaining the same relative distance between the point 14 and point 29 as in the original high-resolution design of the outline.
+
+**Step 3: Adding the Res command**
+
+Switch to the VTTtalk window** (`ctlr 5`). Type Res before the YAnchor commands. Compile VTT Talk, (`ctrl r`) and save (`ctrl + s`).
+
+The final code in the VTTtalk window will appear like this. The Res command is highlighted here for easy comparison.   /* Y direction */
+
+**Res**YAnchor(5,9)
+
+YShift(5,22)
+
+**Res**YAnchor(14,3)
+
+YShift(14,29)
+
+Smooth()
+
+_The hinting for Cap O is now complete. The glyph can be proofed in the main window, using the text string to see shape and spacing, in the size ramp to see the hinted results at a range of sizes, and in the Variation Window, to proof for all variations in the font._
 
 
 
