@@ -496,9 +496,42 @@ Smooth()
 _The hinting for Cap O is now complete. The glyph can be proofed in the main window, using the text string to see shape and spacing, in the size ramp to see the hinted results at a range of sizes, and in the Variation Window, to proof for all variations in the font._
 
 
+## Editing the Hinting
+
+<img width="100%" height="100%" src="Images/BInterpolate.png">
+
+**Capital B Interpolation**
+
+**Left:** Original outline design of the Capital ‘B’ in Open Sans
+
+**Middle:** Hinted outline without interpolation
+
+**Right:** Hinted outline with interpolation
+ 
+**Editing the Cap B**
 
 
+![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/EditHintingB.gif)
 
+As you gain more experience in looking at the code and the graphical representation of the hints, you will start to see patterns of glyphs and features that need attention.
+
+In the Capital B, the two points 8 and 9, designed correctly in the y-direction in the original outline design, between the middle bar, become offset in the hinted version, when no interpolation is used.
+
+The middle bar has been controlled by hinting, but points 8 and 9, now need further instruction as to how to find their correct position. As you can see in the animation this only takes a few seconds to complete.
+ 
+Choose the YInterpolate tool. Position the ‘blue circle’, directly over point 28, at the bottom left of the middle bar, and drag to point 19. You will see a ‘line’ appear, which takes the form of a draggable ‘elastic band’. No code is generated yet until a point is chosen to interpolate. Click anywhere on the interpolaton line, and drag to the point you want to interpolate, in this case point 8 and release.
+
+**Note:** Sometimes two points fall very closely together on the outline, so you may need to zoom in see more clearly and to ensure you pick the correct points to interpolate.
+
+The following code is generated in the VTTtalk Window.
+ 
+YInterpolate(19,8,28)
+ 
+Now while zoomed in, click again anywhere on the interpolate line, drag to point 9 and release. Point 9 is now added to the interpolate code
+
+YInterpolate(19,8,9,28)
+ 
+That’s it for the edits on the Cap B, and the hinting is complete and ready for proofing. The points 8 and 9 now use the middle bar as a reference as to where to correctly position, for all sizes. **Note:** Interpolations by default do not round points to a grid line. In most cases this is teh desired result.
 
 
 
