@@ -535,13 +535,11 @@ That’s it for the edits on the Cap B, and the hinting is complete and ready fo
 
 While viewing the autohinted results, any kind of distortion, as described here in the B, most likely means that some additional editing and or code addition or deletion is needed. The goal for this style of hinting is always to ensure there are no obvious distortions happening the hinted outline. The closer the hinted outline is to the original design, the better the rendering will be on screen. 
 
-## Editing the Hinting
-
 <img width="100%" height="100%" src="Images/QInterpolate.png">
 
-**Capital B Interpolation**
+**Capital Q Interpolation**
 
-**Left:** Original outline design of the Capital ‘B’ in Open Sans
+**Left:** Original outline design of the Capital ‘Q’ in Open Sans
 
 **Middle:** Hinted outline without interpolation
 
