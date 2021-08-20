@@ -531,10 +531,40 @@ Now while zoomed in, click again anywhere on the interpolate line, drag to point
 
 YInterpolate(19,8,9,28)
  
-That’s it for the edits on the Cap B, and the hinting is complete and ready for proofing. The points 8 and 9 now use the middle bar as a reference as to where to correctly position, for all sizes. **Note:** Interpolations by default do not round points to a grid line. In most cases this is teh desired result.
+That’s it for the edits on the Cap B, and the hinting is complete and ready for proofing. The points 8 and 9 now use the middle bar as a reference as to where to correctly position, for all sizes. **Note:** Interpolations by default do not round points to a grid line. In most cases this is the desired result.
+
+While viewing the autohinted results, any kind of distortion, as described here in the B, most likely means that some additional editing and or code addition or deletion is needed. The goal for this style of hinting is always to ensure there are no obvious distortions happening the hinted outline. The closer the hinted outline is to the original design, the better the rendering will be on screen. 
+
+## Editing the Hinting
+
+<img width="100%" height="100%" src="Images/QInterpolate.png">
+
+**Capital B Interpolation**
+
+**Left:** Original outline design of the Capital ‘B’ in Open Sans
+
+**Middle:** Hinted outline without interpolation
+
+**Right:** Hinted outline with interpolation
+ 
+**Editing the Cap Q**
 
 
+![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/EditHintingQ.gif)
 
+Similar to the Capital B, the two points 4 and 7, are positioned correctly in the y-direction in the original outline design, between the bottom round of the Q, but become badly offset in the hinted version, when no interpolation is used.
+
+The bottom round has been controled by hinting, but points 4 and 7, now need further instruction as to how to find their correct position in the hinted outline.
+ 
+Using the same technique as in the B, drag the interpolation tool from the bottom of the lower round on the Q, from point 10 to point 27. Click anywhere on the interpolaton line, and drag to the point you want to interpolate, point 4, and release.
+
+_**Note:** In this case point 4 is the most obvious point to interpolate, but on closer inspection, point 7 also needs fine control and should be included in the interpolation._
+
+The following code is generated in the VTTtalk Window.
+ 
+YInterpolate(27,4,7,10)
+ 
+That’s it for the edits on the Cap Q. The hinting is complete and ready for proofing.
 
 
 
