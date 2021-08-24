@@ -565,25 +565,25 @@ That’s it for the edits on the Cap Q. The hinting is complete and ready for pr
 
 <img width="100%" height="100%" src="Images/KInterpolate.png">
 
-**Capital Q Interpolation**
+**Capital K Interpolation**
 
-**Left:** Original outline design of the Capital ‘Q’ in Open Sans
+**Left:** Original outline design of the Capital ‘K’ in Open Sans
 
-**Middle:** Hinted outline without interpolation
+**Middle:** Hinted outline without interpolation / middle section of the K becomes distorted and appears light
 
-**Right:** Hinted outline with interpolation
+**Right:** Hinted outline with interpolation, corrects the hinted position of points 3, 8, 2 and 14
  
 **Editing the Cap K**
 
 ![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/EditHintingK.gif)
 
-Editing is shown here for the default Regular Weight and the Light variation. The middle part of the K becomes distorted and may cause the outline to look to light on-screen. It is best to proof glyphs in the main window at a low hinted size, shown here at 9 point,where it is easier to spot the distortions. 
+Editing is shown here for the default regular Weight and the light variation. The middle part of the K becomes distorted and may cause the outline to look light on-screen. It is best to proof glyphs in the main window at a low hinted size, shown here at 9 point, where it is easier to spot the distortions. 
 
 Using the same technique as in the B, drag the interpolation tool from the baseline of the Cap K, from point 5 to point 6 at the cap height. Zoom in for easier editing. Click anywhere on the interpolaton line, and drag to the point you want to interpolate, point 3, and release. Click on the interpolation line again, and repeat for points 8, 2, and 14. 
 
-That’s it for the edits on the Cap K. The middle points are now corrected positioned in the hinted outlines for all variations. The hinting is complete and ready for proofing. 
+That’s it for the edits on the Cap K. The middle points are now correctly positioned in the hinted outlines for all variations. The hinting is complete and ready for proofing. 
 
-Editing glyphs and adding interpolations can be done in an efficient way using the graphical hinting tools. As you progress throught the glyph set and gain more experience, its becomes easier and faster to spot where and for which glyphs the additional edits are needed. Proof glyphs by turning hinting on and off, and some smaller point sizes to spot distortions.
+Editing glyphs and adding interpolations can be done in an efficient way using the graphical hinting tools. As you progress throught the glyph set and gain more experience, its becomes easier and faster to spot where and for which glyphs any additional edits are needed. Proof glyphs by turning hinting on and off, `ctrl + g` at some smaller point sizes to spot distortions.
 
 
 
