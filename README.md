@@ -311,7 +311,58 @@ Follow these steps to Autohint a Latin font:
 4. From the Tools menu, select Autohint > Light Latin Autohint.
 5. When Autohinting is complete choose Save from File Menu
 
-**Note** The intent is that this Autohinter works well enough for most glyphs. Autohinting for all glyphs in the font should be carefully checked and proofed, and certain glyphs may need to be re-hinted manually, either by using the Visual Hinting tools, or by editing the VTT Talk code directly._
+**Note** _The intent is that this Autohinter works well enough for most glyphs. Autohinting for all glyphs in the font should be carefully checked and proofed, and certain glyphs may need to be re-hinted manually, either by using the Visual Hinting tools, or by editing the VTT Talk code directly._
+
+## XML Export and Import Hinting code
+
+**Step 2.** Export, edit, import, and complile XML.
+
+VTT allows for export and import of all hinting code to a seperate XML file. This can be used in a few ways
+
+**Archiving:** Saving a plain text representation of the hinting code in a font.
+
+**Outline corrections:**  Hinting is usually the last step in the production process. If there are any problems with the outlines, outline modifications will be required. VTT does allow some point manipulation for static fonts, but not for Variable outlines. Changes to the original outlines must be made in the source files, in a font editor. The font can then be regenerated. 
+
+In summary: Hints can be exported from a TrueType font to an XML file, editS completed on the original source file outlines in a font editor, and a new TrueType file generated. Import the saved XML file, compile everything for all glyphs and resume the hinting.
+
+**Important Note:** _This technique only works if the glyph order and point order is preserved. 
+
+**Editing:** Export all hinting code from the font to XML, editing the XML in an external text editor, then re-importing those hints back to your original font, with modifications. 
+
+In the following example, we will replace all ‘ResYDist’ code commands with the ‘YShift’ command. Using the YShift command in place of the ResYDist for controlling stem weights, helps to render the outlines of all Variations from Light to Black, using more natural rendering from the outline. The ResYDist command, causes stems to round to full pixels at smaller sizes. This causes distortions, particulatly in lighter outlines. Using the YShift command in place of ResYDist correct these distortions and renders the outlines more accurately.
+
+![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/exportxml.gif)
+
+**Export all hinting data**
+
+1. From the File menu, choose Export, then “All code to XML”.
+2. Choose a location to save the file.
+3. Type a filename.
+4. Click Save.
+
+![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/searchreplace.gif)
+
+**Search and replace**
+
+1. Open XML file in WordPad or any text editor that allow for search and replace
+2. Replace: Find ResYdist > replace with YShift > replace all
+3. Save.
+
+![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/Compileeverything.gif)
+
+**Import modified hinting code**
+
+Note steps 1-3 below for exporting are not shown here, in the animation. The import takes about 30 seconds to complete for this font file.
+
+1. Select the Import submenu of the File menu and choose “All code to XML”.
+2. Select the XML file to import.
+3. Click Open.
+4. **Complile > Everything for all glyphs**
+5. Save
+
+All stems that previously used ResYdist to control the stem weight, will now use YShift. 
+
+**Ensure to complete step 4 above, after editing and importing the XML file.**
 
 ## Hinting Concepts (Hinting the H & O)
 
