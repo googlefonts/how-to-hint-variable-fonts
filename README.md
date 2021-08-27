@@ -636,6 +636,81 @@ That’s it for the edits on the Cap K. The middle points are now correctly posi
 
 Editing glyphs and adding interpolations can be done in an efficient way using the graphical hinting tools. As you progress throught the glyph set and gain more experience, its becomes easier and faster to spot where and for which glyphs any additional edits are needed. Proof glyphs by turning hinting on and off, `ctrl + g` at some smaller point sizes to spot distortions.
 
+## Hinting complex glyphs
+
+**Hinting strategy for Yen**
+
+1. Control the top (Capital Height) and bottom (Baseline) to be consistent with other figure glyphs, using values in the Control Value Table as a reference. Minimise blur at the Cap Height.
+ 
+2. Control the position of the two middle horizontal bars, in relation to the baseline and Capital height. 
+
+3. Control the weight of the middle horizonal bars.
+
+4. Maintain white space between middle bars in all variations.
+
+The Autohinter is able to do 1 2 and 3, but has no stragety for 4. Maintaining white space is critical to ensure the glyph is kept open and readable. It is often easier and faster to rehint more complex glyphs from scratch, with a clear stragety in mind, rather than edit the autohinter code.
+
+![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/HintYen.gif)
+
+**Step 1: Baseline and Cap Height Control** 
+
+Choose the YShift Tool from the Toolbar. Position the ‘blue circle’, directly over point 12, and right click. With the right mouse button held down, drag to the right to select ‘round to grid’ then release. The Yen is defined in the  ‘Figure’ category, and the baseline cvt for the figure category will be choosen automatically. 
+
+**YAnchor (12, 12)** Moves point 12 to the control value listed in the ‘Control Program’, that corresponds to the Figure baseline, (cvt #12) and rounds this point to a grid line.
+
+**YShift(21,4)** Using the YShift Tool position the ‘blue circle’, directly over point 21, and drag to point 1. Moves point 21 to the control value listed in the ‘Control Program’, that corresponds to the Figure square height, (cvt #4) and rounds this point to a grid line. 
+
+**YShift(21,1)**
+Shifts point 1, to a new position on the grid, relative to point 21’s new position on the grid, ensuring point 1 will also be grid-fit to the figure height.
+
+**Step 2: Position middle bars** 
+
+**YIPAnchor(12,17,21)** Choose the YInterpolate tool. Position the ‘blue circle’, directly over point 21, at the top left, and drag to point 12 at the baseline. Click anywhere on the interpolaton line, and drag to the point you want to interpolate, in this case point 17 and release. Right click on point 17 and drag to the right to round the point to grid. It is important to choose the bottom point of the top middle bar, to begin the positioning, as this will be used to ensure the white space is preserved between the middle bars. This will also place point point 17 on a full pixel boundary ensuring that one side of the bar is kept on a high contrast grid boundary.
+
+**YShift(17,6)** YShift from point 17 to point 6, to ensure point 6 is aligned with point 17
+
+**YShift(17,20)** YShift from point 17 to point 20, to control the weight of the top middle bar.
+
+**YShift(20,3)** YShift from point 20 to point 3, to ensure point 3 is aligned with point 20
+
+**YShift(3,0)** YShift from point 3 to point 0, to position point 0 correctly in relation to the middle bar.
+
+**Step 3: Maintain White Space** 
+
+This is the critical step in the hinting process, to ensure that there is always white space maintained between the two middle bars, and to keep at least one side of the lower bar on a high contrast grid boundary. 
+
+**YDist(17,16,>=)** Choose the YLink Tool from the Toolbar. Position the ‘blue circle’, directly over point 17, and drag to point 16 and release. Right click on point 17 and drag down to ensure the minimum distance option is choosen. 
+
+**>=** The greater than and equals sign appears after the 16 in the YDist command. This means, always keep a minimum distance of at least one pixel, ensuring in this case that there will always now be at least one pixel of white space between the two middle horizonal bars. This ensures that the glyph will appear open and readable at all sizes for all variations. This same stragety can be used for similar complex glyphs, in the currency range, or for other glyphs with multiple horizonals. 
+
+**Note** _The YLink tool can generate two type of commands, a YLink, that uses a cvt as a reference to control a distance or YDist that uses the outline measurement, and no cvt._
+
+**YShift(16,7)** YShift from point 16 to point 7, to ensure point 7 is aligned with point 16
+
+**YShift(16,13)** YShift from point 16 to point 13, to control the weight of the bottom middle bar.
+
+**YShift(13,10)** YShift from point 13 to point 10, to ensure point 10 is aligned with point 13
+
+The hinting for the Yen is now complete. The heights are set, middle bars correctly positioned, and white space maintained for all sizes and all variations. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
