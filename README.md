@@ -679,7 +679,7 @@ Shifts point 1, to a new position on the grid, relative to point 21’s new posi
 
 This is the critical step in the hinting process, to ensure that there is always white space maintained between the two middle bars, and to keep at least one side of the lower bar on a high contrast grid boundary. 
 
-**YDist(17,16,>=)** Choose the YLink Tool from the Toolbar. Position the ‘blue circle’, directly over point 17, and drag to point 16 and release. Right click on point 17 and drag down to ensure the minimum distance option is choosen. 
+**YDist(17,16,>=)** Choose the YLink Tool from the Toolbar. Position the ‘blue circle’, directly over point 17, and drag to point 16 and release. Right click on the green arrowhead and drag down to ensure the minimum distance option is choosen. 
 
 **>=** The greater than and equals sign appears after the 16 in the YDist command. This means, always keep a minimum distance of at least one pixel, ensuring in this case that there will always now be at least one pixel of white space between the two middle horizonal bars. This ensures that the glyph will appear open and readable at all sizes for all variations. This same stragety can be used for similar complex glyphs, in the currency range, or for other glyphs with multiple horizonals. 
 
@@ -693,17 +693,53 @@ This is the critical step in the hinting process, to ensure that there is always
 
 The hinting for the Yen is now complete. The heights are set, middle bars correctly positioned, and white space maintained for all sizes and all variations. 
 
+## Hinting Accent glyphs
 
+**Hinting strategy for Acute**
 
+1. Move the bottom of the glyph to align to the grid
+ 
+2. Ensure hinted glyph is at least two pixels in height at all sizes for all variations.
 
+The Autohinter has no special stragety for hinting accented glyphs. By locking the top and bottom of the accent to the grid, the autohinter code can cause accents to collapse to one pixel in height. A one pixel high Acute accent, may be mistaken for a dot accent.
 
+To ensure the best readable solution, accents that need it, should be hinted to be a minimum of two pixels in height for all sizes. 
 
+![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/HintAcute.gif)
 
+**Hinting the Acute (0xb4)**
 
+Choose the YLink Tool from the Toolbar. Position the ‘blue circle’, directly over point 6, and drag to point 12. Two lines of code are generated in the VTT Talk Window. Right click on the green arrowhead below point 12, and drag down to ensure the minimum distance option is choosen. _If you have set the YLink tool previously to use a dist and minimum distance, this may be already set._
 
+YAnchor(6,16)
+YDist(6,12,>=)
 
+VTT automatically generates a cvt, when anchoring point 6. This cvt is not required, as accents are positioned later over the base glyphs using different positioning code. To remove the cvt, right click on the anchor symbol below point 6, drag to left to release. This sets point 6 to round to grid, but not use a cvt. The code will update to the following.
 
+YAnchor(6)
+YDist(6,12,>=)
 
+Choose the YInterpolate tool, drag from point 6 to 12. Click anywhere on the interpolaton line, and drag to point 1. Click again and drag to point 8.
+
+YInterpolate(12,1,6,8)
+
+The graphical hinting is now done. To ensure that the accent is at least two pixels tall at all sizes, move to the VTTalk Window. (`ctrl + 5`) 
+
+Add 2 after the >= and compile the VTTTalk. (`ctrl + r`). This instructs the hinting to maintain a minimum distance of 2 pixels.
+
+YDist(6,12,>=2)
+
+The final code will look like this.
+
+YAnchor(6)
+
+YDist(6,12,>=2)
+
+YInterpolate(12,1,6,8)
+
+Smooth()
+
+The acute accent now has the correct hinting, and ready for proofing. The accent will appear to be at least two pixels tall at all sizes, making it readable and clear for all variations.
 
 
 
