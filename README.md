@@ -636,6 +636,12 @@ That’s it for the edits on the Cap K. The middle points are now correctly posi
 
 Editing glyphs and adding interpolations can be done in an efficient way using the graphical hinting tools. As you progress throught the glyph set and gain more experience, its becomes easier and faster to spot where and for which glyphs any additional edits are needed. Proof glyphs by turning hinting on and off, `ctrl + g` at some smaller point sizes to spot distortions.
 
+**Editing other Capitals**
+
+![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/HintCaps.gif)
+
+Once you become more familiar with viewing the Autohinter output, editing the hinting using the graphical hinting tools, can be done quickly. The animation above, combines the editing for the ‘A’‘M’‘R’‘N’‘S’‘V’‘W’. All of the edits are interpolations. Quickly add the interpolations and proof the glyphs in the main window and variation window.
+
 ## Hinting complex glyphs
 
 **Hinting strategy for Yen**
