@@ -299,7 +299,7 @@ If the measured outline distance between the base glyph and the accent is the sa
 
 **Step 1.** Autohinting a Variable Font
 
-VTT includes an Autohinter for Latin fonts. This Autohinter makes use of a lightweight hinting strategy that focuses on fitting common heights, such as x-height, cap height, ascender, descender to heights stored in the Control Value Table (CVT). This strategy takes advantage of Windows’ symmetric rendering modes and anchors these key heights to the grid, thereby maintaining consistency in heights across a font family. This method of grid-fitting also helps to reduce blur and minimizes distortion.
+VTT includes an Autohinter for Latin fonts. The Autohinter makes use of a lightweight hinting strategy that focuses on fitting common heights, such as x-height, cap height, ascender, descender to heights stored in the Control Value Table (CVT). This strategy anchors these key heights to the grid, thereby maintaining consistency in heights across a font family. This method of grid-fitting also helps to reduce blur and minimizes distortion.
 
 Follow these steps to Autohint a Latin font:
 
@@ -312,6 +312,44 @@ Follow these steps to Autohint a Latin font:
 5. When Autohinting is complete choose Save from File Menu
 
 **Note** _The intent is that this Autohinter works well enough for most glyphs. Autohinting for all glyphs in the font should be carefully checked and proofed, and certain glyphs may need to be re-hinted manually, either by using the Visual Hinting tools, or by editing the VTT Talk code directly._
+
+The Autohinter automatically generates VTTTalk (`ctrl + 5`) hinting information for each glyph, which in turn compiles down to low-level TrueType instructions. (`ctrl + 2`)
+
+VTTTalk is a high-level language designed to be easier for typographers to understand, rather than editing the more obtuse lower level true type code. The main VTT Talk commands are used for the following types of hints
+
+**Link** The distance between a pair of points is controlled by an entry in the CVT Table. Links always use a CVT reference. For example contolling the weight of a horizontal crossbar in the vertical direction.
+
+**Dist** Controls the natural distance between a pair of points.
+
+**Interpolate** Interpolates points between two parent points to find their correct position.
+
+**Anchor** Points can be rounded to the nearest gridline, or to a grid-line specified by a CVT entry
+
+These tables, in particular the VTTTalk tables for each each, is where most of the editing will be done. _Note: Composite glyphs do not contain any VTTTalk code, only low level TrueType code. Editing for composites, can only be done manually in the composite glyph program. The Visual Hinting tools are not used for Composite glyphs._
+
+When the Light Latin Autohinter is run, VTT also creates three three global tables. 
+
+**Control Value & cvar (cvt variations) tables)** (`ctrl + 4`)(`ctrl + shift + 4`) The CVT table is created automatically for Latin fonts, with pre-populated font measurements, saving you time, so that you can begin adding or editing the ‘Visual hinting’ in your font immediately, without the need to measure the font, and manually fill in the relevant CVT entries. The cvar table currently requires manually editing.
+
+The two other global tables that are created are the ‘Pre-Program’ and the ‘Font Program’. 
+
+**Pre-Program** (`ctrl + 3`) In every font there are certain conditions that will always apply. In a TrueType font these conditions are controlled through code placed in the pre-program, for example at what size Hinting wil be turned on and off globally. _Note: There is minimal editing needed in the pre-program. Changing the size for when hints are enabled and or disabled globally, is the most common edit required._
+
+**Font Program** (`ctrl + 7`) This table stores functions that can be called from the ‘prep’ or from the glyph’s instructions. Functions are used to eliminate repetitive code from being used in multiple glyphs. A common example is to control the placement of a diacritic over a base glyph. 
+
+Typically there is no editing done in the font program. It is useful to have a look at the comments at the beginning of the most commonly used functions, to gain a better overall understanding of what each function does.
+
+See this documentaion for a more detailed description of the [‘Cvt’, ‘prep’ and ‘fpgm’](https://docs.microsoft.com/en-us/typography/truetype/hinting-tutorial/basic-global-tables)
+
+VTT Also Generates a ['GASP](https://docs.microsoft.com/en-us/typography/opentype/spec/gasp) table for the font. 
+
+
+
+
+
+
+
+
 
 ## XML Export and Import Hinting code
 
