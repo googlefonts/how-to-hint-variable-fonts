@@ -397,7 +397,7 @@ All stems that previously used ResYdist to control the stem weight, will now use
 
 **Ensure to complete step 4 above, after editing and importing the XML file.**
 
-## Hinting Concepts (Hinting the H & O)
+## Hinting Concepts (Hinting the Capitals)
 
 **Hinting the Control Glyphs H & O**
 
@@ -540,7 +540,7 @@ SRP2[], 5 **S**et **R**eference **P**oint 2
 
 **High level hinting strategy for hinting the uppercase O**
 
-Control the top _(round overshoot height)_ and bottom _(round undershoot height)_ to be consistent with other uppercase glyphs, using values in the Control Value Table as a reference.
+Control the top _(Cap round overshoot height)_ and bottom _(Cap round undershoot height)_ to be consistent with other uppercase glyphs, using values in the Control Value Table as a reference.
  
 Reduce blur at the Capital Overshoot height, and baseline undershoot height, using *inheritence, to force the undershoot and overshoot values to be equal to the baseline and square cap height until a defined size
 
@@ -609,6 +609,54 @@ YShift(14,29)
 Smooth()
 
 _The hinting for Cap O is now complete. The glyph can be proofed in the main window, using the text string to see shape and spacing, in the size ramp to see the hinted results at a range of sizes, and in the Variation Window, to proof for all variations in the font._
+
+
+## Hinting Concepts (Hinting the Lowercase)
+
+**Hinting the Control Glyphs n & o**
+
+Now, let’s look at how to add hinting to the lowercase ‘n’, and ‘o’ using the graphical hinting tools. For this example, the hinting has been deleted and the glyphs are hinted from scratch. In a typical workflow when hinting a Variable font, these glyphs will likely only need minor edits to the Autohinter output.
+
+**High level hinting strategy for hinting the lowercase ‘o’**
+
+Control the top _(lowercase round overshoot height)_ and bottom _(lowercase round undershoot height)_ to be consistent with other lowercase glyphs, using values in the Control Value Table as a reference.
+ 
+Reduce blur at the lowercase overshoot height, and baseline undershoot height, using inheritence, to force the undershoot and overshoot values to be equal to the baseline and square x-height until a defined highter point size.
+
+**High level hinting strategy for hinting the lowercase ‘n’**
+
+1. Control the top left stem (square x-height) and top round (lowercse round overshoot) and bottom (Baseline) to be consistent with other lowercase glyphs, using values in the Control Value Table as a reference. Minimise blur at the the square and round x-height.
+
+2. Control the weight of the top round. 
+ 
+Using the same techniques and approach as described for the Capitals above, add the Hinting using the graphical interface hinting tools. As the glyphs are recognised as lowercase by VTT the correct cvt’s for lowercase baseline, x-height and lowercase overshoot and undershoot will be generated automatically as you add the hinting. 
+
+![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/Hintno.gif)
+
+**Hinting the ‘o’**
+
+The hinting approach for the lowercase ‘o’, is identical to the Capital O. Control the bottom and top rounds, and use a shift to control the weight of the top and bottom rounds. The same concept of inheritence is used for the overshoots and undershoots, the only difference is the cvt’s that are referenced in the Control Value Table, relate to the lowercase glyphs. 
+
+This same hinting approach is used for all lowercase glyphs, with similar rounds, ‘b,c,d,e,p,q,s’, as well as the rounds of ‘f,g,h,j,m,n,r,t,u’. When all of the lowercse glyphs reference the same cvt values for these key heights, consistent alignment for baseline, x-height, ascender, descender, and overshoot and undershoot behaviour, is guaranteed onscreen for all point sizes.
+
+**Hinting the ‘n’**
+
+While hinting the lowercase n, there are a some additional points, that need to be controlled in addition to the baseline, square and round x-height. These points, 18 and 19 need instruction as to where to find their correct position in the hinted outline. Note here, that because of the nature of Variable font design, these points are positioned differently across the variable design space. In the default weight, the y-coordinates of the points fall on the outline in the y-direction between the baseline and the bottom the top round, while in the Condensed Bold weight, the y-coordinates of these same points are higher in the outline and fall in the y-direction between the top round. 
+
+The best solution to ensure these points find their correct position accross the Variable design space, is to use a shift command, from point 9 to point 18. Points 18 and 19 are at the same y-coordinates, so only one point needs to be touched. _These points cannot be interpolated between the top round of the ‘n’, as they are positioned differently in different weights of the font. The y-coordinates of interpolated points must fall between the two parent points, referenced in the Interpolation._
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Editing the Hinting
