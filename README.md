@@ -611,72 +611,7 @@ Smooth()
 _The hinting for Cap O is now complete. The glyph can be proofed in the main window, using the text string to see shape and spacing, in the size ramp to see the hinted results at a range of sizes, and in the Variation Window, to proof for all variations in the font._
 
 
-## Hinting Concepts (Hinting the Lowercase)
-
-**Hinting the Control Glyphs n & o**
-
-Now, let’s look at how to add hinting to the lowercase ‘n’, and ‘o’ using the graphical hinting tools. For this example, the hinting has been deleted and the glyphs are hinted from scratch. In a typical workflow when hinting a Variable font, these glyphs will likely only need minor edits to the Autohinter output.
-
-**High level hinting strategy for hinting the lowercase ‘o’**
-
-Control the top _(lowercase round overshoot height)_ and bottom _(lowercase round undershoot height)_ to be consistent with other lowercase glyphs, using values in the Control Value Table as a reference.
- 
-Reduce blur at the lowercase overshoot height, and baseline undershoot height, using inheritence, to force the undershoot and overshoot values to be equal to the baseline and square x-height until a defined highter point size.
-
-**High level hinting strategy for hinting the lowercase ‘n’**
-
-1. Control the top left stem (square x-height) and top round (lowercse round overshoot) and bottom (Baseline) to be consistent with other lowercase glyphs, using values in the Control Value Table as a reference. Minimise blur at the the square and round x-height.
-
-2. Control the weight of the top round. 
- 
-Using the same techniques and approach as described for the Capitals above, add the Hinting using the graphical interface hinting tools. As the glyphs are recognised as lowercase by VTT the correct cvt’s for lowercase baseline, x-height and lowercase overshoot and undershoot will be generated automatically as you add the hinting. 
-
-![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/Hintno.gif)
-
-**Hinting the ‘o’**
-
-The hinting approach for the lowercase ‘o’, is identical to the Capital O. Control the bottom and top rounds, and use a shift to control the weight of the top and bottom rounds. The same concept of inheritence is used for the overshoots and undershoots, the only difference is the cvt’s that are referenced in the Control Value Table, relate to the lowercase glyphs. 
-
-This same hinting approach is used for all lowercase glyphs, with similar rounds, ‘b,c,d,e,p,q,s’, as well as the rounds of ‘f,g,h,j,m,n,r,t,u’. When all of the lowercse glyphs reference the same cvt values for these key heights, consistent alignment for baseline, x-height, ascender, descender, and overshoot and undershoot behaviour, is guaranteed onscreen for all point sizes.
-
-**Hinting the ‘n’**
-
-While hinting the lowercase n, there are a some additional points, that need to be controlled in addition to the baseline, square and round x-height. These points, 18 and 19 need instruction as to where to find their correct position in the hinted outline. Note here, that because of the nature of Variable font design, these points are positioned differently across the variable design space. In the default weight, the y-coordinates of the points fall on the outline in the y-direction between the baseline and the bottom the top round, while in the Condensed Bold weight, the y-coordinates of these same points are higher in the outline and fall in the y-direction between the top round. 
-
-The best solution to ensure these points find their correct position accross the Variable design space, is to use a shift command, from point 9 to point 18. Points 18 and 19 are at the same y-coordinates, so only one point needs to be touched. _These points cannot be interpolated between the top round of the ‘n’, as they are positioned differently in different weights of the font. The y-coordinates of interpolated points must fall between the two parent points, referenced in the Interpolation._
-
-**Edit the Hinting for the lowercase ‘i’**
-
-The lowercase ‘i’ is a great example of why it is impotant to have a hinting stragety in mind, before adding the hints. In the high resolution design, the dot on the ‘i’, is a seperate part, with white space always maintained between it and the main part of the glyph. This is a key feature that must also be maintained when the glyph is hinted and rendered on-screen, particularly at small sizes. 
-
-<img width="100%" height="100%" src="Images/iillustration.png">
-
-**Top:** In the top example here, when hinting is applied by the Autohinter, there is no stragety in place to keep this critical white space open and clear. The autohinter finds the top of the dot on the ‘i’ as a y-extreme, moves this point to the grid, and then misses controlling the weight of the dot. When the top of the dot on the ‘i’, is rounded to the grid, this rounding happens independantly from the hinting on the main stem of the ‘i’. This can cause the dot in some cases, as shown here in the condenced Bold, to round down to the grid, and clash with the ‘i’ stem, causing the glyph to look more like a lowercase ‘l’, than an ‘i’. 
-
-**Bottom:** Showing the hinted glyph, kept open and clear. Note the Bold condensed Version in the Variation Window.
-
-With a hinting stragety in mind, to always keep this white space open, it is easy to use some simple code to maintain a clear, open and readable glyph at all sizes for all variations. 
-
-**Edit the Hinting of the ‘i’ to keep dot clear**
-
-![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/Hintiopen.gif)
-
-This example shows how powerful VTT is, in allowing for some simple edits and code, to solve this screen rendering problem, for all variation of the glyph. 
-
-To edit the autohinter output for the lowercase ‘i’ dot. Right click on point 4 at the top of the dot and drag to the left to remove the YAnchor command. **Note** _When any edits are made with the graphical hinting tools, the comments that are added by the Autohinter in the VTTtalk are removed, making it easier to view, and edit this code._
-
-Once this edit is made the remaining code for the main stem of the ‘i’, remains, and is perfectly hinted, with the baseline point 2, anchored to the lowercase baseline cvt:10, and the top, point 3 anchored to the x-height cvt:6
-
-The only code that is now needed is the critical code to mantain the the white space between the base stem and the dot of the ‘i’. Choose the YLink tool, drag from point 3 to to point 10 at the bottom of the ‘i’ dot, and make sure that the minimum distance is choosen. The following code is generated in the VTTtalk window.
-
-**YDist(3,10 >=)**
-
-The ‘>=’ in this command, ensures that there is always a minimum distance of 1 pixel maintained between point 6 at the lowercase square x-height to the bottom of the dot on the ‘i’. The bottom of the dot is now also rounded to the grid, maintaining contrast. Now choose the shift tool, and drag from point 10 to point 4 to control the weight of the dot. 
-
-That is the hinting completed for the lowercase ‘i’. The dot will be kept at the correct distance from the main stem of the ‘i’, and critically, the white space will be maintained for all weights and variations of the glyph. Simple and powerful! This same stragety can be used to keep similar glyphs with similar features open and readable at all sizes. 
-
-
-## Editing the Hinting
+## Editing the Capitals Hinting
 
 <img width="100%" height="100%" src="Images/BInterpolate.png">
 
@@ -689,7 +624,6 @@ That is the hinting completed for the lowercase ‘i’. The dot will be kept at
 **Right:** Hinted outline with interpolation
  
 **Editing the Cap B**
-
 
 ![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/EditHintingB.gif)
 
@@ -770,6 +704,81 @@ Editing glyphs and adding interpolations can be done in an efficient way using t
 ![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/HintCaps.gif)
 
 Once you become more familiar with viewing the Autohinter output, editing the hinting using the graphical hinting tools, can be done quickly. The animation above, combines the editing for the ‘A’‘M’‘R’‘N’‘S’‘V’‘W’. All of the edits are interpolations. Quickly add the interpolations and proof the glyphs in the main window and variation window.
+
+
+## Hinting Concepts (Hinting the Lowercase)
+
+**Hinting the Control Glyphs n & o**
+
+Now, let’s look at how to add hinting to the lowercase ‘n’, and ‘o’ using the graphical hinting tools. For this example, the hinting has been deleted and the glyphs are hinted from scratch. In a typical workflow when hinting a Variable font, these glyphs will likely only need minor edits to the Autohinter output.
+
+**High level hinting strategy for hinting the lowercase ‘o’**
+
+Control the top _(lowercase round overshoot height)_ and bottom _(lowercase round undershoot height)_ to be consistent with other lowercase glyphs, using values in the Control Value Table as a reference.
+ 
+Reduce blur at the lowercase overshoot height, and baseline undershoot height, using inheritence, to force the undershoot and overshoot values to be equal to the baseline and square x-height until a defined highter point size.
+
+**High level hinting strategy for hinting the lowercase ‘n’**
+
+1. Control the top left stem (square x-height) and top round (lowercse round overshoot) and bottom (Baseline) to be consistent with other lowercase glyphs, using values in the Control Value Table as a reference. Minimise blur at the the square and round x-height.
+
+2. Control the weight of the top round. 
+ 
+Using the same techniques and approach as described for the Capitals above, add the Hinting using the graphical interface hinting tools. As the glyphs are recognised as lowercase by VTT the correct cvt’s for lowercase baseline, x-height and lowercase overshoot and undershoot will be generated automatically as you add the hinting. 
+
+![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/Hintno.gif)
+
+**Hinting the ‘o’**
+
+The hinting approach for the lowercase ‘o’, is identical to the Capital O. Control the bottom and top rounds, and use a shift to control the weight of the top and bottom rounds. The same concept of inheritence is used for the overshoots and undershoots, the only difference is the cvt’s that are referenced in the Control Value Table, relate to the lowercase glyphs. 
+
+This same hinting approach is used for all lowercase glyphs, with similar rounds, ‘b,c,d,e,p,q,s’, as well as the rounds of ‘f,g,h,j,m,n,r,t,u’. When all of the lowercse glyphs reference the same cvt values for these key heights, consistent alignment for baseline, x-height, ascender, descender, and overshoot and undershoot behaviour, is guaranteed onscreen for all point sizes.
+
+**Hinting the ‘n’**
+
+While hinting the lowercase n, there are a some additional points, that need to be controlled in addition to the baseline, square and round x-height. These points, 18 and 19 need instruction as to where to find their correct position in the hinted outline. Note here, that because of the nature of Variable font design, these points are positioned differently across the variable design space. In the default weight, the y-coordinates of the points fall on the outline in the y-direction between the baseline and the bottom the top round, while in the Condensed Bold weight, the y-coordinates of these same points are higher in the outline and fall in the y-direction between the top round. 
+
+The best solution to ensure these points find their correct position accross the Variable design space, is to use a shift command, from point 9 to point 18. Points 18 and 19 are at the same y-coordinates, so only one point needs to be touched. _These points cannot be interpolated between the top round of the ‘n’, as they are positioned differently in different weights of the font. The y-coordinates of interpolated points must fall between the two parent points, referenced in the Interpolation._
+
+**Edit the Hinting for the lowercase ‘i’**
+
+The lowercase ‘i’ is a great example of why it is impotant to have a hinting stragety in mind, before adding the hints. In the high resolution design, the dot on the ‘i’, is a seperate part, with white space always maintained between it and the main part of the glyph. This is a key feature that must also be maintained when the glyph is hinted and rendered on-screen, particularly at small sizes. 
+
+<img width="100%" height="100%" src="Images/iillustration.png">
+
+**Top:** In the top example here, when hinting is applied by the Autohinter, there is no stragety in place to keep this critical white space open and clear. The autohinter finds the top of the dot on the ‘i’ as a y-extreme, moves this point to the grid, and then misses controlling the weight of the dot. When the top of the dot on the ‘i’, is rounded to the grid, this rounding happens independantly from the hinting on the main stem of the ‘i’. This can cause the dot in some cases, as shown here in the condenced Bold, to round down to the grid, and clash with the ‘i’ stem, causing the glyph to look more like a lowercase ‘l’, than an ‘i’. 
+
+**Bottom:** Showing the hinted glyph, kept open and clear. Note the Bold condensed Version in the Variation Window.
+
+With a hinting stragety in mind, to always keep this white space open, it is easy to use some simple code to maintain a clear, open and readable glyph at all sizes for all variations. 
+
+**Edit the Hinting of the ‘i’ to keep dot clear**
+
+![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/Hintiopen.gif)
+
+This example shows how powerful VTT is, in allowing for some simple edits and code, to solve this screen rendering problem, for all variation of the glyph. 
+
+To edit the autohinter output for the lowercase ‘i’ dot. Right click on point 4 at the top of the dot and drag to the left to remove the YAnchor command. **Note** _When any edits are made with the graphical hinting tools, the comments that are added by the Autohinter in the VTTtalk are removed, making it easier to view, and edit this code._
+
+Once this edit is made the remaining code for the main stem of the ‘i’, remains, and is perfectly hinted, with the baseline point 2, anchored to the lowercase baseline cvt:10, and the top, point 3 anchored to the x-height cvt:6
+
+The only code that is now needed is the critical code to mantain the the white space between the base stem and the dot of the ‘i’. Choose the YLink tool, drag from point 3 to to point 10 at the bottom of the ‘i’ dot, and make sure that the minimum distance is choosen. The following code is generated in the VTTtalk window.
+
+**YDist(3,10 >=)**
+
+The ‘>=’ in this command, ensures that there is always a minimum distance of 1 pixel maintained between point 6 at the lowercase square x-height to the bottom of the dot on the ‘i’. The bottom of the dot is now also rounded to the grid, maintaining contrast. Now choose the shift tool, and drag from point 10 to point 4 to control the weight of the dot. 
+
+That is the hinting completed for the lowercase ‘i’. The dot will be kept at the correct distance from the main stem of the ‘i’, and critically, the white space will be maintained for all weights and variations of the glyph. Simple and powerful! This same stragety can be used to keep similar glyphs with similar features open and readable at all sizes. 
+
+## Editing other lowercase glyphs
+
+![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/Hintlowercase.gif)
+
+Once the control glyphs have been reviewed, and edited, hinting can progress on rest of the lowercase glyphs. As each glyphs is reviewed to ensure the correct cvt’s are assigned and the hinting structure overall, as output by the autohinter is correct, small edits can then be done to each glyph to fine tune the results. 
+
+Note in the animation, only smaller edits are made, to shift untouched points and to add some interpolations. In some glyphs the autohinter adds hints, that are not needed, such as in the lowercase ‘r’. The shift from point 6 to point 3, is not needed, and can be removed, by a click and drag on the arrowhead of the shift to point 3. 
+
+
 
 ## Hinting complex glyphs
 
