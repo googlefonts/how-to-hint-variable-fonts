@@ -944,8 +944,57 @@ YInterpolate(5,10,22,17)
 
 Smooth()
 
+## Composites 
 
+**Composite Glyphs**
 
+<img width="100%" height="100%" src="Images/Eacutecomp.png">
+
+Composite glyphs are composed from one or more other glyphs, saving font file space. A common example of use is for accented glyphs, e.g. ‘Eacute’. The Capital E and the Acute glyph are hinted as uniques and are then composed as a Composite, forcing the  rendering to be identical to the base glyphs referenced. 
+ 
+VTT’s Autohinter generates the code for composites glyphs containing a reference, _(in VTT the Glyph ID number)_ to the original glyphs as well as additional positioning or offset code. 
+
+Let’s take a look at the glyf program code for the ‘Eacute’ as output by the VTT Autohinter. **Note:** The Visual hinting tools cannot be used to generate code for composite glyphs and any additional editing that is needed, is done in the TrueType (‘glyf’ program) instructions (`ctrl + 2`). A composite glyph may contain further hinting instructions, for example, to position the accent correctly for smaller sizes at lower resolutions. See section on Positioning Accents.
+
+**Capital E acute, Unicode 0xc9, Glyph ID 139**
+
+USEMYMETRICS[]
+
+OFFSET[R], 40, 0, 0
+
+OFFSET[R], 118, 429, 367
+
+**USEMYMETRICS[]** Instructs the composite to use the same metrics or advance width, from the glyph referenced in the first OFFSET instruction. 
+
+**OFFSET[ R ], 40, 0, 0** The first value 40, is the glyph index for the first component, the Capital E. The next value (zero) is the X offset amount in units per em. The final value (zero) is the Y offset. The offset code the base glyph, is the first line of code. Offset amounts, are usually set to zero for both X and Y.
+
+**OFFSET[ R ], 118, 429, 367** Positions the diacritic. The first value, (118) is the Glyph ID for the Acute accent. The second value (429), the X offset, positions the diacritic in the x-direction. The next value (367) positions the diacritic in the y-direction and is usually the same for all Y distances in all composite glyphs. 
+
+The values for positioning the diacritics are for high resolution. **Note:** Additional code is required to position accents for smaller point sizes to ensure the accent does not clash with the base glyph. 
+
+**Other examples or composite glyphs**  
+
+In the Open Sans font, the Capital Greek Alpha has the same exact design and metrics as the Capital A (GID 36). The composite code is
+ 
+**Unicode 0x391 Ellipsis (Glyph ID 350)**
+
+USEMYMETRICS[] (Use the Capital A metrics)
+
+OFFSET[ R] , 36, 0, 0 (Use Capital A, with zero offsets for x and y)
+ 
+Once the Capital A has been hinted and proofed for all Variations, the composite glyph for the Greek Alpha only needs to be proofed quickly, with no addition hinting code required
+ 
+**Offset only composites**
+ 
+**Unicode 0x2026 Ellipsis (Glyph ID 527)**  
+ 
+OFFSET[R], 17, 0, 0
+
+OFFSET[R], 17, 529, 0
+
+OFFSET[R], 17, 1055, 0
+ 
+If the advance width and or spacing is different, USEMYMETRICS[] is not used and offsets only, are used. The ‘ellipsis’ (Glyph ID 527) is a composite glyph, using the ‘period’ as a reference glyph. In this case the period is referenced three times, with only offset code to correctly position components. Once the ‘period’ glyph has been hinted and proofed for all Variations, the composite glyph for the Ellipsis only needs to be proofed quickly, with no addition hinting code required.
 
 
 
