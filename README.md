@@ -72,7 +72,7 @@ Accented glyphs are hinted once to be a minimum of two pixels in height, if need
 Glyphs with a complex outline structure can be made to render clearly on-screen.
 
 
-**Examples: Benifits of Hinting / Open Sans Variable / DirectWrite rendering**
+**Examples: Benefits of Hinting / Open Sans Variable / DirectWrite rendering**
 
 **Alignment and blur reduction**
 <img width="100%" height="100%" src="Images/EHTBLUR.png">
@@ -181,7 +181,7 @@ The hinted outline should not vary too much from the high resolution design in p
 
 Shown here in the main window set to the left. _(Refer to the VTT Help file for more detailed explanations on using each tool. The Toolbar can be configured to show on the top, left, right, or bottom of the Main Window using `Tools>Options>Appearance>Location`)_ 
 
-**Note:** The ‘Move’, ‘Swap’, ‘Delete’ and ‘Insert’ commands in the Main Window UI Toolbar are disabled in VTT for Variation Fonts. Making any changes to the oultines with these commands would break a Variation font. 
+**Note:** The ‘Move’, ‘Swap’, ‘Delete’ and ‘Insert’ commands in the Main Window UI Toolbar are disabled in VTT for Variation Fonts. Making any changes to the outlines with these commands would break a Variation font. 
 
 Navigate / Zoomin / Zoomout 
 
