@@ -8,9 +8,9 @@ _“The glyphs look like crisp pixel sculptures with lots of detail!”_ — Eri
 Feedback from client on a VTT Hinted Variable font
 
 ## Introduction
-Font Hinting has always been thought of as a ‘black art’ - some magic performed behind the scenes, hard to understand, and very difficult to do. This was true when [hinting was done for low resolution screens](https://docs.microsoft.com/en-us/typography/truetype/fixing-rasterization-issues) and in the case of older font rendering techniques, such as black and white or monochrome rendering. These older techniques required a lot of hinting code to ensure every feature in the font was strictly controlled and to ensure consistent and clear on-screen display. This made hinting an _extremely_ time-consuming and skilled task, for specialists only. In addition, hinting was often a manual process, involving writing and editing TrueType code by hand.
+Font Hinting has always been thought of as a ‘black art’ - some magic performed behind the scenes, hard to understand, and very difficult to do. This was true when [hinting was done for low resolution screens](https://docs.microsoft.com/en-us/typography/truetype/fixing-rasterization-issues) and for older font rendering techniques, such as black and white or monochrome rendering. These older techniques required a lot of hinting code to ensure every feature in the font was strictly controlled and a consistent and clear on-screen display was maintained. This made hinting an _extremely_ time-consuming and skilled task, for specialists only. In addition, hinting was often a manual process, involving writing and editing thousands of lines of TrueType code by hand.
 
-The good news is that this is no longer the case. As screen resolutions and font rendering have improved, hinting has become a lot less complicated, with only a handful of hinting instructions needed for each glyph, to ensure consistent and beautiful rendering on-screen. In addition, VTT’s built in Autohinter significantly speeds up the process, leaving the focus on editing and fine-tuning the hinting to achieve the best results.
+The good news is that this is no longer the case. As screen resolutions and font rendering have improved, hinting has become a lot less complicated, with only a handful of hinting instructions needed for each glyph, to ensure consistent and beautiful rendering on-screen. In addition, VTT’s built in autohinter significantly speeds up the process, leaving the focus on editing and fine-tuning the hinting to achieve the best results.
 
 **VTT (Visual TrueType)** [Install](https://aka.ms/vtt-mst)
 
@@ -20,10 +20,9 @@ VTT has been upgraded to handle all aspects of hinting for variable fonts. The f
 
 ## Background / Older Font Hinting
 
-In digital fonts, each character or glyph is described by a set of outlines. For older methods of font rendering, when the outline was scaled to a small size and rendered onto a coarse grid of pixels, each pixel whose centre lay within the outline was set to black. This method never produced good results. The resulting bitmap’s shapes were irregular and usually misshapen, glyph stems became uneven, spacing was not controlled, and individual glyph shapes were poor.
+In digital fonts, each character or glyph is described by a set of outlines. For older methods of font rendering, when the outline was scaled to a small size and rendered onto a coarse grid of pixels, each pixel whose centre lay within the outline was set to black. This scale and fill method never produced good results, bitmap shapes were irregular, glyph stems became uneven, spacing was not controlled, and individual glyph shapes were poor.
 
-To help solve these problems, some form of font intelligence or instructions  was needed. These instructions were known as 
-[hints](https://docs.microsoft.com/en-us/typography/truetype/hinting), and helped to translate a typeface’s high resolution outlines to the coarse pixel grid of a screen. To ensure even and easy to read text, every feature had be controlled, including spacing, symmetry, stem consistency, individual glyph shape, proportion, and overall typographic colour. Special instructions called ‘deltas’ were often used to even further refine a glyph’s shape, turning individual pixels on or off at a specific point size on-screen. 
+A set of instructions known as [hints](https://docs.microsoft.com/en-us/typography/truetype/hinting), solved this problem helping to translate a typeface’s high resolution outlines to the coarse pixel grid of a screen. To ensure even and easy to read text, every feature of the font outline and metrics, was controlled through hinting code, including spacing, symmetry, stem consistency, individual glyph shape, proportion, and overall typographic colour. Special instructions called ‘deltas’ were often used to even further refine a glyph’s shape, turning individual pixels on or off at a specific point size on-screen. 
 
 Achieving perfect results, however, required expert hinting knowledge, a huge amount of code, and months of painstaking detailed work. 
 
@@ -41,13 +40,13 @@ Most modern browsers and common rendering environments, such as Microsoft Office
  
 **Subpixel Positioning**
  
-When DirectWrite renders a font’s spacing, glyphs can now begin on a subpixel boundary. [Subpixel positioning](https://docs.microsoft.com/en-us/windows/win32/directwrite/introducing-directwrite#improved-text-rendering-with-cleartype) greatly improves the spacing of type on-screen, especially at small sizes. The spacing accuracy that can be achieved by starting a glyph’s spacing on a subpixel boundary is significant compared with starting on a whole pixel as in GDI. This more accurate spacing is critical in achieving a smooth flow and even typographic color to the text. 
+When DirectWrite renders a font’s spacing, glyphs can now begin on a subpixel boundary. [Subpixel positioning](https://docs.microsoft.com/en-us/windows/win32/directwrite/introducing-directwrite#improved-text-rendering-with-cleartype) greatly improves the spacing of type on-screen, especially at small sizes. The spacing accuracy that can be achieved by starting a glyph’s spacing on a subpixel boundary is significant compared with starting on a whole pixel as in GDI. This more accurate spacing is critical in achieving a smooth flow and even typographic colour to the text. 
 
 Hinting is no longer needed to control the font’s spacing, which in the past required a lot of extra code and time to complete. This speeds up the hinting process significantly. 
  
 **Horizontal and Vertical anti-aliasing**
  
-Subpixel rendering improves the horizontal aspect of type on-screen but not the vertical. Older types of rendering, such as Cleartype in Windows GDI for example, only supported horizontal anti-aliasing. This meant that aliasing or ‘jaggies’ were still very apparent at larger sizes on-screen. In order to fix this problem and give a smoother vertical effect, DirectWrite applies [anti-aliasing in the y-direction](https://docs.microsoft.com/en-us/windows/win32/directwrite/introducing-directwrite#improved-text-rendering-with-cleartype) in addition to using the horizontal subpixel rendering. 
+Subpixel rendering improved the horizontal aspect of type on-screen but not the vertical. Older types of rendering, such as ClearType in Windows GDI for example, only supported horizontal anti-aliasing. This meant that aliasing or ‘jaggies’ were still very apparent at larger sizes on-screen. In order to fix this problem and give a smoother vertical effect, DirectWrite applies [anti-aliasing in the y-direction](https://docs.microsoft.com/en-us/windows/win32/directwrite/introducing-directwrite#improved-text-rendering-with-cleartype) in addition to using the horizontal subpixel rendering. 
  
 The addition of support for vertical anti-aliasing, helped a great deal in smoothing out the appearance of text on-screen, particularly at larger sizes. However, for smaller font sizes, when a font’s outlines are scaled and rendered with no hinting, the vertical anti-aliasing can result in significant blur, particularly for horizontal features. 
 
@@ -61,15 +60,13 @@ The main glyph heights (such as capital, x-height, figure, ascender, descender) 
 
 **Sharp rendering of horizontal strokes and alignment zones**
 
-A simple set of hinting instructions fits horizontal features of the font outline to the pixel grid, which significantly reduces blur. 
+A simple set of hinting instructions fits horizontal features of the font outline to the pixel grid, significantly reducing blur. 
  
 **Maintaining correct distances**
 
-This allows all glyphs to be rendered clearly on-screen across all variations. 
+This allows all the details in all glyphs to be rendered clearly on-screen across all variations. For example, accented glyphs are hinted once to be a minimum of two pixels in height, if needed, and to be at least one pixel clear of the base glyph, for all variations. This ensures readable text across all variations, allowing for open and clear rendering on-screen, and for the details of the font design to be maintained down to the smallest text sizes.  
 
-Accented glyphs are hinted once to be a minimum of two pixels in height, if needed, and to be at least one pixel clear of the base glyph, for all variations. This ensures readable text across all variations, allowing for open and clear rendering on-screen, and for the detail of the font design to be maintained down to the smallest text sizes.  
-
-Glyphs with a complex outline structure can be made to render clearly on-screen.
+Glyphs with a complex outline structure can also be made to render clearly on-screen.
 
 
 **Examples: Benefits of Hinting / Open Sans Variable / DirectWrite rendering**
@@ -91,7 +88,7 @@ Glyphs with a complex outline structure can be made to render clearly on-screen.
 
 <img width="100%" height="100%" src="Images/accentsunhintedvhinted.png">
 
-**Top:** Accented glyphs, at 13ppem/10 point @96dpi. Accents lose details and blur together with the base glyphs, resulting in loss of legibility. _(Open Sans Variable font, default, Regular weight, and ExtraBold Variation.)_
+**Top:** Accented glyphs, at 13ppem/10 point @96dpi. Accents lose details and blur together with the base glyphs, resulting in loss of legibility. _(Open Sans Variable font, default, Regular weight, and Extra Bold Variation.)_
 
 **Bottom:** Hinted accent. Accents are hinted to preserve the correct shape and to maintain a consistent height. A minimum distance is maintained between the base glyph and the accent for all variations.
 
@@ -110,17 +107,17 @@ Hinting, editing, and proofing a Variable font in VTT is detailed work. It is he
 
 _On opening a Variation Font, you can arrange the Windows in VTT to suit your own workflow. Make any edit, and save (`ctrl + s`). This will save the VTT preferences. The next time a font file is opened in VTT you will see the same window configuration._
 
-This example window setup _(OpenSans Variable font)_ shows the main windows (1-4) needed to view and edit the hinting, proof the results, and see the visual representation of the hinting (1 & 2), as well as the hinting code associated with each glyph. (3 & 4). Display Options (5) will not appear during the workflow when set.
+This example window setup _(Open Sans Variable font)_ shows the main windows (1-4) needed to view and edit the hinting, proof the results, and see the visual representation of the hinting (1 & 2), as well as the hinting code associated with each glyph. (3 & 4). Display Options (5) will not appear during the workflow when set.
 
-**NOTE:** _Refer also to the extensive Help file in VTT for additional information on setup, proofing, Hinting basics, Hinting tools, Autohinting, Variable fonts, and more._
+**NOTE:** _Refer also to the extensive help file in VTT for additional information on setup, proofing, Hinting basics, Hinting tools, Autohinting, and Variable fonts_
 
 **(1) Main Window _(View > Main View or `ctrl + 1`)_**
 
 Hinting is done in the Main Window _(as previously for static fonts in VTT)_ on the default instance of the Variation font. Variable fonts are a way of accessing many font instances stored in one font file, but only one set of outlines needs to be hinted: the default instance. 
 
-With both the Main and Variation windows showing side by side, viewing and editing hints of the default instance of the font is performed in the Main window. The hinting will update live in the Variation window. Because hints in a variable font are associated with the default instance and other instances merely use interpolated CVTs (control values), you can only edit hints in the Main window.
+With both the Main and Variation windows showing side by side, viewing and editing the hints of the default instance of the font is done in the Main Window. The hinting will update live in the Variation window. Because hints in a variable font are associated with the default instance and other instances merely use interpolated CVTs (control values), you can only edit hints, on the default instance, in the Main Window.
 
-The Variation Window can be used to proof the hinted results of any available instance in the font. When the Variation Window is highlighted, choose Display Menu > Variations Instance > Choose Variation, Light Bold, Condensed Light etc. or use keyboard shortcuts. (`ctrl + shift + up arrow / down arrow` is a quick and convenient way to toggle through the available variations in the font)
+The Variation Window can be used to proof the hinted results of any available instance in the font. When the Variation window is highlighted, choose, Display Menu > Variations Instance > Choose Variation, Light Bold, Condensed Light etc. or use keyboard shortcuts. (`ctrl + shift + up arrow / down arrow` is a quick and convenient way to toggle through the available variations in the font)
 
 **(5) Display Options _(Menu > Display > Options or `ctrl + D`)_**
 
@@ -133,7 +130,7 @@ Display options settings determine how the glyph view and live text in the Main 
 **CT anti-aliased _(y-smoothing)_**
 
 
-These settings will be reflected in the Main View of the current glyph, the text samples in the size ramp at the bottom of the main view, and in the sample text string at the top. _(The sample text string can be customized in `Tools>options>Text Sample> Extra Text`.)_
+These settings will be reflected in the Main View of the current glyph, the text samples in the size ramp at the bottom of the Main View, and in the sample text string at the top. _(The sample text string can be customized in `Tools>options>Text Sample> Extra Text`.)_
 
 Other settings can be configured to how best suits your own working style. 
 
@@ -141,11 +138,11 @@ Other settings can be configured to how best suits your own working style.
 
 `Display > Options > Design Options` >  **Show fewer points.**
 
-Showing fewer points will hide all off curve points which are not generally needed when hinting. This also allows for a much clearer display of the glyph outline in the main window, while hinting.
+Showing fewer points will hide all off curve points which are not generally needed when hinting. This also allows for a much clearer display of the glyph outline in the Main Window, while hinting.
 
 `Display > Options > VTT General` > **X-direction**
 
-Set x-direction to off, as x-hinting is not used
+Set x-direction to off, as x-hinting code is not used
 
 `Display > Options > VTT Attributes` > **Show CVT numbers.** 
 
@@ -159,7 +156,7 @@ While viewing any glyph in the Main Window, the glyph info bar will display the 
 
 **GID number:** The Glyph ID for the currently selected glyph, in the sequential order the glyphs are stored in the font file. **Pro Tip:** The glyph order can be displayed in two ways, under `Tools > options > settings > Access glyph by Index`. When this checkbox is set, the character set (`ctrl-9`) will show the glyphs as they are ordered in the font file. It is useful to leave this as the default setting, as the hinting for every glyph in the font should be proofed and checked. If this option is unset, only glyphs with Unicode codepoints assigned will be shown. This is also a useful view, however if set as the default, some glyphs may be missed in the hinting and proofing process.
 
-**Char:** If the glyph has an associated Unicode, this will be shown, eg: Cap H (0x48). If there is no Unicode associated with the glyph, this will be shown as Oxffff _(OpenType glyphs such as Small Caps, figure styles or ligatures, for example). Unicode is followed by the Glyph name.
+**Char:** If the glyph has an associated Unicode, this will be shown, e.g.: Cap H (0x48). If there is no Unicode associated with the glyph, this will be shown as Oxffff _(OpenType glyphs such as Small Caps, figure styles or ligatures, for example). Unicode is followed by the Glyph name.
 
 **Uppercase:** Character group information for each character. The character group tells VTT which group of values to use from the Control Value Table.
 
@@ -181,9 +178,9 @@ The hinted outline should not vary too much from the high resolution design in p
 
 Shown here in the main window set to the left. _(Refer to the VTT Help file for more detailed explanations on using each tool. The Toolbar can be configured to show on the top, left, right, or bottom of the Main Window using `Tools>Options>Appearance>Location`)_ 
 
-**Note:** The ‘Move’, ‘Swap’, ‘Delete’ and ‘Insert’ commands in the Main Window UI Toolbar are disabled in VTT for Variation Fonts. Making any changes to the outlines with these commands would break a Variation font. 
+**Note:** The ‘Move’, ‘Swap’, ‘Delete’ and ‘Insert’ commands in the Main Window UI Toolbar are disabled in VTT for Variable fonts. Making any changes to the outlines with these commands would break a Variable font. 
 
-Navigate / Zoomin / Zoomout 
+Navigate / Zoom in / Zoom out 
 
 **Pro Tip** _Using a wheel mouse for zooming in and out is a must for a smooth workflow. Zooming in to inspect details, in particular, is a common task during the hinting workflow._
 
@@ -215,7 +212,7 @@ Three main tools are needed to complete the hinting in a variable font.
 
 **(2) Variation View (`ctrl + shift + 1`)**
 
-This window is used for viewing and proofing hinting for variation instances. The Variation Window shows you the current glyph outline and hints, in the same way as the Main Window, for the selected variable font instance. The chosen instance is displayed in the top left of the Variation Window. With both the Main and Variation windows setup side by side, you can edit hints in the Main window and see the impact on variations in the Variation window.
+This window is used for viewing and proofing hinting for variation instances. The Variation Window shows you the current glyph outline and hints, in the same way as the Main Window, for the selected variable font instance. The chosen instance is displayed in the top left of the Variation Window. With both the Main and Variation windows setup side by side, you can edit hints in the Main Window and see the impact on variations in the Variation Window.
 
 **Variation Cvt View** (View Menu > Variation CVT)
 
@@ -291,7 +288,7 @@ A color-coded system is shown here as an example of marking each glyph as having
 
 If the measured outline distance between the base glyph and the accent is the same across the variation space, this code can be used. If the accent distance measurement varies, custom code is needed.
 
-4. **Composites: Autohinter code output is ok**. If the autohinter's measured distance is constant, then the code is OK to use for a variable font.
+4. **Composites: Autohinter code output is correct**. If the the distance between the accent and base glyph is constant, across all variations in the font, the code output by the autohinter can be used to position accents.
 
 <img width="100%" height="100%" src="Images/HintOS.png">
 
@@ -313,13 +310,13 @@ Follow these steps to Autohint a Latin font:
 4. From the Tools menu, select Autohint > Light Latin Autohint.
 5. When Autohinting is complete choose Save from File Menu
 
-**Note** _The intent is that this Autohinter works well enough for most glyphs. Autohinting for all glyphs in the font should be carefully checked and proofed, and certain glyphs may need to be re-hinted manually, either by using the Visual Hinting tools, or by editing the VTT Talk code directly._
+**Note** _The Autohinter code works well for most glyphs. However, autohinting for all glyphs in the font should be carefully checked and proofed, and certain glyphs may need to be re-hinted manually, either by using the Visual Hinting tools, or by editing the VTT Talk code directly._
 
 The Autohinter automatically generates VTTTalk (`ctrl + 5`) hinting information for each glyph, which in turn compiles down automatically to low-level TrueType instructions. (`ctrl + 2`)
 
 VTTTalk is a high-level language designed to be easier for typographers to understand, rather than editing the more obtuse lower level true-type code. The main VTT Talk commands are used for the following types of hints
 
-**Link** The distance between a pair of points is controlled by an entry in the CVT Table. Links always use a CVT reference. For example contolling the weight of a horizontal crossbar in the vertical direction.
+**Link** The distance between a pair of points is controlled by an entry in the CVT Table. Links always use a CVT reference. For example controlling the weight of a horizontal crossbar in the vertical direction.
 
 **Dist** Controls the natural outline distance between a pair of points.
 
@@ -327,38 +324,38 @@ VTTTalk is a high-level language designed to be easier for typographers to under
 
 **Anchor** Points can be rounded to the nearest gridline, or to a grid-line specified by a CVT entry
 
-These tables, in particular the VTTtalk table for each glyph, is where most of the editing will be done. _Note: Composite glyphs do not contain any VTTtalk code, only low level TrueType code. Editing for composites, can only be done manually in each composite glyph program. (`ctrl + 2`) The Visual Hinting tools cannot be used for Composite glyphs._
+These tables, in particular the VTTtalk table (`ctrl + 5`) for each glyph, is where most of the editing will be done. _Note: Composite glyphs do not contain any VTTtalk code, only low level TrueType code. Editing for composites, can only be done manually in each composite glyph program. (`ctrl + 2`) The Visual Hinting tools cannot be used for Composite glyphs._
 
-When the Light Latin Autohinter is run, VTT also creates three three global tables. 
+When the Light Latin Autohinter is run, VTT also creates three global tables. 
 
-**Control Value & cvar (cvt variations) tables)** (`ctrl + 4`)(`ctrl + shift + 4`) The CVT table is created automatically for Latin fonts, with pre-populated font measurements, saving you time, so that you can begin adding or editing the ‘Visual hinting’ in your font immediately, without the need to measure the font, and manually fill in the relevant CVT entries. The cvar table currently requires manually editing.
+**Control Value & cvar (cvt variations) tables)** (`ctrl + 4`)(`ctrl + shift + 4`) The CVT table is created automatically for Latin fonts, with pre-populated font measurements, saving you time, so that you can begin adding or editing the ‘Visual hinting’ in your font immediately, without the need to measure the font, and manually fill in the relevant CVT entries. The ‘cvar’ table currently requires manually editing.
 
 The two other global tables that are created are the ‘Pre-Program’ and the ‘Font Program’. 
 
-**Pre-Program** (`ctrl + 3`) In every font there are certain conditions that will always apply. In a TrueType font these conditions are controlled through code placed in the pre-program, for example at what size hinting wil be turned on and off globally. _Note: There is minimal editing needed in the pre-program. Changing the size for when hints are enabled and or disabled globally, is the most common edit required._
+**Pre-Program** (`ctrl + 3`) In every font there are certain conditions that will always apply. In a TrueType font these conditions are controlled through code placed in the pre-program, for example at what size hinting will be turned on and off globally. _Note: There is minimal editing needed in the pre-program. Changing the size for when hints are enabled and or disabled globally, is the most common edit required._
 
 **Font Program** (`ctrl + 7`) This table stores functions that can be called from the ‘Pre-Program’ or from the glyph’s instructions. Functions are used to eliminate repetitive code from being used in multiple glyphs. A common example is to control the placement of a diacritic over a base glyph. 
 
 Typically there is no editing done in the font program. It is useful to have a look at the comments at the beginning of the most commonly used functions, to gain a better overall understanding of what each function does.
 
-See this documentaion for a more detailed description of the [‘Cvt’, ‘prep’ and ‘fpgm’](https://docs.microsoft.com/en-us/typography/truetype/hinting-tutorial/basic-global-tables)
+See this documentation for a more detailed description of the [‘Cvt’, ‘prep’ and ‘fpgm’](https://docs.microsoft.com/en-us/typography/truetype/hinting-tutorial/basic-global-tables)
 
 VTT Also Generates a ['GASP](https://docs.microsoft.com/en-us/typography/opentype/spec/gasp) table for the font. 
 
 
 ## XML, Export and Import Hinting code
 
-**Step 2.** Export, edit, import, and complile XML.
+**Step 2.** Export, edit, import, and compile XML.
 
-VTT allows for export and import of all hinting code to a seperate XML file. This can be used in a few ways
+VTT allows for export and import of all hinting code to a separate XML file. This can be used in a few ways
 
 **Archiving:** Saving a plain text representation of the hinting code in a font.
 
 **Outline corrections:**  Hinting is usually the last step in the production process. If there are any problems with the outlines, outline modifications will be required. VTT does allow some point manipulation for static fonts, but not for Variable outlines. Changes to the original outlines must be made in the source files, in a font editor. The font can then be regenerated. 
 
-In summary: Hints can be exported from a Variable TrueType font and saved to an XML file. Edits can be completed on the original source file outlines in a font editor, and a new TrueType file generated. The saved XML file, can then be imported into the new font and compiled and saved. From the VTT Menu _Tools > Compile > Everything for all glyphs > Save. Hinting can then be resumed._
+**In summary:** Hints can be exported from a Variable TrueType font and saved to an XML file. Edits can be completed on the original source file outlines in a font editor, and a new TrueType file generated. The saved XML file, can then be imported into the new font and compiled and saved. From the VTT Menu _Tools > Compile > Everything for all glyphs > Save. Hinting can then be resumed._
 
-**Important Note:** _This technique only works if the same glyph order and point order is preserved in the new generated font.
+**Important Note:** _This technique only works if the same glyph order and point order is preserved in the new generated font._
 
 **Editing:** Export all hinting code from the font to XML, editing the XML in an external text editor, then re-importing those hints back to your original font, with modifications. 
 
@@ -390,10 +387,10 @@ Note steps 1-3 below for exporting are not shown here, in the animation. The imp
 1. Select the Import submenu of the File menu and choose “All code to XML”.
 2. Select the XML file to import.
 3. Click Open.
-4. **From the VTT ‘Tools’ menu: Complile > Everything for all glyphs**
+4. **From the VTT ‘Tools’ menu: Compile > Everything for all glyphs**
 5. Save
 
-All stems that previously used ResYdist to control the stem weight, will now use YShift. 
+All stems that previously used ResYDist to control the stem weight, will now use YShift. 
 
 **Ensure to complete step 4 above, after editing and importing the XML file.**
 
@@ -409,7 +406,7 @@ Understanding how to use the basic graphical hinting tools, and the hinting code
 
 Once you become familiar with some hinting concepts, tools, and code, editing the hinting or re-hinting, can be completed quickly. The automatically generated code, for the most part, will be either fully correct, or will only need some small edits.
 
-**High level hinting strategy for hinting the uppercase H**
+**Hinting strategy for hinting the uppercase H**
 
 1. Control the top (Capital Height) and bottom (Baseline) to be consistent with other uppercase glyphs, using values in the Control Value Table as a reference. Minimise blur at the Cap Height.
  
@@ -459,7 +456,7 @@ Choose the YInterpolate tool. Position the _‘blue circle’_, directly over po
 
 **YInterpolate(5,3,6)**
 
-The middle bar is now positioned correcty, between the base line and cap height but one more step is needed. To maintain as much contrast as possible and to reduce blur, one side of the middle bar needs to be aligned to the pixel grid.
+The middle bar is now positioned correctly, between the base line and cap height but one more step is needed. To maintain as much contrast as possible and to reduce blur, one side of the middle bar needs to be aligned to the pixel grid.
 
 **Step 3: Round to grid** 
 
@@ -479,9 +476,7 @@ Choose the YShift tool. Position the blue circle over point 3, and drag to point
 
 **Step 5: Adding the Res command** 
 
-The Res addition to the command ResAnchor, for example, stands for Rendering Environment Specific, and ensures that the appropriate rounding happens, for the various rendering environments. This saves adding additional Hinting commands if Hinting is required to work in a variety of rendering environments._The Res command calls a Function, that is designed to also allow for more subtle rendering of features such as undershoots and overshoots
-
-_( Please refer to the longer section on Res commands for more details.)_ **(link to this)**
+The Res addition to the command ResAnchor, for example, stands for Rendering Environment Specific, and ensures that the appropriate rounding happens, for the various rendering environments. This saves adding additional Hinting commands if Hinting is required to work in a variety of rendering environments._The Res command calls a Function, that is designed to also allow for more subtle rendering of features such as undershoots and overshoots_
 
 Switch to the VTTtalk window** (`ctlr 5`). Type Res before the YAnchor commands. Compile VTT Talk, (`ctrl r`) and save (`ctrl + s`).
 
@@ -507,7 +502,7 @@ Smooth()
 
 _The hinting for Cap H is now complete. The glyph can be proofed in the main window, using the text string to see shape and spacing, in the size ramp to see the hinted results at a range of sizes, and in the Variation Window, to proof for all variations in the font._
 
-Now lets take a closer look at the lower level _‘Glyph Program’,_ TrueType code. VTTtalk compiles into TrueType instructions, which can be viewed and edited if necessary in the Glyph program. (`ctlr 2`) _Editing TrueType instructions is not commonly done, however it is useful to have an understanding of what the code is doing._
+Now let’s take a closer look at the lower level _‘Glyph Program’,_ TrueType code. VTTtalk compiles into TrueType instructions, which can be viewed and edited if necessary in the Glyph program. (`ctlr 2`) _Editing TrueType instructions is not commonly done, however it is useful to have an understanding of what the code is doing._
 
 Refer to the full [TrueType Instruction](https://docs.microsoft.com/en-us/typography/opentype/spec/tt_instructions) set for details.
 
@@ -526,27 +521,27 @@ The following is each VTTTalk instruction followed by the corresponding TrueType
 
 **YAnchor(6,2) > MIAP[ R ], 6, 2** **M**ove **I**ndirect **A**bsolute **P**oint. Moves point 6 to the value of CVT 2 and rounds point to grid. 
 
-**YSHIFT(6,11) > SHP[ 1 ], 1** (Shift point by the last point) Moves point 11 maintaining the same relative distance between point 6 and point 11. Note, if the point that is shifted, has the same measurement in the y-direction, the point will also be rounded to grid. Is the point to be shifted, does not have the same measurement in the y-direction, the same relative distence will be maintained as in the original outline, but will not be rounded to grid. 
+**YSHIFT(6,11) > SHP[ 1 ], 1** (Shift point by the last point) Moves point 11 maintaining the same relative distance between point 6 and point 11. Note, if the point that is shifted, has the same measurement in the y-direction, the point will also be rounded to grid. Is the point to be shifted, does not have the same measurement in the y-direction, the same relative distance will be maintained as in the original outline, but will not be rounded to grid. 
 
 SRP2[], 5 **S**et **R**eference **P**oint 2
 
-**YIPAnchor(6,3,5) > IP[ 3 ]** Moves point 3 so that the relationship to point 5 and point 6, is the same as was in the unhinted high resolution outline. **> MDAP[ R ], 3** **M**ove **D**irect **A**bsolute **P**oint 3 Rounds point 3 to the Grid
+**YIPAnchor(6,3,5) > IP[ 3 ]** Moves point 3 so that the relationship to point 5 and point 6, is the same as was in the un-hinted high resolution outline. **> MDAP[ R ], 3** **M**ove **D**irect **A**bsolute **P**oint 3 Rounds point 3 to the Grid
 
 **YSHIFT(3,8) > SHP[ 1 ], 8** (Shift point by the last point) Moves point 8 maintaining the same relative distance as in the original outline, between point 3 and point 8.
 
-**Smooth() > IUP[ Y ] IUP[ X ]** At the end of the VTTtalk for each glyph there is a Smooth[] command. This command is then compiled into a IUP[ X ] and IUP[ Y ] TrueType instructions. These instructions move the points that have not been hinted with the points that have been hinted. The effect smoothes out the hinted outline. 
+**Smooth() > IUP[ Y ] IUP[ X ]** At the end of the VTTtalk for each glyph there is a Smooth[] command. This command is then compiled into a IUP[ X ] and IUP[ Y ] TrueType instructions. These instructions move the points that have not been hinted with the points that have been hinted, smoothing out the hinted outline. 
 
 **Hinting the Cap O**
 
 ![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/HintO.gif)
 
-**High level hinting strategy for hinting the uppercase O**
+**Hinting strategy for hinting the uppercase O**
 
 Control the top _(Cap round overshoot height)_ and bottom _(Cap round undershoot height)_ to be consistent with other uppercase glyphs, using values in the Control Value Table as a reference.
  
-Reduce blur at the Capital Overshoot height, and baseline undershoot height, using *inheritence, to force the undershoot and overshoot values to be equal to the baseline and square cap height until a defined size
+Reduce blur at the Capital Overshoot height, and baseline undershoot height, using *Inheritance, to force the undershoot and overshoot values to be equal to the baseline and square cap height until a defined size
 
-_*Inheritence: A method of forcing one cvt to be equal to another cvt until a certain size. This is used for smaller point sizes on-screen to supress subtle features that cannot be shown when there is a limited number of pixels_
+_*Inheritance: A method of forcing one cvt to be equal to another cvt until a certain size. This is used for smaller point sizes on-screen to supress subtle features that cannot be shown when there is a limited number of pixels_
  
 Control the weight of the top and bottom rounds of the O
 
@@ -635,7 +630,7 @@ In the Capital B, the two points 8 and 9, designed correctly in the y-direction 
 
 The middle bar has been controlled by hinting, but points 8 and 9, now need further instruction as to how to find their correct position. As you can see in the animation this only takes a few seconds to complete.
  
-Choose the YInterpolate tool. Position the ‘blue circle’, directly over point 28, at the bottom left of the middle bar, and drag to point 19. You will see a ‘line’ appear, which takes the form of a draggable ‘elastic band’. No code is generated yet until a point is chosen to interpolate. Click anywhere on the interpolaton line, and drag to the point you want to interpolate, in this case point 8 and release.
+Choose the YInterpolate tool. Position the ‘blue circle’, directly over point 28, at the bottom left of the middle bar, and drag to point 19. You will see a ‘line’ appear, which takes the form of a draggable ‘elastic band’. No code is generated yet until a point is chosen to interpolate. Click anywhere on the interpolation line, and drag to the point you want to interpolate, in this case point 8 and release.
 
 **Note:** Sometimes two points fall very closely together on the outline, so you may need to zoom in see more clearly and to ensure you pick the correct points to interpolate.
 
@@ -667,7 +662,7 @@ While viewing the autohinted results, any kind of distortion, as described here 
 
 Similar to the Capital B, the two points 4 and 7, are positioned correctly in the y-direction in the original outline design, between the bottom round of the Q, but become badly offset in the hinted version, when no interpolation is used.
 
-The bottom round has been controled by hinting, but points 4 and 7, now need further instruction as to how to find their correct position in the hinted outline.
+The bottom round has been controlled by hinting, but points 4 and 7, now need further instruction as to how to find their correct position in the hinted outline.
  
 Using the same technique as in the B, drag the interpolation tool from the bottom of the lower round on the Q, from point 10 to point 27. Click anywhere on the interpolation line, and drag to the point you want to interpolate, point 4, and release.
 
@@ -699,7 +694,7 @@ Using the same technique as in the B, drag the interpolation tool from the basel
 
 That’s it for the edits on the Cap K. The middle points are now correctly positioned in the hinted outlines for all variations. The hinting is complete and ready for proofing. 
 
-Editing glyphs and adding interpolations can be done in an efficient way using the graphical hinting tools. As you progress throught the glyph set and gain more experience, its becomes easier and faster to spot where and for which glyphs any additional edits are needed. Proof glyphs by turning hinting on and off, `ctrl + g` at some smaller point sizes to spot distortions.
+Editing glyphs and adding interpolations can be done in an efficient way using the graphical hinting tools. As you progress through the glyph set and gain more experience, its becomes easier and faster to spot where and for which glyphs any additional edits are needed. Proof glyphs by turning hinting on and off, `ctrl + g` at some smaller point sizes to spot distortions.
 
 **Editing other Capitals**
 
@@ -714,15 +709,15 @@ Once you become more familiar with viewing the Autohinter output, editing the hi
 
 Now, let’s look at how to add hinting to the lowercase ‘n’, and ‘o’ using the graphical hinting tools. For this example, the hinting has been deleted and the glyphs are hinted from scratch. In a typical workflow when hinting a Variable font, these glyphs will likely only need minor edits to the Autohinter output.
 
-**High level hinting strategy for hinting the lowercase ‘o’**
+**Hinting strategy for hinting the lowercase ‘o’**
 
 Control the top _(lowercase round overshoot height)_ and bottom _(lowercase round undershoot height)_ to be consistent with other lowercase glyphs, using values in the Control Value Table as a reference.
  
-Reduce blur at the lowercase overshoot height, and baseline undershoot height, using inheritence, to force the undershoot and overshoot values to be equal to the baseline and square x-height until a defined highter point size.
+Reduce blur at the lowercase overshoot height, and baseline undershoot height, using inheritance, to force the undershoot and overshoot values to be equal to the baseline and square x-height until a defined higher point size.
 
 **High level hinting strategy for hinting the lowercase ‘n’**
 
-1. Control the top left stem (square x-height) and top round (lowercse round overshoot) and bottom (Baseline) to be consistent with other lowercase glyphs, using values in the Control Value Table as a reference. Minimise blur at the the square and round x-height.
+1. Control the top left stem (square x-height) and top round (lowercase round overshoot) and bottom (Baseline) to be consistent with other lowercase glyphs, using values in the Control Value Table as a reference. Minimise blur at the square and round x-height.
 
 2. Control the weight of the top round. 
 
@@ -732,7 +727,7 @@ Using the same techniques and approach as described for the Capitals above, add 
 
 **Hinting the ‘o’**
 
-The hinting approach for the lowercase ‘o’, is identical to the Capital O. Control the bottom and top rounds, and use a shift to control the weight of the top and bottom rounds. The same concept of inheritence is used for the overshoots and undershoots, the only difference is the cvt’s that are referenced in the Control Value Table, relate to the lowercase glyphs. 
+The hinting approach for the lowercase ‘o’, is identical to the Capital O. Control the bottom and top rounds, and use a shift to control the weight of the top and bottom rounds. The same concept of inheritance is used for the overshoots and undershoots, the only difference is the cvt’s that are referenced in the Control Value Table, relate to the lowercase glyphs. 
 
 This same hinting approach is used for all lowercase glyphs, with similar rounds, ‘b,c,d,e,p,q,s’, as well as the rounds of ‘f,g,h,j,m,n,r,t,u’. When all of the lowercase glyphs reference the same cvt values for these key heights, consistent alignment for baseline, x-height, ascender, descender, and overshoot and undershoot behaviour, is guaranteed onscreen for all point sizes.
 
@@ -740,19 +735,19 @@ This same hinting approach is used for all lowercase glyphs, with similar rounds
 
 While hinting the lowercase n, there are a some additional points, that need to be controlled in addition to the baseline, square and round x-height. These points, 18 and 19 need instruction as to where to find their correct position in the hinted outline. Note here, that because of the nature of Variable font design, these points are positioned differently across the variable design space. In the default weight, the y-coordinates of the points fall on the outline in the y-direction between the baseline and the bottom the top round, while in the Condensed Bold weight, the y-coordinates of these same points are higher in the outline and fall in the y-direction between the top round. 
 
-The best solution to ensure these points find their correct position accross the Variable design space, is to use a shift command, from point 9 to point 18. Points 18 and 19 are at the same y-coordinates, so only one point needs to be touched. _These points cannot be interpolated between the top round of the ‘n’, as they are positioned differently in different weights of the font. The y-coordinates of interpolated points must fall between the two parent points, referenced in the Interpolation._
+The best solution to ensure these points find their correct position across the Variable design space, is to use a shift command, from point 9 to point 18. Points 18 and 19 are at the same y-coordinates, so only one point needs to be touched. _These points cannot be interpolated between the top round of the ‘n’, as they are positioned differently in different weights of the font. The y-coordinates of interpolated points must fall between the two parent points, referenced in the Interpolation._
 
 **Edit the Hinting for the lowercase ‘i’**
 
-The lowercase ‘i’ is a great example of why it is impotant to have a hinting stragety in mind, before adding the hints. In the high resolution design, the dot on the ‘i’, is a seperate part, with white space always maintained between it and the main part of the glyph. This is a key feature that must also be maintained when the glyph is hinted and rendered on-screen, particularly at small sizes. 
+The lowercase ‘i’ is a great example of why it is important to have a hinting strategy in mind, before adding the hints. In the high resolution design, the dot on the ‘i’, is a separate part, with white space always maintained between it and the main part of the glyph. This is a key feature that must also be maintained when the glyph is hinted and rendered on-screen, particularly at small sizes. 
 
 <img width="100%" height="100%" src="Images/iillustration.png">
 
-**Top:** In the top example here, when hinting is applied by the Autohinter, there is no stragety in place to keep this critical white space open and clear. The autohinter finds the top of the dot on the ‘i’ as a y-extreme, moves this point to the grid, and then misses controlling the weight of the dot. When the top of the dot on the ‘i’, is rounded to the grid, this rounding happens independantly from the hinting on the main stem of the ‘i’. This can cause the dot in some cases, as shown here in the condenced Bold, to round down to the grid, and clash with the ‘i’ stem, causing the glyph to look more like a lowercase ‘l’, than an ‘i’. 
+**Top:** In the top example here, when hinting is applied by the Autohinter, there is no stragety in place to keep this critical white space open and clear. The autohinter finds the top of the dot on the ‘i’ as a y-extreme, moves this point to the grid, and then misses controlling the weight of the dot. When the top of the dot on the ‘i’, is rounded to the grid, this rounding happens independently from the hinting on the main stem of the ‘i’. This can cause the dot in some cases, as shown here in the condensed Bold, to round down to the grid, and clash with the ‘i’ stem, causing the glyph to look more like a lowercase ‘l’, than an ‘i’. 
 
 **Bottom:** Showing the hinted glyph, kept open and clear. Note the Bold condensed Version in the Variation Window.
 
-With a hinting stragety in mind, to always keep this white space open, it is easy to use some simple code to maintain a clear, open and readable glyph at all sizes for all variations. 
+With a hinting strategy in mind, to always keep this white space open, it is easy to use some simple code to maintain a clear, open and readable glyph at all sizes for all variations. 
 
 **Edit the Hinting of the ‘i’ to keep dot clear**
 
@@ -764,13 +759,13 @@ To edit the autohinter output for the lowercase ‘i’ dot. Right click on poin
 
 Once this edit is made the remaining code for the main stem of the ‘i’, remains, and is perfectly hinted, with the baseline point 2, anchored to the lowercase baseline cvt:10, and the top, point 3 anchored to the x-height cvt:6
 
-The only code that is now needed is the critical code to mantain the the white space between the base stem and the dot of the ‘i’. Choose the YLink tool, drag from point 3 to to point 10 at the bottom of the ‘i’ dot, and make sure that the minimum distance is choosen. The following code is generated in the VTTtalk window.
+The only code that is now needed is the critical code to maintain the white space between the base stem and the dot of the ‘i’. Choose the YLink tool, drag from point 3 to point 10 at the bottom of the ‘i’ dot, and make sure that the minimum distance is chosen. The following code is generated in the VTTtalk window.
 
 **YDist(3,10 >=)**
 
 The ‘>=’ in this command, ensures that there is always a minimum distance of 1 pixel maintained between point 6 at the lowercase square x-height to the bottom of the dot on the ‘i’. The bottom of the dot is now also rounded to the grid, maintaining contrast. Now choose the shift tool, and drag from point 10 to point 4 to control the weight of the dot. 
 
-That is the hinting completed for the lowercase ‘i’. The dot will be kept at the correct distance from the main stem of the ‘i’, and critically, the white space will be maintained for all weights and variations of the glyph. Simple and powerful! This same stragety can be used to keep similar glyphs with similar features open and readable at all sizes. 
+That is the hinting completed for the lowercase ‘i’. The dot will be kept at the correct distance from the main stem of the ‘i’, and critically, the white space will be maintained for all weights and variations of the glyph. Simple and powerful! This same strategy can be used to keep similar glyphs with similar features open and readable at all sizes. 
 
 ## Editing other lowercase glyphs
 
@@ -794,13 +789,13 @@ Note in the animation, only smaller edits are made, to shift untouched points an
 
 4. Maintain white space between middle bars in all variations.
 
-The Autohinter is able to do 1 2 and 3, but has no stragety for 4. Maintaining white space is critical to ensure the glyph is kept open and readable. It is often easier and faster to rehint more complex glyphs from scratch, with a clear stragety in mind, rather than edit the autohinter code.
+The Autohinter is able to do 1 2 and 3, but has no strategy for 4. Maintaining white space is critical to ensure the glyph is kept open and readable. It is often easier and faster to re-hint more complex glyphs from scratch, with a clear strategy in mind, rather than edit the autohinter code.
 
 ![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/HintYen.gif)
 
 **Step 1: Baseline and Cap Height Control** 
 
-Choose the YShift Tool from the Toolbar. Position the ‘blue circle’, directly over point 12, and right click. With the right mouse button held down, drag to the right to select ‘round to grid’ then release. The Yen is defined in the  ‘Figure’ category, and the baseline cvt for the figure category will be choosen automatically. 
+Choose the YShift Tool from the Toolbar. Position the ‘blue circle’, directly over point 12, and right click. With the right mouse button held down, drag to the right to select ‘round to grid’ then release. The Yen is defined in the  ‘Figure’ category, and the baseline cvt for the figure category will be chosen automatically. 
 
 **YAnchor (12, 12)** Moves point 12 to the control value listed in the ‘Control Program’, that corresponds to the Figure baseline, (cvt #12) and rounds this point to a grid line.
 
@@ -811,7 +806,7 @@ Shifts point 1, to a new position on the grid, relative to point 21’s new posi
 
 **Step 2: Position middle bars** 
 
-**YIPAnchor(12,17,21)** Choose the YInterpolate tool. Position the ‘blue circle’, directly over point 21, at the top left, and drag to point 12 at the baseline. Click anywhere on the interpolaton line, and drag to the point you want to interpolate, in this case point 17 and release. Right click on point 17 and drag to the right to round the point to grid. It is important to choose the bottom point of the top middle bar, to begin the positioning, as this will be used to ensure the white space is preserved between the middle bars. This will also place point point 17 on a full pixel boundary ensuring that one side of the bar is kept on a high contrast grid boundary.
+**YIPAnchor(12,17,21)** Choose the YInterpolate tool. Position the ‘blue circle’, directly over point 21, at the top left, and drag to point 12 at the baseline. Click anywhere on the interpolation line, and drag to the point you want to interpolate, in this case point 17 and release. Right click on point 17 and drag to the right to round the point to grid. It is important to choose the bottom point of the top middle bar, to begin the positioning, as this will be used to ensure the white space is preserved between the middle bars. This will also place point 17 on a full pixel boundary ensuring that one side of the bar is kept on a high contrast grid boundary.
 
 **YShift(17,6)** YShift from point 17 to point 6, to ensure point 6 is aligned with point 17
 
@@ -825,9 +820,9 @@ Shifts point 1, to a new position on the grid, relative to point 21’s new posi
 
 This is the critical step in the hinting process, to ensure that there is always white space maintained between the two middle bars, and to keep at least one side of the lower bar on a high contrast grid boundary. 
 
-**YDist(17,16,>=)** Choose the YLink Tool from the Toolbar. Position the ‘blue circle’, directly over point 17, and drag to point 16 and release. Right click on the green arrowhead and drag down to ensure the minimum distance option is choosen. 
+**YDist(17,16,>=)** Choose the YLink Tool from the Toolbar. Position the ‘blue circle’, directly over point 17, and drag to point 16 and release. Right click on the green arrowhead and drag down to ensure the minimum distance option is chosen. 
 
-**>=** The greater than and equals sign appears after the 16 in the YDist command. This means, always keep a minimum distance of at least one pixel, ensuring in this case that there will always now be at least one pixel of white space between the two middle horizonal bars. This ensures that the glyph will appear open and readable at all sizes for all variations. This same stragety can be used for similar complex glyphs, in the currency range, or for other glyphs with multiple horizonals. 
+**>=** The greater than and equals sign appears after the 16 in the YDist command. This means, always keep a minimum distance of at least one pixel, ensuring in this case that there will always now be at least one pixel of white space between the two middle horizonal bars. This ensures that the glyph will appear open and readable at all sizes for all variations. This same strategy can be used for similar complex glyphs, in the currency range, or for other glyphs with multiple horizontals. 
 
 **Note** _The YLink tool can generate two type of commands, a YLink, that uses a cvt as a reference to control a distance or YDist that uses the outline measurement, and no cvt._
 
@@ -847,7 +842,7 @@ The hinting for the Yen is now complete. The heights are set, middle bars correc
  
 2. Ensure hinted glyph is at least two pixels in height at all sizes for all variations.
 
-The Autohinter has no special stragety for hinting accented glyphs. By locking the top and bottom of the accent to the grid, the autohinter code can cause accents to collapse to one pixel in height. A one pixel high Acute accent, may be mistaken for a dot accent.
+The Autohinter has no special strategy for hinting accented glyphs. By locking the top and bottom of the accent to the grid, the autohinter code can cause accents to collapse to one pixel in height. A one pixel high Acute accent, may be mistaken for a dot accent.
 
 To ensure the best readable solution, accents that need it, should be hinted to be a minimum of two pixels in height for all sizes. 
 
@@ -855,7 +850,7 @@ To ensure the best readable solution, accents that need it, should be hinted to 
 
 **Hinting the Acute (0xb4)**
 
-Choose the YLink Tool from the Toolbar. Position the ‘blue circle’, directly over point 6, and drag to point 12. Two lines of code are generated in the VTT Talk Window. Right click on the green arrowhead below point 12, and drag down to ensure the minimum distance option is choosen. _If you have set the YLink tool previously to use a dist and minimum distance, this may be already set._
+Choose the YLink Tool from the Toolbar. Position the ‘blue circle’, directly over point 6, and drag to point 12. Two lines of code are generated in the VTT Talk Window. Right click on the green arrowhead below point 12, and drag down to ensure the minimum distance option is chosen. _If you have set the YLink tool previously to use a dist and minimum distance, this may be already set._
 
 YAnchor(6,16)
 YDist(6,12,>=)
@@ -900,7 +895,7 @@ The acute accent now has the correct hinting, and ready for proofing. The accent
 
 **Hinting the Tilde (0x2dc)**
 
-Choose the YLink Tool from the Toolbar. Position the ‘blue circle’, directly over point 17, and drag to point 5. As in the previous example, ensure the YDist is set to use a mimimum distance. This can be checked by clicking on the arrowhead or viewing the generated code in the VTTTalk window. If mimimum distance is set a >= will appear after the YDIST command.
+Choose the YLink Tool from the Toolbar. Position the ‘blue circle’, directly over point 17, and drag to point 5. As in the previous example, ensure the YDist is set to use a minimum distance. This can be checked by clicking on the arrowhead or viewing the generated code in the VTTTalk window. If minimum distance is set a >= will appear after the YDIST command.
 
 YAnchor(17,16)
 
@@ -916,7 +911,7 @@ Right click on the anchor symbol below point 17 to remove the height cvt that wa
 
 YAnchor(17)
 
-Choose the YInterpolate tool, drag from point 17 to 5. Click anywhere on the interpolation line, and drag to point 22. Click again and drag to point 10. _Note: There are different ways to hint any glyph. Another stragety for the Tilde would be to control the weight of the glyph, by using a shift command from point 17 to point 10, and from point 5 to 22. This will also work. This will depend on the design of the glyph and what type of variations are in the font. For OpenSans, the interpolation technique, works well to control the weight from light to black._
+Choose the YInterpolate tool, drag from point 17 to 5. Click anywhere on the interpolation line, and drag to point 22. Click again and drag to point 10. _Note: There are different ways to hint any glyph. Another strategy for the Tilde would be to control the weight of the glyph, by using a shift command from point 17 to point 10, and from point 5 to 22. This will also work. This will depend on the design of the glyph and what type of variations are in the font. For Open Sans, the interpolation technique, works well to control the weight from light to black._
 
 YInterpolate(5,10,22,17)
 
@@ -950,7 +945,7 @@ Smooth()
 
 <img width="100%" height="100%" src="Images/Eacutecomp.png">
 
-Composite glyphs are composed from one or more other glyphs, saving font file space. A common example of use is for accented glyphs, e.g. ‘Eacute’. The Capital E and the Acute glyph are hinted as uniques and are then composed as a Composite, forcing the  rendering to be identical to the base glyphs referenced. 
+Composite glyphs are composed from one or more other glyphs, saving font file space. A common example of use is for accented glyphs, e.g. ‘Eacute’. The Capital E and the Acute are hinted as unique glyphs, and are then composed as a Composite, forcing the rendering to be identical to the base glyphs referenced. 
  
 VTT’s Autohinter generates the code for composites glyphs containing a reference, _(in VTT the Glyph ID number)_ to the original glyphs as well as additional positioning or offset code. 
 
@@ -998,7 +993,7 @@ If the advance width and or spacing is different, USEMYMETRICS[] is not used and
 
 ## Positioning accents
  
-VTT Autohinter generates additional code for composite glyphs, to position accents for smaller font sizes and lower resolutions. The code used in the VTT Version 6.35 can cause problems in Variable fonts. All accented glyphs need to be carefully checked to make sure the the automatic code is correct. The following are some of the problems, and solutions.
+VTT Autohinter generates additional code for composite glyphs, to position accents for smaller font sizes and lower resolutions. The code used in the VTT Version 6.35 can cause problems in Variable fonts. All accented glyphs need to be carefully checked to make sure the automatic code is correct. The following are some of the problems, and solutions.
  
 **Accent Positioning code**
  
@@ -1018,7 +1013,7 @@ CALL[], 41, 35, 20, 32, 5, 87
 
 SHC[2], 2
 
-Compile the glyph program, (Tools > Compile > Glyph program, or(`ctrl + r`) and Save. Repeat this for all accented glphs in the font.
+Compile the glyph program, (Tools > Compile > Glyph program, or(`ctrl + r`) and Save. Repeat this for all accented glyphs in the font.
  
 **Y-direction positioning Code**
  
@@ -1028,7 +1023,7 @@ Compile the glyph program, (Tools > Compile > Glyph program, or(`ctrl + r`) and 
 
 **Problem**
 
-The code generated by the autohinter for ‘edotaccent’ 0x117 (GID 217) in the Open Sans Variable font, causes the accent to appear to high at higher resolution in the Extra Bold Variation.
+The code generated by the autohinter for ‘edotaccent’ 0x117 (GID 217) in the Open Sans Variable font, causes the accent to appear too high at higher resolution in the Extra Bold Variation.
  
 <img width="100%" height="100%" src="Images/edot.png">
 
@@ -1040,7 +1035,7 @@ VTT Autohinter adds code to maintain a minimum distance of at least one pixel be
  
 The method VTT uses to position the accents in the y-direction, calls a function from the Font Program (Function 86). The function is designed to position accents and also maintain white space between the base glyph and the accent. Depending on the design of the outlines this function can cause problems.
  
-Lets look at the y-direction code, for ‘edotaccent’ 0x117 (GID 217)
+Let’s look at the y-direction code, for ‘edotaccent’ 0x117 (GID 217)
  
 SVTCA[Y] /*sets the Vector to the Y axis*/
 
@@ -1066,7 +1061,7 @@ CALL[], 38, 0, 1, 1, 172, 86, calls Function 86
 
 In the Regular Default weight, the measured distance of 172 Font units, from top of base glyph to bottom of accent is correct. 
 
-**Note:**_The Function uses a measured outline distance of 172, from base glyph to the accent. This is correct for static fonts, as there is only one measurement, but incorrect when used in a variable font, where the distance from base glyph to accent can vary significantly._
+**Note:** _The Function uses a measured outline distance of 172, from base glyph to the accent. This is correct for static fonts, as there is only one measurement, but incorrect when used in a variable font, where the distance from base glyph to accent can vary significantly._
 
 In the Extrabold Variant the dot over the ‘e’ is designed to be much closer to the base glyph and the measured outline distance, is 90 Font Units. This design is correct for high resolution, where the accent in the Regular weight is higher, keeping the typographic colour open. In the Extrabold design, the dot accent is designed to be closer to the base glyph to maintain the right typographic colour.
  
@@ -1103,7 +1098,7 @@ IUP[Y]
 
 IUP[X]
 
-Complile the glyph program and save.
+Compile the glyph program and save.
 
 **Y-Positioning code details** 
 
@@ -1126,11 +1121,11 @@ rendering environments
  
 **CALL[], 0, 7, 114**
  
-38 is the oncurve point on the bottom of the dot accent. This code moves the accent to be at least one pixel from the base glyph for all sizes, variations, and rendering environments, while also maintaining the correct outline distance for all variations.
+38 is the on-curve point on the bottom of the dot accent. This code moves the accent to be at least one pixel from the base glyph for all sizes, variations, and rendering environments, while also maintaining the correct outline distance for all variations.
 
 **MDRP[ m>RWh ], 38**
  
-Smooths out the rest of the ouline points.
+Smooths out the rest of the outline points.
  
 **IUP[ Y ]**
 
