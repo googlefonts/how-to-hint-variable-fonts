@@ -154,17 +154,25 @@ Showing cvt numbers allows for easy visual proofing of the hinted glyph in the M
 
 While viewing any glyph in the Main Window, the glyph info bar will display the following information:
 
-**GID number:** The Glyph ID for the currently selected glyph, in the sequential order the glyphs are stored in the font file. **Pro Tip:** The glyph order can be displayed in two ways, under `Tools > options > settings > Access glyph by Index`. When this checkbox is set, the character set (`ctrl-9`) will show the glyphs as they are ordered in the font file. It is useful to leave this as the default setting, as the hinting for every glyph in the font should be proofed and checked. If this option is unset, only glyphs with Unicode codepoints assigned will be shown. This is also a useful view, however if set as the default, some glyphs may be missed in the hinting and proofing process.
+**GID number:** The Glyph ID for the currently selected glyph, in the sequential order the glyphs are stored in the font file. 
+
+> **Pro Tip:** The glyph order can be displayed in two ways, under `Tools > options > settings > Access glyph by Index`. When this checkbox is set, the character set (`ctrl-9`) will show the glyphs as they are ordered in the font file. It is useful to leave this as the default setting, as the hinting for every glyph in the font should be proofed and checked. If this option is unset, only glyphs with Unicode codepoints assigned will be shown. This is also a useful view, however if set as the default, some glyphs may be missed in the hinting and proofing process.
 
 **Char:** If the glyph has an associated Unicode, this will be shown, e.g.: Cap H (0x48). If there is no Unicode associated with the glyph, this will be shown as Oxffff _(OpenType glyphs such as Small Caps, figure styles or ligatures, for example). Unicode is followed by the Glyph name.
 
 **Uppercase:** Character group information for each character. The character group tells VTT which group of values to use from the Control Value Table.
 
-**pt / ppem** Currently selected point/ppem size reflecting the selected resolution _(The resolution to display the text string and waterfall run in the main window can be changed (`Display > Resolution > choose desired resolution`). This is useful for proofing at both lower and high resolutions)_ Choose the size to view in the Main window, `Display > Size > ...`, or click on a size from the text ramp at the bottom of the Main Window. Use up and down arrows to change the point size, or `ctrl + equals`, and enter the desired size.
+**pt / ppem** Currently selected point/ppem size reflecting the selected resolution. 
+
+The resolution to display the text string and waterfall run in the main window can be changed, `Display > Resolution > choose desired resolution`. This is useful for proofing at both lower and high resolutions). 
+
+Choose the size to view in the Main window, `Display > Size > ...`, or click on a size from the text ramp at the bottom of the Main Window. Use up and down arrows to change the point size, or `ctrl + equals`, and enter the desired size.
+
+**Note on setting the resolution:** While hinting and proofing in the Main Window and in the Variation Window, it is recommended to set the resolution to 72dpi. This allows for proofing of all sizes. When adding or editing the visual hinting, setting the size to a lower ppem _(in the range of 9 - 16ppem),_ is a good method to best view the effects of the hinting. Use (`ctrl + g`), to turn hinting on and off. 
 
 **grid-fitted:** Showing if hinting is turned on (grid-fitted) or off. To toggle between the two states use `ctrl + g`. 
 
-**Pro Tip** `ctrl + g` is worn out on my keyboard. While adding hints or reviewing and editing the autohinter code, `ctrl + g` switches between hinting and no hinting. It is critical to always keep the original outline in mind, _(no hinting)_ to ensure that there is minimal distortion between the two states. 
+> **Pro Tip** `ctrl + g` is worn out on my keyboard. While adding hints or reviewing and editing the autohinter code, `ctrl + g` switches between hinting and no hinting. It is critical to always keep the original outline in mind, _(no hinting)_ to ensure that there is minimal distortion between the two states. 
 
 The hinted outline should not vary too much from the high resolution design in proportion and shape, and there should be no obvious distortions.
 
@@ -182,7 +190,7 @@ Shown here in the main window set to the left. _(Refer to the VTT Help file for 
 
 Navigate / Zoom in / Zoom out 
 
-**Pro Tip** _Using a wheel mouse for zooming in and out is a must for a smooth workflow. Zooming in to inspect details, in particular, is a common task during the hinting workflow._
+> **Pro Tip** _Using a wheel mouse for zooming in and out is a must for a smooth workflow. Zooming in to inspect details, in particular, is a common task during the hinting workflow._
 
 **Measure**
 
@@ -241,9 +249,11 @@ The waterfall window view allows for a quick preview waterfall of the glyphs tha
 
 <img width="100%" height="100%" src="Images/characterset.png">
 
-Proofing can also be done on the entire glyph set, by choosing `View > Character / glyph set`. `ctrl + shift + up arrow / down arrow` can be used in both the Waterfall view and the Glyph set view to toggle between all of the available font variations.
+Proofing can be done on the entire glyph set, by choosing `View > Character / glyph set`. `ctrl + shift + up arrow / down arrow` can be used in both the Waterfall view and the Glyph set view to toggle between all of the available font variations. This is useful for proofing all of the Variation Instances in the font.
 
-> **Note:** One set of hints covers all masters in the font. If there are problems with the hints, or if you change your mind on the hinting strategy, select the Default master and edit the hints again in VTT’s main window. Remember, though, that any changes here affect all masters, so you’ll need to proof everything across all instances for the re-hinted glyphs again. 
+> **Pro Tip:** The Character/glyph set window (`ctrl + 9`) can be set to refresh with the Main View. Tools > Options > Settings > Refresh Char set with Main View. 
+
+With this option set, use the Character/glyph set window, to proof the entire glyph set. Changing the resolution under Display> Resolution, will be refected in the Character/glyph set Window and is a good way to test and proof from lower to higher resolutions. With the Character/glyph set window, use ctrg g to quickly turn hinting on and off to spot any obvious distrotions between teh hinted and unhinted glyphs oultines. 
 
 
 **Choosing Glyphs**
@@ -253,22 +263,6 @@ Proofing can also be done on the entire glyph set, by choosing `View > Character
 or 
 
 Using the Character set (`ctrl + 9`). Clicking on any glyph in the character set window, will take you to that glyph in the main window. 
-
-**Useful Keyboard Shortcuts**
-
-* `ctrl + g`: Grid-fit _(Hinting)_ on/off. 
-
-* `ctrl + b`: Pixels on/off. It is useful to hint with pixels turned on to visualize the exact results of the hinting code. While hinting, it is also necessary to view the outline clearly to identify control point numbers. 
-
-* `ctrl + =`: Go to point size
-
-* `ctrl + 9`: View Character set
-
-* `ctrl + shift + up arrow / down arrow`:  Runs through the Variations in the Variations Windows for proofing
-
-* `ctrl + shift + y`: Show/hide Visual Hints in the Main Window
-
-* `Left arrow / Right arrow`: Previous / Next Glyph
 
 **Notes on Keeping track of completed Hinting**
 
@@ -291,6 +285,29 @@ If the measured outline distance between the base glyph and the accent is the sa
 4. **Composites: Autohinter code output is correct**. If the the distance between the accent and base glyph is constant, across all variations in the font, the code output by the autohinter can be used to position accents.
 
 <img width="100%" height="100%" src="Images/HintOS.png">
+
+## Useful Keyboard Shortcuts
+
+* `ctrl + g` : Grid-fit _(Hinting)_ on/off. 
+
+* `ctrl + b` : Pixels on/off. It is useful to hint with pixels turned on to visualize the exact results of the hinting code. While hinting, it is also necessary to view the outline clearly to identify control point numbers. 
+
+* `ctrl + =` : Go to point size
+
+* `ctrl h` : Go to glyph, by glyph index or character code
+
+* `ctrl + 9` : View Character set
+
+* `ctrl + shift + up arrow / down arrow` : Runs through the Variation Instances in the Variations Window and Character / Glyph set Window, for proofing
+
+* `ctrl + shift + y` : Show/hide Visual Hints in the Main and Variation Window
+
+* `Left arrow / Right arrow` : Previous / Next Glyph
+
+* `ctrl + r` : Compile  
+
+* `ctrl + s` : Save 
+
 
 
 
