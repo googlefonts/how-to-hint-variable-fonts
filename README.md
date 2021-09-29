@@ -105,11 +105,11 @@ Glyphs with a complex outline structure can also be made to render clearly on-sc
 
 Hinting, editing, and proofing a Variable font in VTT is detailed work. It is helpful to have the workspace in VTT set up to a consistent and comfortable view. Becoming familiar with the tools, info, settings, and options will help you get the most out of VTT, and will streamline the hinting process. 
 
-_On opening a Variation Font, you can arrange the Windows in VTT to suit your own workflow. Make any edit, and save (`ctrl + s`). This will save the VTT preferences. The next time a font file is opened in VTT you will see the same window configuration._
-
 This example window setup _(Open Sans Variable font)_ shows the main windows (1-4) needed to view and edit the hinting, proof the results, and see the visual representation of the hinting (1 & 2), as well as the hinting code associated with each glyph. (3 & 4). Display Options (5) will not appear during the workflow when set.
 
-**NOTE:** _Refer also to the extensive help file in VTT for additional information on setup, proofing, Hinting basics, Hinting tools, Autohinting, and Variable fonts_
+> **Pro Tip** On opening a Variation Font, you can arrange the Windows in VTT to suit your own workflow. Saving the Window arrangment is an important part of that workflow as you will want the font to open with the same Window configuration, when resuming hinting. To save the Window configuration, make any change that requires a ‘Save’. For example, add or edit hinting on any glyph, using the Visual Hinting tools in the Main Window and ‘Save’, or simply, with the VTTtalk window selected, type and then delete some text, anywhere in the window, and then ‘Save’. `ctrl + s`. This will save the VTT preferences. The next time a font file is opened in VTT you will see the same window configuration.
+
+**NOTE:** _Refer also to the extensive help file in VTT for additional information on setup, proofing, Hinting basics, tools, Autohinting, and Variable fonts_
 
 **(1) Main Window _(View > Main View or `ctrl + 1`)_**
 
