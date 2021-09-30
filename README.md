@@ -313,11 +313,7 @@ If the measured outline distance between the base glyph and the accent is the sa
 
 ## VTT Variable font workflow process 
 
-**A Note on VTT importing Binary message:** VTT can import compiled, binary instructions from a font to the low-level language windows. When you open a font, VTT will ask you whether or not you want to import these instructions. 
-
-<img width="100%" height="100%" src="Binary.png">
-
-When following the steps below to Run the Light Latin Autohinter, choose ‘No’ in step 4.
+**A Note on VTT importing Binary message:** VTT can import compiled, binary instructions from a font to the low-level language windows. When you open a font, VTT will ask you whether or not you want to import these instructions. When following the steps below to Run the Light Latin Autohinter, choose ‘No’ in step 4.
 
 _You can also choose to disable this message permanently. By selecting the “Don’t show this message again” in the dialog box. **Note:** Selecting this option disables this prompt permanently. If you later want to import binary data, you must use the “Source from binary” command on the Tools menu._
 
