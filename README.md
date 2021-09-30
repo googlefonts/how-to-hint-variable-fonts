@@ -313,19 +313,29 @@ If the measured outline distance between the base glyph and the accent is the sa
 
 ## VTT Variable font workflow process 
 
+**A Note on VTT importing Binary message:** VTT can import compiled, binary instructions from a font to the low-level language windows. When you open a font, VTT will ask you whether or not you want to import these instructions. 
+
+<img width="100%" height="100%" src="Binary.png">
+
+When following the steps below to Run the Light Latin Autohinter, choose ‘No’ in step 4.
+
+_You can also choose to disable this message permanently. By selecting the “Don’t show this message again” in the dialog box. **Note:** Selecting this option disables this prompt permanently. If you later want to import binary data, you must use the “Source from binary” command on the Tools menu._
+
 **Step 1.** Autohinting a Variable Font
 
 VTT includes an Autohinter for Latin fonts. The Autohinter makes use of a lightweight hinting strategy that focuses on fitting common heights, such as x-height, cap height, ascender, descender to heights stored in the Control Value Table (CVT). This strategy anchors these key heights to the grid, thereby maintaining consistency in heights across glyphs with common heights, as well as across a font family. This method of grid-fitting also helps to reduce blur and minimizes distortion.
 
-Follow these steps to Autohint a Latin font:
+**Follow these steps to Autohint a Latin font:**
 
 ![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/VTTLightLatinAutohinter.gif)
 
-1. Start Visual True Type.
-2. File > Open. Navigate to font file you would like to Autohint.
-3. Select Font File and Open.
-4. From the Tools menu, select Autohint > Light Latin Autohint.
-5. When Autohinting is complete choose Save from File Menu
+1. Start Visual True Type
+2. File > Open. Navigate to font file you would like to Autohint
+3. Select Font File and Open
+4. Choose **‘No’** when prompted to _‘Do you wish to import Font program, Pre-program, and Glyph Program source from associated binary data?’_
+5. From the Tools menu, select Autohint > Light Latin Autohint.
+6. Choose **‘Yes’** to the following message._‘Generate VTT Talk’... will now REPLACE all existing code. Do you really wish to generate VTT Talk?’_
+7. When Autohinting is complete choose ‘Save’ from File Menu
 
 **Note** _The Autohinter code works well for most glyphs. However, autohinting for all glyphs in the font should be carefully checked and proofed, and certain glyphs may need to be re-hinted manually, either by using the Visual Hinting tools, or by editing the VTT Talk code directly._
 
