@@ -309,7 +309,25 @@ If the measured outline distance between the base glyph and the accent is the sa
 * `ctrl + s` : Save 
 
 
+## Font Outline Quality.
 
+**General recommendations for outline quality**
+
+Hinting is usually the last step in the production process. Any Variable font should be prepared and checked for any outstanding issues before beginning the auto-hinting process. Font outlines or metrics, cannot be edited for Variable fonts, in VTT, and any issues must be fixed in the original source fonts.
+
+**Consistency**
+- Vertical and Horizontal stems that are intended to be to be straight, should be exact. A few font units of difference, may require additional hinting to correct this.
+- Outlines should include points on extrema. Glyphs with missing extrema points, particularly on curves at y-max and y-min points on the outline, cannot be hinted.
+- Glyphs that are intended to have the same outline measurement, for heights for example, should be exactly equal
+- Winding order should be correct. (Correct outline orientation, outer contours should run clockwise, inner contours counter-clockwise)
+
+**Metrics**
+
+No changes can be made to glyph metrics or advance widths in VTT. Spacing, and overall metrics, should be proofed and checked before beginning hinting. **Example:** _All glyphs that are intended to be monospaced, Such as Tabular figures, should all have the same advance width._
+
+**Composite Glyphs**
+- Flipped and scaled composites, that use the SOFFSET command, should not be used. These glyphs should be decomposed in the font sources and hinted as unique glyphs.
+- Composites of composites should not be used.
 
 ## VTT Variable font workflow process 
 
