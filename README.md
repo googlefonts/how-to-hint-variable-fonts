@@ -648,6 +648,39 @@ Smooth()
 
 _The hinting for Cap O is now complete. The glyph can be proofed in the main window, using the text string to see shape and spacing, in the size ramp to see the hinted results at a range of sizes, and in the Variation Window, to proof for all variations in the font._
 
+## Hinting Concepts (RES Instructions)
+
+VTT supports a set of instructions in the high-level font hinting language (“VTT Talk”). The RES instructions are added automatically when Autohinting a font.
+ 
+‘RES’ _(Rendering Environment Specific)_ instructions, are an extension to the hints in VTT Talk, enabling different types of rounding to happen automatically for a variety of rendering environments. While VTT Talk’s existing hints, compile to TrueType instructions, the ‘Res instructions’ use a set of TrueType functions. These functions determine the appropriate rounding for each rendering environment, such as GDI or DirectWrite. Using Res instructions is the recommended approach for Variable font hinting.
+ 
+**Note:** _Adding the ‘Res’ instructions is not supported when using the Graphical hinting tools in the Main Window. ‘Res’ needs to be appended to the existing Hinting commands. This can be done by editing in the VTT talk window and compiling. The Light Latin Autohinter, adds the ‘Res’ instructions automatically. You can then continue to edit the hints in the font, via the GUI, and VTT will preserve the ‘Res’ hint commands._
+
+<img width="100%" height="100%" src="Images/Resround.png">
+ 
+**(TOP)** In the example above, the y-rounds and the middle bar of the lowercase ‘e’ are hinted using a ‘YDist’ instruction. In GDI and DirectWrite _(shown here),_ the rounds and middle bar will round to a full pixel or pixels. The ‘YDist’ instruction always rounds to a full pixel. **Note:** _(The y-rounds and middle bar of the of the ‘e’, in this case, break from one to two pixels, from 20 to 21 point. This makes the rendering too light at 20 point and too heavy at 21 point. The transition from 20 to 21 point is also abrupt, a change of one whole pixel, and can look like a weight change has happened.)_
+ 
+**(BOTTOM)** The rounds and middle horizontal stem use a ‘ResYDist’ instruction. These features now round to a fractional pixel, allowing for the weight to be described correctly, and for a much smoother transition, when there is a size change.
+ 
+Using this method of allowing stems to round to fractional pixels, renders the outlines of a Variable font from the lightest weights to the heaviest using a more subtle rounding, remaining faithful to the original outline weights. 
+
+Rounding to fractional pixels also allows for subtle features such as undershoots and overshoots to appear less dramatic on-screen and look more natural. When undershoots and overshoots for the font kick in on-screen, instead of using one full pixel above the Cap or x-height, and below the baseline, which can appear too dramatic and cause heights to look misaligned, fractional pixel rounding can show this subtle feature, without distorting the outlines.
+ 
+The following are the ‘Res’, Y-Direction hinting instructions added automatically by the VTT Light Latin Autohinter.
+ 
+- RESYAnchor: Used in combination with a cvt reference to control heights.
+- RESYDist: Used to control the weights of rounds and stems.
+ 
+If cvt’s are used in hinting to control stems 
+
+- ResYlink instruction, can be used in combination with a cvt reference.
+ 
+A consistent use of the ‘Res’ instruction is important. For example if a height is anchored using a ‘ResYAnchor’ and a cvt in one glyph, and a ‘YAnchor’ and the same cvt in for a similar height in another glyph, there may be different rounding on-screen at some sizes.
+ 
+**Note:** In the method for hinting Variable fonts described here the ‘ResYDist’ instructions are replaced by the ‘YShift’ instruction. The ‘YShift’ instruction behaves very much like the ‘ResYDist’ instruction, rounding stems and rounds, to a fractional pixel. YShift will not round to a full pixel for any stem, allowing for a more natural rendering of the outlines, in particular for very light weight Variations at smaller sizes.
+
+If full pixel rounding is required, either ‘ResYDist’ or ‘ResYLink in combination with a cvt, should be used to control the weight of stems and rounds.
+ 
 
 ## Editing the Capitals Hinting
 
