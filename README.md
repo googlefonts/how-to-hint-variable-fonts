@@ -437,32 +437,30 @@ All stems that previously used ResYDist to control the stem weight, will now use
 
 **Ensure to complete step 4 above, after editing and importing the XML file.**
 
-## Hinting Concepts (cvt and cvar table)
+## cvt - Control Value Table
 
-**Control Value Table**
-
-The control value table (‘cvt’ Table), is a key part of the hinting process. As edits are done, or new hinting is added in the Main Window, ‘cvt’ values can be reviewed or assigned _(if adding new hinting)_ to key features such as heights or straight or round stems. 
+The control value table (‘cvt’ Table), is a key part of the hinting process. As edits are done, or new hinting is added in the Main Window, ‘cvt’ values can be reviewed or assigned to key features such as heights or straight or round stems. 
 
 When an outline is scaled to a particular size, hinting code is used to move points on the outline to align to the pixel grid. Because outline measurements can be slightly different across glyphs with similar features, the scaled grid-fitted results can be inconsistent. When the outlines are scaled, the slight differences in measurements, can cause inconsistent rounding. Heights and stems can become unequal. 
  
-The ‘cvt’ table is a shared table of measurements and distances, that can be referenced by instructions in each glyph's program. Examples of the values for global font features that can be stored in the control value table are: Capital, Ascender, Descender, Figure, baseline, and x-heights, as well as distances for both x and y direction, stems and rounds.
+The ‘cvt’ table is a shared table of measurements and distances, that can be referenced by instructions in each glyph's, ‘glyph program’. Examples of the values for global font features that can be stored in the control value table are: Capital, Ascender, Descender, Figure, baseline, and x-heights, as well as distances for both x and y direction, stems and rounds.
 
 **Note:** _When running the Autohinter in VTT, the ‘cvt’ table is created automatically for Latin fonts, with pre-populated font measurements, saving a lot of time. Editing the ‘Visual hinting’ in your font can begin straight away, without the need to measure the font, and manually fill in the relevant ‘cvt’ entries._
 
-Referencing ‘cvt’ values from hinting instruction in a set of glyphs that share similar measurements, allows strict control over the regularity of these features. Distances such as stem widths, and key heights, can be controlled so they are the exact same pixel width and height at any given size, for lower resolutions.
+Referencing ‘cvt’ values from hinting instruction in a set of glyphs that share similar measurements, allows strict control over the regularity of these features. Distances such as stem widths, and key heights, can be controlled, so that they are the exact same pixel width and height at any given size, for lower resolutions.
 
-For the hinting approach for Variable fonts described here, cvt’s are generally used to ensure heights are kept consistent at any given point size. When adding hints, an anchor on any point, will be rounded to the nearest grid line. However, a Yanchor, _for example,_ can refer to a ‘cvt’ value to specify a height or overshoot shared by other glyphs in the font. Instead of rounding to the nearest grid line, the point will round to the grid line specified by the ‘cvt’ value. 
+For the hinting approach for Variable fonts described here, cvt’s are generally used to ensure heights are kept consistent at any given point size. When adding hints, an ‘anchor’ on any point, will be rounded to the nearest grid line. However, a YAnchor, _for example,_ can refer to a ‘cvt’ value to specify a height or overshoot shared by other glyphs in the font. Instead of rounding to the nearest grid line, the anchored point will round to the grid line specified by the ‘cvt’ value. 
 
-This is also also useful for making global adjustments to heights, by adjusting just one cvt. 
+This is also also useful for making global adjustments to heights, for a range of glyphs, by adjusting just one cvt. 
  
 **Advantages of using the CVT table for Variable fonts**
 
 - Consistency of features is maintained at lower resolutions
 - Key Heights, can be kept consistent across glyphs with similar measurements
 - Heights and proportions can be adjusted across a range of glyphs, with a global instruction.
-- Subtle features such as undershoot and overshoots can be controlled by using Inheritance. Inheritance is a method, used in the cvt table, to force one cvt to be equal to another cvt until a certain size. This is used for smaller point sizes on-screen to supress subtle features that cannot be shown when there is a limited number of pixels
-- Roman and Italic fonts cvt’s can be coordinated, to maaintain consistent rendering accross a family.
-- New cvt’s can be added to the ‘cvt’ table for glyph ranges that fall outside the defined cvts, such as small caps for example
+- Subtle features such as undershoots and overshoots can be controlled by using Inheritance. Inheritance is a method, used in the cvt table, to force one cvt to be equal to another cvt until a certain size. This is used for smaller point sizes on-screen to supress subtle features that cannot be shown when there is a limited number of pixels
+- Roman and Italic fonts cvt’s can be coordinated, to maintain consistent rendering across a family.
+- New cvt’s can be added to the ‘cvt’ table for glyph ranges that fall outside the defined cvts, such as ‘small caps’, for example
  
  
  **Global Adjustments**
@@ -485,7 +483,7 @@ This Delta command raises the Cap Height by one pixel for all of the instances i
 
 **Note:** When adjusting one height, other heights should also be reviewed, and adjusted if necessary, to ensure the correct proportion is maintained, between heights.
  
-**Globallly adjust height in the ‘cvt’ table:**
+**Globally adjust height in the ‘cvt’ table:**
 
 Open the CVT Table (`ctrl + 4`) and refer to the ‘cvt’ for Cap Height, ‘cvt’ number 2. Directly after the ‘cvt’ type the following, Delta(1@9) and compile, ctrl ( r ) and save.
  
