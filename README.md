@@ -1370,4 +1370,23 @@ This version of the font is the final shiping font and will have been stripped o
 _Refer to the built in Help File in VTT, for more information on saving the font file and preparing to Ship your font._
 
 
+## VTT Variable Font Hinting Checklist
 
+A quick checklist for completing the hinting in a Variable font in VTT.
+
+- Outlines proofed / ready for Hinting / Any outline issues addressed and fixed in source files
+- Run Light Latin Autohinter
+- Check in VTT for font Errors (Menu > View > Font errors and warnings)
+- Set min and max size for hinting instructions _(pre-program)_
+- Export XML > edit > Import XML > (Tools > Compile > Everything for all glyphs > Save)
+- Review, Edit, re-hint if necessary, and proof for all Variation Instances, all autohinted glyphs. (e.g. Add interpolations, edit code to remove unnecessary hints, check for correct cvt assignments) 
+- Accents hinted to a minimum of 2 pixels in height. _(If required)_
+- All Composite glyphs checked for correct y-positioning, and proofed for all Variation Instances
+- cvt edits _(Control Value Table)_
+- cvar edits _(cvt Variations Table)_
+- GASP table edits _(Grid fitting and Scan-conversion table)_
+- Compile everything for all glyphs _(Tools > Compile > Everything for all glyphs > Save)_
+- No Font errors or warnings
+- Recalculate MAXP Table
+- Save
+- Ship
