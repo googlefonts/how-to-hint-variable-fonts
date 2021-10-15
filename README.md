@@ -107,7 +107,7 @@ Hinting, editing, and proofing a Variable font in VTT is detailed work. It is he
 
 This example window setup _(Open Sans Variable font)_ shows the main windows (1-4) needed to view and edit the hinting, proof the results, and see the visual representation of the hinting (1 & 2), as well as the hinting code associated with each glyph. (3 & 4). Display Options (5) will not appear during the workflow when set.
 
-> **Pro Tip** On opening a Variation Font, you can arrange the Windows in VTT to suit your own workflow. Saving the Window arrangment is an important part of that workflow as you will want the font to open with the same Window configuration, when resuming hinting. To save the Window configuration, make any change that requires a ‘Save’. For example, add or edit hinting on any glyph, using the Visual Hinting tools in the Main Window and ‘Save’, or simply, with the VTTtalk window selected, type and then delete some text, anywhere in the window, and then ‘Save’. `ctrl + s`. This will save the VTT preferences. The next time a font file is opened in VTT you will see the same window configuration.
+> **Pro Tip** On opening a Variation Font, you can arrange the Windows in VTT to suit your own workflow. Saving the Window arrangement is an important part of that workflow as you will want the font to open with the same Window configuration, when resuming hinting. To save the Window configuration, make any change that requires a ‘Save’. For example, add or edit hinting on any glyph, using the Visual Hinting tools in the Main Window and ‘Save’, or simply, with the VTTtalk window selected, type and then delete some text, anywhere in the window, and then ‘Save’. `ctrl + s`. This will save the VTT preferences. The next time a font file is opened in VTT you will see the same window configuration.
 
 **NOTE:** _Refer also to the extensive help file in VTT for additional information on setup, proofing, Hinting basics, tools, Autohinting, and Variable fonts_
 
@@ -156,7 +156,7 @@ While viewing any glyph in the Main Window, the glyph info bar will display the 
 
 **GID number:** The Glyph ID for the currently selected glyph, in the sequential order the glyphs are stored in the font file. 
 
-> **Pro Tip:** The glyph order can be displayed in two ways, under `Tools > options > settings > Access glyph by Index`. When this checkbox is set, the character set (`ctrl-9`) will show the glyphs as they are ordered in the font file. It is useful to leave this as the default setting, as the hinting for every glyph in the font should be proofed and checked. If this option is unset, only glyphs with Unicode codepoints assigned will be shown. This is also a useful view, however if set as the default, some glyphs may be missed in the hinting and proofing process.
+> **Pro Tip:** The glyph order can be displayed in two ways, under `Tools > options > settings > Access glyph by Index`. When this checkbox is set, the character set (`ctrl + 9`) will show the glyphs as they are ordered in the font file. It is useful to leave this as the default setting, as the hinting for every glyph in the font should be proofed and checked. If this option is unset, only glyphs with Unicode codepoints assigned will be shown. This is also a useful view, however if set as the default, some glyphs may be missed in the hinting and proofing process.
 
 **Char:** If the glyph has an associated Unicode, this will be shown, e.g.: Cap H (0x48). If there is no Unicode associated with the glyph, this will be shown as Oxffff _(OpenType glyphs such as Small Caps, figure styles or ligatures, for example). Unicode is followed by the Glyph name.
 
@@ -253,7 +253,7 @@ Proofing can be done on the entire glyph set, by choosing `View > Character / gl
 
 > **Pro Tip:** The Character/glyph set window (`ctrl + 9`) can be set to refresh with the Main View. Tools > Options > Settings > Refresh Char set with Main View. 
 
-With this option set, use the Character/glyph set window, to proof the entire glyph set. Changing the resolution under Display> Resolution, will be refected in the Character/glyph set Window and is a good way to test and proof from lower to higher resolutions. With the Character/glyph set window, use ctrg g to quickly turn hinting on and off to spot any obvious distrotions between teh hinted and unhinted glyphs oultines. 
+With this option set, use the Character/glyph set window, to proof the entire glyph set. Changing the resolution under Display> Resolution, will be reflected in the Character/glyph set Window. This is a good way to test and proof from lower to higher resolutions. With the Character/glyph set window open, use ctrg g to quickly turn hinting on and off to spot any obvious distortions between the hinted and un-hinted glyph outlines. 
 
 
 **Choosing Glyphs**
@@ -282,7 +282,7 @@ A color-coded system is shown here as an example of marking each glyph as having
 
 If the measured outline distance between the base glyph and the accent is the same across the variation space, this code can be used. If the accent distance measurement varies, custom code is needed.
 
-4. **Composites: Autohinter code output is correct**. If the the distance between the accent and base glyph is constant, across all variations in the font, the code output by the autohinter can be used to position accents.
+4. **Composites: Autohinter code output is correct**. If the distance between the accent and base glyph is constant, across all variations in the font, the code output by the autohinter can be used to position accents.
 
 <img width="100%" height="100%" src="Images/HintOS.png">
 
@@ -348,7 +348,7 @@ VTT includes an Autohinter for Latin fonts. The Autohinter makes use of a lightw
 3. Select Font File and Open
 4. Choose **‘No’** when prompted to _‘Do you wish to import Font program, Pre-program, and Glyph Program source from associated binary data?’_
 5. From the Tools menu, select Autohint > Light Latin Autohint.
-6. Choose **‘Yes’** to the following message._‘Generate VTT Talk’... will now REPLACE all existing code. Do you really wish to generate VTT Talk?’_
+6. Choose **‘Yes’** to the following message. _‘Generate VTT Talk’... will now REPLACE all existing code. Do you really wish to generate VTT Talk?’_
 7. When Autohinting is complete choose ‘Save’ from File Menu
 
 **Note** _The Autohinter code works well for most glyphs. However, autohinting for all glyphs in the font should be carefully checked and proofed, and certain glyphs may need to be re-hinted manually, either by using the Visual Hinting tools, or by editing the VTT Talk code directly._
@@ -451,7 +451,7 @@ Referencing ‘cvt’ values from hinting instruction in a set of glyphs that sh
 
 For the hinting approach for Variable fonts described here, cvt’s are generally used to ensure heights are kept consistent at any given point size. When adding hints, an ‘anchor’ on any point, will be rounded to the nearest grid line. However, a YAnchor, _for example,_ can refer to a ‘cvt’ value to specify a height or overshoot shared by other glyphs in the font. Instead of rounding to the nearest grid line, the anchored point will round to the grid line specified by the ‘cvt’ value. 
 
-This is also also useful for making global adjustments to heights, for a range of glyphs, by adjusting just one cvt. 
+This is also useful for making global adjustments to heights, for a range of glyphs, by adjusting just one cvt. 
  
 **Advantages of using the CVT table for Variable fonts**
 
@@ -577,9 +577,9 @@ Choose the YShift tool. Position the blue circle over point 3, and drag to point
 
 **Step 5: Adding the Res command** 
 
-The Res addition to the command ResAnchor, for example, stands for Rendering Environment Specific, and ensures that the appropriate rounding happens, for the various rendering environments. This saves adding additional Hinting commands if Hinting is required to work in a variety of rendering environments._The Res command calls a Function, that is designed to also allow for more subtle rendering of features such as undershoots and overshoots_
+The Res addition to the command ResAnchor, for example, stands for Rendering Environment Specific, and ensures that the appropriate rounding happens, for the various rendering environments. This saves adding additional Hinting commands if Hinting is required to work in a variety of rendering environments. _The Res command calls a Function, that is designed to also allow for more subtle rendering of features such as undershoots and overshoots_
 
-Switch to the VTTtalk window** (`ctlr 5`). Type Res before the YAnchor commands. Compile VTT Talk, (`ctrl r`) and save (`ctrl + s`).
+Switch to the VTTtalk window** (`ctrl + 5`). Type Res before the YAnchor commands. Compile VTT Talk, (`ctrl + r`) and save (`ctrl + s`).
 
 The ‘Res’ _(Resolution Environment Specific)_ command is not supported when using the Graphical Hinting tools. This additional code can be added manually, in the VTTtalk window. 
 
@@ -603,7 +603,7 @@ Smooth()
 
 _The hinting for Cap H is now complete. The glyph can be proofed in the main window, using the text string to see shape and spacing, in the size ramp to see the hinted results at a range of sizes, and in the Variation Window, to proof for all variations in the font._
 
-Now let’s take a closer look at the lower level _‘Glyph Program’,_ TrueType code. VTTtalk compiles into TrueType instructions, which can be viewed and edited if necessary in the Glyph program. (`ctlr 2`) _Editing TrueType instructions is not commonly done, however it is useful to have an understanding of what the code is doing._
+Now let’s take a closer look at the lower level _‘Glyph Program’,_ TrueType code. VTTtalk compiles into TrueType instructions, which can be viewed and edited if necessary in the Glyph program. (`ctrl + 2`) _Editing TrueType instructions is not commonly done, however it is useful to have an understanding of what the code is doing._
 
 Refer to the full [TrueType Instruction](https://docs.microsoft.com/en-us/typography/opentype/spec/tt_instructions) set for details.
 
@@ -652,7 +652,7 @@ Choose the YShift Tool from the Toolbar. Position the ‘blue circle’, directl
 
 **YAnchor(5,9)** Moves point 5 to the control value listed in the ‘Control Program’, that corresponds to the baseline cap round undershoot value. 
 
-**Note on Inheritence:** Inheritance is a method, used in the cvt table, to force one cvt to be equal to another cvt until a defined size. Inheritance is used in this case for smaller point sizes on-screen to supress subtle feature of undershoots and overshoots, that cannot be shown when there is a limited number of pixels.
+**Note on Inheritance:** Inheritance is a method, used in the cvt table, to force one cvt to be equal to another cvt until a defined size. Inheritance is used in this case for smaller point sizes on-screen to supress subtle feature of undershoots and overshoots, that cannot be shown when there is a limited number of pixels.
 
 Here CVT 9, _(defined in the cvt table as the cap round undershoot)_is automatically forced to be equal to the baseline cvt 8, which has a value of zero, until a higher size. CVT 3, _(defined in the cvt table as the cap round overshoot)_ is automatically forced to be equal to square cap height cvt 2, until a higher size. This supresses the undershoots and overshoots, until there are enough pixels to show this subtle feature. This will already be automatically generated in the cvt table, and you will only need to change the value for appropriate point size to show the overshoots and undershoots. 
  
@@ -666,7 +666,7 @@ The baseline cap round undershoot value in the cvt table looks like this.
  
 8 designates the parent cvt, which is the square baseline in this case. 
  
-47 means that the overshoot should kick in at 47 ppem. Replace the 47ppem by whichever ppem size you wish the overshoot to kick in.
+47 means that the overshoot should kick in at 47ppem. Replace the 47ppem by whichever ppem size you wish the overshoot to kick in.
 
 **YShift(5,22)**
 
@@ -687,14 +687,14 @@ Choose the YShift Tool from the Toolbar. Position the ‘blue circle’, directl
  
 2 designates the parent cvt, (cap height) which is the square cap height.
  
-47 means that the overshoot should kick in at 47 ppem. Replace the 47ppem by whichever ppem size you wish the overshoot to kick in. The size at which the undershoot and overshoots will kick in, is usually kept to be equal.
+47 means that the overshoot should kick in at 47ppem. Replace the 47ppem by whichever ppem size you wish the overshoot to kick in. The size at which the undershoot and overshoots will kick in, is usually kept to be equal.
  
 **YShift(14,29)**
 Shifts point 29, to a new position, relative to point 14’s new position on the grid, maintaining the same relative distance between the point 14 and point 29 as in the original high-resolution design of the outline.
 
 **Step 3: Adding the Res command**
 
-Switch to the VTTtalk window** (`ctlr 5`). Type Res before the YAnchor commands. Compile VTT Talk, (`ctrl r`) and save (`ctrl + s`).
+Switch to the VTTtalk window** (`ctrl + 5`). Type Res before the YAnchor commands. Compile VTT Talk, (`ctrl + r`) and save (`ctrl + s`).
 
 The final code in the VTTtalk window will appear like this. The Res command is highlighted here for easy comparison.   /* Y direction */
 
@@ -714,7 +714,7 @@ _The hinting for Cap O is now complete. The glyph can be proofed in the main win
 
 VTT supports a set of instructions in the high-level font hinting language (“VTT Talk”). The RES instructions are added automatically when Autohinting a font.
  
-‘RES’ _(Rendering Environment Specific)_ instructions, are an extension to the hints in VTT Talk, enabling different types of rounding to happen automatically for a variety of rendering environments. While VTT Talk’s existing hints, compile to TrueType instructions, the ‘Res instructions’ use a set of TrueType functions. These functions determine the appropriate rounding for each rendering environment, such as GDI or DirectWrite. Using Res instructions is the recommended approach for Variable font hinting.
+‘RES’ _(Rendering Environment Specific)_ instructions, are an extension to the hints in VTT Talk, enabling different types of rounding to happen automatically for a variety of rendering environments. While VTT Talk’s existing hints, compile to TrueType instructions, the ‘Res instructions’ use a set of TrueType functions. These functions determine the appropriate rounding for each rendering environment, such as GDI or DirectWrite. Using ‘Res instructions’ is the recommended approach for Variable font hinting.
  
 **Note:** _Adding the ‘Res’ instructions is not supported when using the Graphical hinting tools in the Main Window. ‘Res’ needs to be appended to the existing Hinting commands. This can be done by editing in the VTT talk window and compiling. The Light Latin Autohinter, adds the ‘Res’ instructions automatically. You can then continue to edit the hints in the font, via the GUI, and VTT will preserve the ‘Res’ hint commands._
 
@@ -768,7 +768,7 @@ The middle bar has been controlled by hinting, but points 8 and 9, now need furt
  
 Choose the YInterpolate tool. Position the ‘blue circle’, directly over point 28, at the bottom left of the middle bar, and drag to point 19. You will see a ‘line’ appear, which takes the form of a draggable ‘elastic band’. No code is generated yet until a point is chosen to interpolate. Click anywhere on the interpolation line, and drag to the point you want to interpolate, in this case point 8 and release.
 
-**Note:** Sometimes two points fall very closely together on the outline, so you may need to zoom in see more clearly and to ensure you pick the correct points to interpolate.
+**Note:** Points can be positioned very closely together on the outline, so you may need to zoom in see more clearly and to ensure you pick the correct points to interpolate.
 
 The following code is generated in the VTTtalk Window.
  
@@ -1085,7 +1085,7 @@ Composite glyphs are composed from one or more other glyphs, saving font file sp
  
 VTT’s Autohinter generates the code for composites glyphs containing a reference, _(in VTT the Glyph ID number)_ to the original glyphs as well as additional positioning or offset code. 
 
-Let’s take a look at the glyf program code for the ‘Eacute’ as output by the VTT Autohinter. **Note:** The Visual hinting tools cannot be used to generate code for composite glyphs and any additional editing that is needed, is done in the TrueType (‘glyf’ program) instructions (`ctrl + 2`). A composite glyph may contain further hinting instructions, for example, to position the accent correctly for smaller sizes at lower resolutions. See section on Positioning Accents.
+Let’s take a look at the ‘glyf’ program code for the ‘Eacute’ as output by the VTT Autohinter. **Note:** The Visual hinting tools cannot be used to generate code for composite glyphs and any additional editing that is needed, is done in the TrueType (‘glyf’ program) instructions (`ctrl + 2`). A composite glyph may contain further hinting instructions, for example, to position the accent correctly for smaller sizes at lower resolutions. See section on Positioning Accents.
 
 **Capital E acute, Unicode 0xc9, Glyph ID 139**
 
@@ -1355,11 +1355,11 @@ _Refer to the built in Help File in VTT, for more information on Compiling and m
 
 **Save VTT Source font**
 
-When working on a font in VTT, this font file contains all the source data for the hinting that has been completed. The shipping version of the font should not contain all the VTT related private tables. This file should be safely stored and saved in a seperate location. Additional hinting to the font may be required at a later date or the glyph set may need extending.
+When working on a font in VTT, this font file contains all the source data for the hinting that has been completed. The shipping version of the font should not contain all the VTT related private tables. This file should be safely stored and saved in a separate location. Additional hinting to the font may be required at a later date or the glyph set may need to be extended.
 
 **Prepare a “ship” version of font for distribution**
 
-This version of the font is the final shiping font and will have been stripped of the private tables. Visual TrueType removes the Visual TrueType source code and the TrueType source code (or glyph program) assembled from that Visual TrueType source code, but not the binary TrueType ‘glyf’ table created from the TrueType source code.
+This version of the font is the final shipping font and will have been stripped of the private tables. Visual TrueType removes the Visual TrueType source code and the TrueType source code (or glyph program) assembled from that Visual TrueType source code, but not the binary TrueType ‘glyf’ table created from the TrueType source code.
 
 - On the Tools menu, click Ship Font.
 
