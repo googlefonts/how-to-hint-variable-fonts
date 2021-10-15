@@ -652,11 +652,13 @@ Choose the YShift Tool from the Toolbar. Position the ‘blue circle’, directl
 
 **YAnchor(5,9)** Moves point 5 to the control value listed in the ‘Control Program’, that corresponds to the baseline cap round undershoot value. 
 
-**Note:** CVT 9, _(cap round undershoot)_is automatically forced to be equal to baseline cvt 8, which has a value of zero, until a higher size. CVT 3, _(cap round overshoot)_ is automatically forced to be equal to square cap height cvt 2, which has a value of 1462, until a higher size. This supresses the undershoots and overshoots, until there are enough pixels to show this subtle feature. This will already be automatically generated in the cvt table, and you will only need to change the value for appropriate point size to show the overshoots and undershoots.
+**Note on Inheritence:** Inheritance is a method, used in the cvt table, to force one cvt to be equal to another cvt until a defined size. Inheritance is used in this case for smaller point sizes on-screen to supress subtle feature of undershoots and overshoots, that cannot be shown when there is a limited number of pixels.
+
+Here CVT 9, _(defined in the cvt table as the cap round undershoot)_is automatically forced to be equal to the baseline cvt 8, which has a value of zero, until a higher size. CVT 3, _(defined in the cvt table as the cap round overshoot)_ is automatically forced to be equal to square cap height cvt 2, until a higher size. This supresses the undershoots and overshoots, until there are enough pixels to show this subtle feature. This will already be automatically generated in the cvt table, and you will only need to change the value for appropriate point size to show the overshoots and undershoots. 
  
 The baseline cap round undershoot value in the cvt table looks like this.
  
-**9: -22 ~ 8 @ 50 /* base line undershoot */**
+**9: -22 ~ 8 @ 47 /* base line undershoot */**
  
 9 is the cvt number for the cap baseline undershoot
  
@@ -664,7 +666,7 @@ The baseline cap round undershoot value in the cvt table looks like this.
  
 8 designates the parent cvt, which is the square baseline in this case. 
  
-50 means that the overshoot should kick in at 50 ppem. Replace the 50ppem by whichever ppem size you wish the overshoot to kick in.
+47 means that the overshoot should kick in at 47 ppem. Replace the 47ppem by whichever ppem size you wish the overshoot to kick in.
 
 **YShift(5,22)**
 
@@ -677,7 +679,7 @@ Choose the YShift Tool from the Toolbar. Position the ‘blue circle’, directl
 
 **YAnchor(14,29)** Moves point 14 to the control value listed in the ‘Control Program’, that corresponds to the cap height overshoot.
  
-3: 22 ~ 2 @ 50 /* cap height overshoot */
+3: 22 ~ 2 @ 47 /* cap height overshoot */
  
 3 is the cvt number for the cap height overshoot. **Note:** 22 is an average value calculated by the autohinter. _(The actual measured difference between the square cap outline measurement of 1462, and the round cap overshoot measurement, of 1485 is 23, and the bottom round undershoot is 20. It is however better to have both of these values to be equal, to ensure the same rendering behaviour for both overshoot and undershoot at all sizes)_
  
@@ -685,7 +687,7 @@ Choose the YShift Tool from the Toolbar. Position the ‘blue circle’, directl
  
 2 designates the parent cvt, (cap height) which is the square cap height.
  
-50 means that the overshoot should kick in at 50 ppem. Replace the 50ppem by whichever ppem size you wish the overshoot to kick in. The size at which the undershoot and overshoots will kick in, is usually kept to be equal.
+47 means that the overshoot should kick in at 47 ppem. Replace the 47ppem by whichever ppem size you wish the overshoot to kick in. The size at which the undershoot and overshoots will kick in, is usually kept to be equal.
  
 **YShift(14,29)**
 Shifts point 29, to a new position, relative to point 14’s new position on the grid, maintaining the same relative distance between the point 14 and point 29 as in the original high-resolution design of the outline.
