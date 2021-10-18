@@ -44,13 +44,38 @@ When DirectWrite renders a font’s spacing, glyphs can now begin on a subpixel 
 
 Hinting is no longer needed to control the font’s spacing, which in the past required a lot of extra code and time to complete. This speeds up the hinting process significantly. 
  
-**Horizontal and Vertical anti-aliasing**
+**Horizontal, Vertical anti-aliasing, and gasp**
  
 Subpixel rendering improved the horizontal aspect of type on-screen but not the vertical. Older types of rendering, such as ClearType in Windows GDI for example, only supported horizontal anti-aliasing. This meant that aliasing or ‘jaggies’ were still very apparent at larger sizes on-screen. In order to fix this problem and give a smoother vertical effect, DirectWrite applies [anti-aliasing in the y-direction](https://docs.microsoft.com/en-us/windows/win32/directwrite/introducing-directwrite#improved-text-rendering-with-cleartype) in addition to using the horizontal subpixel rendering. 
  
 The addition of support for vertical anti-aliasing, helped a great deal in smoothing out the appearance of text on-screen, particularly at larger sizes. However, for smaller font sizes, when a font’s outlines are scaled and rendered with no hinting, the vertical anti-aliasing can result in significant blur, particularly for horizontal features. 
 
 By aligning key heights and horizontal features to the pixel grid, hinting can greatly reduce this blur, in particular for text reading sizes, on lower resolution screens.
+
+**Notes on the ‘gasp’ table _(Grid-fitting and Scan-conversion Procedure table)_**
+  
+The [‘gasp’](https://docs.microsoft.com/en-us/typography/opentype/spec/gasp) table contains information that describes the preferred rasterization techniques for a font as well as the sizes and rasterization modes at which hinting should be applied.
+ 
+The ‘gasp’ table was used originally in combination with Greyscale anti-aliasing _(or Font Smoothing as it was known),_ on Windows. At smaller point sizes on-screen, Greyscale anti-aliasing, resulted in significant blur, making text, particularly on lower resolution screens, very difficult to read. Attempts were made to try to improve the clarity of the text, using hinting, but the results were poor. Stems were sharpened using hinting, reducing the blur for vertical and horizontal features, but diagonals and curves still displayed a ‘blurring’ effect at smaller text sizes, making the typographic colour very uneven.
+ 
+The ‘gasp’ table, was designed so that Greyscale anti-aliasing could be disabled at smaller text sizes, and a combination of hinting and monochrome _(or black and white rendering)_ used instead. Although monochrome rendering resulted in some _‘jaggies’,_ on diagonals and curves, at text sizes intended for reading, the hinted monochrome bitmaps were much sharper. At larger sizes when there were enough pixels, font smoothing or anti-aliasing was used in combination with hinting.
+ 
+The ‘gasp’ table was later extended, so that for DirectWrite rendering a similar approach could be used to disable y-direction anti-aliasing at text reading sizes, to reduce any blur.
+ 
+In addition, at very small text sizes, _(usually below 8 or 9ppem)_ where there are not enough pixels to describe a fonts outline, and hinting is not useful, the best appearance is achieved by setting the ‘gasp’ table to enable full anti-aliasing, and disable hinting.
+ 
+_Please refer to the VTT Help File for more details on the GASP table_ 
+ 
+**‘gasp’ Table settings**
+
+**Note:** When using the approach described in this document for hinting Variable fonts, the following ‘gasp’ table settings are recommended and apply to all Variation Instances. A combination of sharpening of horizontal stems, using hinting, and using fractional rounding on curves, produces a very even and faithful rendering of the font outlines, for Variable fonts, at all sizes and for all Variations.
+ 
+<img width="100%" height="100%" src="Images/GASP.png">
+
+The ‘GASP’ table /  Open Sans Variable Font
+- Disable hinting, and enable symmetric smoothing below 9ppem.
+- Enable hinting, and enable symmetric smoothing @ 9ppem and above
+
 
 **Hinting Benefits for today’s common rendering environments**
  
