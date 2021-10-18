@@ -524,6 +524,36 @@ Delta(1@9) /* Raise Cap Height globally by 1 pixel */
  
 **Note:** In Variable fonts a Delta command can only be used, if the cvt does not vary across the Variation Space. For example, a Bolder weight variation may have a larger measured outline height. This height is edited in the ‘cvar’ _(cvt variation table)_ to reflect this difference. Because of the difference in height, the bolder weight cvt, can round differently and the ‘Delta’ to change the height for the Bold may not be required.
 
+
+## cvar — CVT Variations Table
+
+The [control value table (CVT)variations table](https://docs.microsoft.com/en-us/typography/opentype/otspec183/cvar) is used in variable fonts to provide variation data for CVT values. 
+
+**Editing the ‘cvar’ Table**
+
+Within a variable font, the value of some control values may need to be adjusted for different variation instances, to match the design changes to outlines for different instances. These values should be edited in VTT in the ‘cvar’ table, to reflect these differences.
+
+_Please refer to the VTT Help file  > Contents > Variable fonts > Editing Variation CVT’s for additional details_
+ 
+![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/CVAREDIT.gif)
+
+**Open Sans Variable font example / Adjust the x-height variation cvt’s**
+ 
+- Open the CVAR (Variation CVT) Table. View > Variation CVT (ctrl+shift+4)
+- From the drop-down menu, choose ExtraBold (max: Weight), from the list of Axis Masters.
+- From the Unvaried CVTS’s list, select cvt 6 (flat x-height)
+- Edit cvt 6 to reflect the measured x-height (1133), for the ExtraBold
+- Compile Variation control values. Tools> Compile > Variation Control Values _(or with the Variation cvt window selected (ctrl r)_ Interpolated values will be generated automatically for ‘Other Masters’ and ‘Interpolated Instances’
+- Save
+
+The edited value of 1133 will be shown after compiling, at the top of the Variation CVT table, listed under Edited CVTs. **Note:** In this example the ExtraBold, shown here on the right in the Variation Window at high resolution, now rounds to its correct measured x-height.
+
+Follow the same method to adjust the ‘cvar’ cvt measurements for other features in a Varaible font, where design measurements change across the variation space.
+
+**Note:** When height values, in general, are edited in the ‘cvar’ table, these new values, when scaled, may round differently to the default weight at some screen sizes.
+
+
+
 ## Hinting Concepts (Hinting the Capitals)
 
 **Hinting the Control Glyphs H & O**
