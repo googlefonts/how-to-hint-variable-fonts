@@ -44,7 +44,7 @@ When DirectWrite renders a font’s spacing, glyphs can now begin on a subpixel 
 
 Hinting is no longer needed to control the font’s spacing, which in the past required a lot of extra code and time to complete. This speeds up the hinting process significantly. 
  
-**Horizontal, Vertical anti-aliasing, and gasp**
+**Horizontal, Vertical anti-aliasing, and ‘gasp’**
  
 Subpixel rendering improved the horizontal aspect of type on-screen but not the vertical. Older types of rendering, such as ClearType in Windows GDI for example, only supported horizontal anti-aliasing. This meant that aliasing or ‘jaggies’ were still very apparent at larger sizes on-screen. In order to fix this problem and give a smoother vertical effect, DirectWrite applies [anti-aliasing in the y-direction](https://docs.microsoft.com/en-us/windows/win32/directwrite/introducing-directwrite#improved-text-rendering-with-cleartype) in addition to using the horizontal subpixel rendering. 
  
@@ -63,16 +63,20 @@ The ‘gasp’ table, was designed so that Greyscale anti-aliasing could be disa
 The ‘gasp’ table was later extended, so that for DirectWrite rendering a similar approach could be used to disable y-direction anti-aliasing at text reading sizes, to reduce any blur.
  
 In addition, at very small text sizes, _(usually below 8 or 9ppem)_ where there are not enough pixels to describe a fonts outline, and hinting is not useful, the best appearance is achieved by setting the ‘gasp’ table to enable full anti-aliasing, and disable hinting.
- 
-_Please refer to the VTT Help File for more details on the GASP table_ 
+
+To change settings in the ‘gasp’ table
+
+- From the Edit menu, > Edit Gasp Table
+
+_Please refer to the VTT Help File for more details on the ‘gasp’ table_ 
  
 **‘gasp’ Table settings**
 
 **Note:** When using the approach described in this document for hinting Variable fonts, the following ‘gasp’ table settings are recommended and apply to all Variation Instances. A combination of sharpening of horizontal stems, using hinting, and using fractional rounding on curves, produces a very even and faithful rendering of the font outlines, for Variable fonts, at all sizes and for all Variations.
  
-<img width="100%" height="100%" src="Images/GASP.png">
+<img width="50%" height="50%" src="Images/GASP.png">
 
-The ‘GASP’ table /  Open Sans Variable Font
+The ‘gasp’ table /  Open Sans Variable Font
 - Disable hinting, and enable symmetric smoothing below 9ppem.
 - Enable hinting, and enable symmetric smoothing @ 9ppem and above
 
