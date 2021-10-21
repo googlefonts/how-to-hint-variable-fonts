@@ -1,6 +1,6 @@
 # A guide to hinting TrueType Variable Fonts with Visual TrueType
 
-_by Michael Duggan_
+by [Michael Duggan](https://twitter.com/mickduggan)
 
 _“The glyphs look like crisp pixel sculptures with lots of detail!”_ — Erik van Blokland
 
