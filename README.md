@@ -12,13 +12,12 @@ Font Hinting has always been thought of as a ‘black art’ - some magic perfor
 
 The good news is that this is no longer the case. As screen resolutions and font rendering have improved, hinting has become a lot less complicated, with only a handful of hinting instructions needed for each glyph, to ensure consistent and beautiful rendering on-screen. In addition, VTT’s built in autohinter significantly speeds up the process, leaving the focus on editing and fine-tuning the hinting to achieve the best results.
 
-**VTT (Visual TrueType)** [Install](https://aka.ms/vtt-mst)
-
 Microsoft Visual TrueType is a software tool for viewing, editing, and adding hinting instructions to the outlines of TrueType and OpenType/TTF fonts. You use Visual TrueType after creating a font in a font editor or after converting an existing font to the TrueType format.
 
-VTT has been upgraded to handle all aspects of hinting for variable fonts. The following tutorial will go into detail on all of the steps you will need to use VTT to automatically add, and then fine tune, the hinting for variable fonts.
+VTT has been upgraded to handle all aspects of hinting for variable fonts. The following tutorial will go into detail on all of the steps you will need to use VTT to automatically add, and then fine tune, the hinting for variable fonts. It accompanies the official docs in [github.com/microsoft/VisualTrueType](https://github.com/microsoft/VisualTrueType/tree/main/doc)
 
-_Please ask questions or provide feedback on this guide at [github.com/googlefonts/how-to-hint-variable-fonts](https://github.com/googlefonts/how-to-hint-variable-fonts)_
+* To get started, **install VTT (Visual TrueType) from [aka.ms/vtt-mst](https://aka.ms/vtt-mst)**
+* Please ask questions or provide feedback on this guide at [github.com/googlefonts/how-to-hint-variable-fonts](https://github.com/googlefonts/how-to-hint-variable-fonts)
 
 ## Background / Older Font Hinting
 
