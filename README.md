@@ -370,7 +370,7 @@ VTT includes an Autohinter for Latin fonts. The Autohinter makes use of a lightw
 
 **Follow these steps to Autohint a Latin font:**
 
-![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/VTTLightLatinAutohinter.gif)
+![LatinAutohinter](Images/VTTLightLatinAutohinter.gif)
 
 1. Start Visual True Type
 2. File > Open. Navigate to font file you would like to Autohint
@@ -433,7 +433,7 @@ VTT allows for export and import of all hinting code to a separate XML file. Thi
 
 In the following example, we will replace all ‘ResYDist’ code commands with the ‘YShift’ command. Using the YShift command in place of the ResYDist for controlling stem weights, helps to render the outlines of all Variations from Light to Black, using more natural rendering from the outline. The ResYDist command, causes stems to round to full pixels at smaller sizes. This causes distortions, particularly in lighter outlines. Using the YShift command in place of ResYDist corrects these distortions and renders the outlines more accurately.
 
-![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/exportxml.gif)
+![LatinAutohinter](Images/exportxml.gif)
 
 **Export all hinting data**
 
@@ -442,7 +442,7 @@ In the following example, we will replace all ‘ResYDist’ code commands with 
 3. Type a filename.
 4. Click Save.
 
-![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/searchreplace.gif)
+![LatinAutohinter](Images/searchreplace.gif)
 
 **Search and replace**
 
@@ -450,7 +450,7 @@ In the following example, we will replace all ‘ResYDist’ code commands with 
 2. Replace: Find ResYdist > replace with YShift > replace all
 3. Save.
 
-![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/Compileeverything.gif)
+![LatinAutohinter](Images/Compileeverything.gif)
 
 **Import modified hinting code**
 
@@ -535,7 +535,7 @@ Within a variable font, the value of some control values may need to be adjusted
 
 _Please refer to the VTT Help file  > Contents > Variable fonts > Editing Variation CVT’s for additional details_
  
-![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/CVAREDIT.gif)
+![LatinAutohinter](Images/CVAREDIT.gif)
 
 **Open Sans Variable font example / Adjust the x-height variation cvt’s**
  
@@ -576,7 +576,7 @@ Once you become familiar with some hinting concepts, tools, and code, editing th
  
 **Tip:** _Before beginning, ensure Auto Compile is turned on. (Tools > Options > Settings Auto-compile Main view). This will speed up the hinting, by allowing VTT to automatically generate the hinting code as you work with the Graphical Hinting tools, without the need to compile after each step in the process._
 
-![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/HintH.gif)
+![LatinAutohinter](Images/HintH.gif)
 
 **Hinting the Cap H**
 
@@ -693,7 +693,7 @@ SRP2[], 5 **S**et **R**eference **P**oint 2
 
 **Hinting the Cap O**
 
-![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/HintO.gif)
+![LatinAutohinter](Images/HintO.gif)
 
 **Hinting strategy for hinting the uppercase O**
 
@@ -817,7 +817,7 @@ If full pixel rounding is required, either ‘ResYDist’ or ‘ResYLink in comb
  
 **Editing the Cap B**
 
-![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/EditHintingB.gif)
+![LatinAutohinter](Images/EditHintingB.gif)
 
 As you gain more experience in looking at the code and the graphical representation of the hints, you will start to see patterns of glyphs and features that need attention.
 
@@ -853,7 +853,7 @@ While viewing the autohinted results, any kind of distortion, as described here 
  
 **Editing the Cap Q**
 
-![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/EditHintingQ.gif)
+![LatinAutohinter](Images/EditHintingQ.gif)
 
 Similar to the Capital B, the two points 4 and 7, are positioned correctly in the y-direction in the original outline design, between the bottom round of the Q, but become badly offset in the hinted version, when no interpolation is used.
 
@@ -881,7 +881,7 @@ That’s it for the edits on the Cap Q. The hinting is complete and ready for pr
  
 **Editing the Cap K**
 
-![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/EditHintingK.gif)
+![LatinAutohinter](Images/EditHintingK.gif)
 
 Editing is shown here for the default regular Weight and the light variation. The middle part of the K becomes distorted and may cause the outline to look light on-screen. It is best to proof glyphs in the main window at a low hinted size, shown here at 9 point, where it is easier to spot the distortions. 
 
@@ -893,7 +893,7 @@ Editing glyphs and adding interpolations can be done in an efficient way using t
 
 **Editing other Capitals**
 
-![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/HintCaps.gif)
+![LatinAutohinter](Images/HintCaps.gif)
 
 Once you become more familiar with viewing the Autohinter output, editing the hinting using the graphical hinting tools, can be done quickly. The animation above, combines the editing for the ‘A’‘M’‘R’‘N’‘S’‘V’‘W’. All of the edits are interpolations. Quickly add the interpolations and proof the glyphs in the main window and variation window.
 
@@ -918,7 +918,7 @@ Reduce blur at the lowercase overshoot height, and baseline undershoot height, u
 
 Using the same techniques and approach as described for the Capitals above, add the Hinting using the graphical interface hinting tools. As the glyphs are recognised as lowercase by VTT the correct cvt’s for lowercase baseline, x-height and lowercase overshoot and undershoot will be generated automatically as you add the hinting. 
 
-![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/Hintno.gif)
+![LatinAutohinter](Images/Hintno.gif)
 
 **Hinting the ‘o’**
 
@@ -946,7 +946,7 @@ With a hinting strategy in mind, to always keep this white space open, it is eas
 
 **Edit the Hinting of the ‘i’ to keep dot clear**
 
-![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/Hintiopen.gif)
+![LatinAutohinter](Images/Hintiopen.gif)
 
 This example shows how powerful VTT is, in allowing for some simple edits and code, to solve this screen rendering problem, for all variation of the glyph. 
 
@@ -964,7 +964,7 @@ That is the hinting completed for the lowercase ‘i’. The dot will be kept at
 
 ## Editing other lowercase glyphs
 
-![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/Hintlowercase.gif)
+![LatinAutohinter](Images/Hintlowercase.gif)
 
 Once the control glyphs have been reviewed, and edited, hinting can progress on rest of the lowercase glyphs. As each glyphs is reviewed to ensure the correct cvt’s are assigned and the hinting structure overall, as output by the autohinter is correct, small edits can then be done to each glyph to fine tune the results. 
 
@@ -986,7 +986,7 @@ Note in the animation, only smaller edits are made, to shift untouched points an
 
 The Autohinter is able to do 1 2 and 3, but has no strategy for 4. Maintaining white space is critical to ensure the glyph is kept open and readable. It is often easier and faster to re-hint more complex glyphs from scratch, with a clear strategy in mind, rather than edit the autohinter code.
 
-![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/HintYen.gif)
+![LatinAutohinter](Images/HintYen.gif)
 
 **Step 1: Baseline and Cap Height Control** 
 
@@ -1041,7 +1041,7 @@ The Autohinter has no special strategy for hinting accented glyphs. By locking t
 
 To ensure the best readable solution, accents that need it, should be hinted to be a minimum of two pixels in height for all sizes. 
 
-![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/HintAcute.gif)
+![LatinAutohinter](Images/HintAcute.gif)
 
 **Hinting the Acute (0xb4)**
 
@@ -1086,7 +1086,7 @@ The acute accent now has the correct hinting, and ready for proofing. The accent
 
 3. Preserve the correct shape of the glyph
  
-![LatinAutohinter](https://github.com/googlefonts/how-to-vtt/blob/main/Images/HintTilde.gif)
+![LatinAutohinter](Images/HintTilde.gif)
 
 **Hinting the Tilde (0x2dc)**
 
